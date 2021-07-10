@@ -6,6 +6,7 @@ if (!isset($_SESSION['login'])){
     header('location: login.php?notlogin');
 };
 
+
 ?>
 
 
@@ -75,11 +76,11 @@ if (!isset($_SESSION['login'])){
             <thead>
                 <tr>
                     <th scope="col">TANGGAL</th>
-                    <th scope="col">PENAMBAH</th>
-                    <th scope="col">MATA PELAJARAN</th>
+                    <th scope="col">NAMA</th>
+                    <th scope="col">MAPEL</th>
                     <th scope="col">DEADLINE</th>
-                    <th scope="col">KETERANGAN</th>
-                    <th scope="col">TOOLS</th>
+                    <th scope="col">KET.</th>
+                    <th scope="col">EDIT</th>
 
                 </tr>
             </thead>
@@ -88,30 +89,29 @@ if (!isset($_SESSION['login'])){
                         
                         include 'connection.php';
                         
-                        $sql = mysqli_query($conn, "select DATE, NAMA, MAPEL, DEADLINE, KETERANGAN from homework");
+                        $sql = mysqli_query($conn, "select * from homework");
 
-                        while($row = mysqli_fetch_array($sql)){
+                        while($row = mysqli_fetch_assoc($sql)){
                     
                     ?>
                 <tr>
-                    
                     <td><?php echo $row['DATE']; ?></td>
                     <td><b><?php echo $row['NAMA']; ?></b></td>
                     <td><?php echo $row['MAPEL']; ?></td>
                     <td><b class="deadline"><?php echo $row['DEADLINE']; ?></b></td>
                     <td><?php echo $row['KETERANGAN']; ?></td>
-                    <td><a class="btn btn-dark" name="hapus" href="hapusBE.php" role="button">DELETE</a></td>
-
-                    <?php } ?>
+                    <td><a class="btn btn-dark" href="hapusBE.php?id= <?= $row['hw_id'] ?> "role="button">DELETE</a>
+                    </td>
+                
+                <?php }; ?>
 
                 </tr>
-
 
 
             </tbody>
         </table>
     </article>
-    <!------------MODAL------------------------->
+    <!------------MODAL CREATE------------------------->
     <div class="modal fade" id="addmodal" tabindex="-1" aria-labelledby="HomeworkModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
@@ -158,6 +158,9 @@ if (!isset($_SESSION['login'])){
             </div>
         </div>
     </div>
+
+
+
 </body>
 
 </html>
