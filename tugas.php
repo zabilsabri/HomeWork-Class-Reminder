@@ -32,6 +32,9 @@ if (!isset($_SESSION['login'])){
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
             <span class="navbar-brand">GO-ABI</span>
+            <small>
+                <b><?php echo $_SESSION['nama'] ?></b>
+            </small>
             <a class="btn btn-dark" href="logoutBE.php" role="button">SIGN OUT</a>
         </div>
     </nav>
@@ -71,23 +74,40 @@ if (!isset($_SESSION['login'])){
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th scope="col">Date</th>
-                    <th scope="col">Nama</th>
-                    <th scope="col">Mapel</th>
-                    <th scope="col">Deadline</th>
-                    <th scope="col">Keterangan</th>
+                    <th scope="col">TANGGAL</th>
+                    <th scope="col">PENAMBAH</th>
+                    <th scope="col">MATA PELAJARAN</th>
+                    <th scope="col">DEADLINE</th>
+                    <th scope="col">KETERANGAN</th>
+                    <th scope="col">TOOLS</th>
+
                 </tr>
             </thead>
             <tbody>
+                <?php 
+                        
+                        include 'connection.php';
+                        
+                        $sql = mysqli_query($conn, "select DATE, NAMA, MAPEL, DEADLINE, KETERANGAN from homework");
+
+                        while($row = mysqli_fetch_array($sql)){
+                    
+                    ?>
                 <tr>
+                    
+                    <td><?php echo $row['DATE']; ?></td>
+                    <td><b><?php echo $row['NAMA']; ?></b></td>
+                    <td><?php echo $row['MAPEL']; ?></td>
+                    <td><b class="deadline"><?php echo $row['DEADLINE']; ?></b></td>
+                    <td><?php echo $row['KETERANGAN']; ?></td>
+                    <td><a class="btn btn-dark" name="hapus" href="hapusBE.php" role="button">DELETE</a></td>
+
+                    <?php } ?>
 
                 </tr>
-                <tr>
 
-                </tr>
-                <tr>
 
-                </tr>
+
             </tbody>
         </table>
     </article>

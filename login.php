@@ -18,15 +18,15 @@
             </div>
 
             <?php if(isset($_GET['notlogin'])) { ?>
-                <b class="failed">YOU SHOULD LOGIN FIRST!</b>
+                <b class="failed">Anda Harus Login Terlebih Dahulu!</b>
             <?php } ?>
             
             <?php if(isset($_GET['wrong'])){ ?>
-                <b class="failed">Your Email or Password is Incorrect!</b>
+                <b class="failed">Nama atau Nis Anda Salah!</b>
             <?php } ?>
             
             <?php if(isset($_GET['empty'])){ ?>
-                <b class="failed">FILL ALL THE EMPTY FIELDS!</b>
+                <b class="failed">Isi Semua!</b>
             <?php } ?>
             
             <form action="loginBE.php" method="POST">

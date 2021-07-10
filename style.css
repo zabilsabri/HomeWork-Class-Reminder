@@ -57,3 +57,7 @@ footer {
 .form-control{
     margin-bottom: 20px;
 }
+
+.deadline{
+    color: red;
+}

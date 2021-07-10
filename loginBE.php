@@ -2,6 +2,8 @@
 session_start();
 include 'connection.php';
 
+$admin = 181175;
+
 if (isset($_POST['login'])){
     
     $nama = $_POST['username'];
@@ -22,8 +24,15 @@ if (isset($_POST['login'])){
         $_SESSION['nama'] = $nama;
 
         if ($row['NAMA'] == $nama && $row['NIS'] == $nis){
-            $_SESSION['login'] = true;  
-            header('location: tugas.php');
+            if($nis == $admin){
+                $_SESSION['admin'] = true;
+                $_SESSION['login'] = true; 
+                header('location: tugas.php');
+            } else {
+                $_SESSION['login'] = true; 
+                header('location: tugas.php');
+            };
+    
         } else {
             header('location: login.php?wrong');
         };

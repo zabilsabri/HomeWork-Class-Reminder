@@ -86,7 +86,7 @@ ALTER TABLE `student_info`
 -- AUTO_INCREMENT for table `homework`
 --
 ALTER TABLE `homework`
-MODIFY `hw_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `hw_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `student_info`
 --
