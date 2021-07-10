@@ -1,3 +1,14 @@
+<?php
+
+session_start();
+
+if (!isset($_SESSION['login'])){
+    header('location: login.php?notlogin');
+};
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +32,7 @@
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
             <span class="navbar-brand">GO-ABI</span>
-            <a class="btn btn-dark" href="#" role="button">SIGN OUT</a>
+            <a class="btn btn-dark" href="logoutBE.php" role="button">SIGN OUT</a>
         </div>
     </nav>
     <div class="heading">

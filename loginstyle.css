@@ -1,0 +1,75 @@
+main{
+    background: linear-gradient(to top right, #000000, #00bfff);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.bg-image{
+    left: 0px;
+    top: 0px;
+    filter: blur(5px);
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    position: absolute;
+    background-size: cover;
+}
+.container{
+    background: black;
+    opacity: 0.9;
+    border: solid;  
+    width: 50vh;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.form-content{
+    border: none;
+    outline: none;
+    background: none;
+    color: white;
+    width: 6cm;
+}
+.text-box{
+    border-bottom: #4287f5 solid;
+    padding-top: 20px;
+}
+.containerFooter{
+    color: white;
+}
+
+.forget-password{
+    text-align: right;
+    text-decoration: none;
+    color: white;
+}
+.footer-container{
+    padding-top: 20px;
+    padding-bottom: 10px;
+    color: white;
+}
+a{
+    text-decoration: none;
+}
+
+.heading-container{
+    color: white;
+}
+
+button{
+    margin-top: 5px;
+}
+
+.failed{
+    color: red;
+}
