@@ -16,14 +16,22 @@ if (isset($_POST['login'])){
 
     if(!empty($nama) && !empty($nis)){
         $sql = mysqli_query($conn, "select NAMA, NIS from student_info where NAMA = '$nama' and NIS = '$nis'");
+        $sqlc = mysqli_query($conn, "select * from subject");
 
         $row = mysqli_fetch_array($sql);
+        $rowc = mysqli_fetch_array($sqlc);
 
         $_SESSION['nama'] = $nama;
+        
 
         if ($row['NAMA'] == $nama && $row['NIS'] == $nis){
+            if ($rowc['sb_id'] <= 0){
+                $_SESSION['login'] = true; 
+                header('location: createSubjectBE.php');
+            } else {
                 $_SESSION['login'] = true; 
                 header('location: tugas.php');
+            };
     
         } else {
             header('location: login.php?wrong');

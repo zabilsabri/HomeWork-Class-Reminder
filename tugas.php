@@ -43,8 +43,11 @@ if (!isset($_SESSION['login'])){
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
                 <h1>TUGAS</h1>
-                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addmodal">
-                    + ADD
+                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addtaskmodal">
+                    + ADD TASK
+                </button>
+                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addsubjectmodal">
+                    + ADD SUBJECT
                 </button>
                 <select class="something" aria-label="Default select example">
                     <option selected>All</option>
@@ -91,7 +94,7 @@ if (!isset($_SESSION['login'])){
                         
                         $sql = mysqli_query($conn, "select * from homework");
 
-                        while($row = mysqli_fetch_assoc($sql)){
+                        while($row = mysqli_fetch_array($sql)){
                     
                     ?>
                 <tr>
@@ -100,10 +103,10 @@ if (!isset($_SESSION['login'])){
                     <td><?php echo $row['MAPEL']; ?></td>
                     <td><b class="deadline"><?php echo $row['DEADLINE']; ?></b></td>
                     <td><?php echo $row['KETERANGAN']; ?></td>
-                    <td><a class="btn btn-dark" href="hapusBE.php?id= <?= $row['hw_id'] ?> "role="button">DELETE</a>
+                    <td><a class="btn btn-dark" href="hapusBE.php?id= <?= $row['hw_id'] ?> " role="button">DELETE</a>
                     </td>
-                
-                <?php }; ?>
+
+                    <?php }; ?>
 
                 </tr>
 
@@ -112,7 +115,7 @@ if (!isset($_SESSION['login'])){
         </table>
     </article>
     <!------------MODAL CREATE------------------------->
-    <div class="modal fade" id="addmodal" tabindex="-1" aria-labelledby="HomeworkModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addtaskmodal" tabindex="-1" aria-labelledby="HomeworkModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
@@ -122,26 +125,20 @@ if (!isset($_SESSION['login'])){
                 <div class="modal-body">
                     <form action="createBE.php" method="POST">
                         1. MAPEL
+
+                        <?php
+                            
+                            $sqlc = mysqli_query($conn, "select * from subject");
+
+                            while($rows = mysqli_fetch_array($sqlc)){
+
+                        ?>
+
                         <select class="form-select" name="mapel" aria-label="Default select example">
-                            <option value="AGAMA">AGAMA</option>
-                            <option value="PKN">PKN</option>
-                            <option value="B. INDO">B. INDO</option>
-                            <option value="MATEMATIKA (M)">Matematika (M)</option>
-                            <option value="Matematika (W)">Matematika (W)</option>
-                            <option value="SEJARAH">SEJARAH</option>
-                            <option value="B. INGGRIS (M)">B. INGGRIS (M)</option>
-                            <option value="B. INGGRIS (W)">B. INGGRIS (W)</option>
-                            <option value="SENI BUDAYA">SENI BUDAYA</option>
-                            <option value="PJOK">PJOK</option>
-                            <option value="PRAKARYA">PRAKARYA</option>
-                            <option value="FISIKA">FISIKA</option>
-                            <option value="BIOLOGI">BIOLOGI</option>
-                            <option value="KIMIA">KIMIA</option>
-                            <option value="GEOGRAFI">GEOGRAFI</option>
-                            <option value="EKONOMI3">EKONOMI</option>
-                            <option value="SOSIOLOGI">SOSIOLOGI</option>
-                            <option value="TIK">TIK</option>
-                            <option value="B. ASING">B. ASING</option>
+                            
+                            <option> <?php echo $rows['subject']; ?> </option>
+
+                        <?php }; ?>
                         </select>
                         2. DEADLINE
                         <input class="form-control" type="text" name="deadline" aria-label="default input example">
@@ -158,6 +155,29 @@ if (!isset($_SESSION['login'])){
             </div>
         </div>
     </div>
+
+    <!------------MODAL CREATE------------------------->
+    <div class="modal fade" id="addsubjectmodal" tabindex="-1" aria-labelledby="HomeworkModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="HomeworkModalLabel">ADD SUBJECT</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="createSubjectBE.php" method="POST">
+                        1. SUBJECT
+                        <input class="form-control" name="subject" type="text" aria-label="default input example">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" name="createSubject" class="btn btn-primary">CREATE</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 
