@@ -42,7 +42,9 @@ if (!isset($_SESSION['login'])){
     <div class="heading">
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
-                <a href="tugas.php"><h1>TUGAS</h1></a>
+                <a href="tugas.php">
+                    <h1>TUGAS</h1>
+                </a>
                 <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addtaskmodal">
                     + ADD TASK
                 </button>
@@ -51,13 +53,13 @@ if (!isset($_SESSION['login'])){
                     SUBJECT LIST
                 </a>
 
-                <form class="d-flex" method="GET" action="tugas.php" >
-                    <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-dark" name="searchButton" type="submit">Search</button>
-                </form>
             </div>
         </nav>
     </div>
+    <form class="search-task" method="GET" action="tugas.php">
+        <input class="form-control-bar" name="search" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-dark" type="submit">Search</button>
+    </form>
     <article>
         <table class="table table-striped table-hover">
             <thead>
@@ -75,7 +77,7 @@ if (!isset($_SESSION['login'])){
                 <?php 
                         include 'connection.php';
 
-                        if (isset($_GET['searchButton'])){
+                        if (isset($_GET['search'])){
                             $sql = mysqli_query($conn, "select * from homework where concat(DATE, NAMA, MAPEL, DEADLINE, KETERANGAN) like '%" .$_GET['search']. "%'");
                         } else {
                             $sql = mysqli_query($conn, "select * from homework");

@@ -36,7 +36,7 @@
                 <div class="text-box">
                     <input type="password" class="form-content" name="nis" placeholder="NIS">
                 </div>
-                <a href="Fpassword.php" class="forget-password">Forget Password?</a>
+                <a href="Fpassword.php" class="forget-password">Forget Account?</a>
                 <button type="submit" name="login" class="btn btn-dark">LOGIN</button>
             </form>
             <div class="footer-container">

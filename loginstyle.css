@@ -1,5 +1,5 @@
 main{
-    background: linear-gradient(to top right, #000000, #00bfff);
+    background: #dbdbdb;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -18,9 +18,8 @@ main{
     background-size: cover;
 }
 .container{
-    background: black;
+    background: white;
     opacity: 0.9;
-    border: solid;  
     width: 50vh;
     height: 50vh;
     display: flex;
@@ -37,11 +36,11 @@ form{
     border: none;
     outline: none;
     background: none;
-    color: white;
+    color: black;
     width: 6cm;
 }
 .text-box{
-    border-bottom: #4287f5 solid;
+    border-bottom: black solid;
     padding-top: 20px;
 }
 .containerFooter{
@@ -51,19 +50,19 @@ form{
 .forget-password{
     text-align: right;
     text-decoration: none;
-    color: white;
+    color: black;
 }
 .footer-container{
     padding-top: 20px;
     padding-bottom: 10px;
-    color: white;
+    color: black;
 }
 a{
     text-decoration: none;
 }
 
 .heading-container{
-    color: white;
+    color: black;
 }
 
 button{

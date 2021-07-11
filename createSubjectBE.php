@@ -5,7 +5,7 @@ include 'connection.php';
 
 if (isset($_POST['addSubject'])){
     $name = $_SESSION['nama'];
-    $subject = $_POST['subject'];
+    $subject = htmlspecialchars($_POST['subject']);
 
     if(!empty($subject)){
         $sql = "insert into subject(NAME, subject) values ('$name','$subject')";
