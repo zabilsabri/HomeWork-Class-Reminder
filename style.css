@@ -20,7 +20,7 @@ body{
     margin-left: 20px;
 }
 
-.something{
+.searchby{
     margin-right: 5px;
     border-radius: 1rem;
     outline: none;
@@ -60,4 +60,9 @@ footer {
 
 .deadline{
     color: red;
+}
+
+a{
+    text-decoration: none;
+    color: black;
 }

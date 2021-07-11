@@ -27,7 +27,7 @@ if (isset($_POST['login'])){
         if ($row['NAMA'] == $nama && $row['NIS'] == $nis){
             if ($rowc['sb_id'] <= 0){
                 $_SESSION['login'] = true; 
-                header('location: createSubjectBE.php');
+                header('location: createSubject.php');
             } else {
                 $_SESSION['login'] = true; 
                 header('location: tugas.php');

@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+if (!isset($_SESSION['login'])){
+    header('location: login.php?notlogin');
+};
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,9 +33,18 @@
             <div class="conatiner-heading">
                 <h2 class="container-heading">ADD SUBJECT</h2>
             </div>
+            <div class="container-indicator">
+                <p>Add all of your subject by pressing "ADD" button. If done, press the "NEXT" button.</p>
+            </div>
             <div class="container-body">
-                1. Subject Name:
-                <input class="form-control" type="text" aria-label="default input example">
+                <form action="createSubjectBE.php" method="POST">
+                    1. Subject Name:
+                    <input class="form-control" name="subject" type="text" aria-label="default input example">
+                    <div class="container-button">
+                        <button type="submit" name="addSubject" class="btn btn-secondary">ADD</button>
+                        <a class="btn btn-secondary" href="subjectList.php" role="button">NEXT>>></a>
+                    </div>
+                </form>
             </div>
         </div>
     </main>

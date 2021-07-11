@@ -42,35 +42,19 @@ if (!isset($_SESSION['login'])){
     <div class="heading">
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
-                <h1>TUGAS</h1>
+                <a href="tugas.php"><h1>TUGAS</h1></a>
                 <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addtaskmodal">
                     + ADD TASK
                 </button>
-                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addsubjectmodal">
-                    + ADD SUBJECT
-                </button>
-                <select class="something" aria-label="Default select example">
-                    <option selected>All</option>
-                    <option value="AGAMA">AGAMA</option>
-                    <option value="PKN">PKN</option>
-                    <option value="B. INDO">B. INDO</option>
-                    <option value="MATEMATIKA (M)">Matematika (M)</option>
-                    <option value="Matematika (W)">Matematika (W)</option>
-                    <option value="SEJARAH">SEJARAH</option>
-                    <option value="B. INGGRIS (M)">B. INGGRIS (M)</option>
-                    <option value="B. INGGRIS (W)">B. INGGRIS (W)</option>
-                    <option value="SENI BUDAYA">SENI BUDAYA</option>
-                    <option value="PJOK">PJOK</option>
-                    <option value="PRAKARYA">PRAKARYA</option>
-                    <option value="FISIKA">FISIKA</option>
-                    <option value="BIOLOGI">BIOLOGI</option>
-                    <option value="KIMIA">KIMIA</option>
-                    <option value="GEOGRAFI">GEOGRAFI</option>
-                    <option value="EKONOMI3">EKONOMI</option>
-                    <option value="SOSIOLOGI">SOSIOLOGI</option>
-                    <option value="TIK">TIK</option>
-                    <option value="B. ASING">B. ASING</option>
-                </select>
+
+                <a type="button" href="subjectList.php" class="btn btn-dark">
+                    SUBJECT LIST
+                </a>
+
+                <form class="d-flex" method="GET" action="tugas.php" >
+                    <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-dark" name="searchButton" type="submit">Search</button>
+                </form>
             </div>
         </nav>
     </div>
@@ -78,21 +62,25 @@ if (!isset($_SESSION['login'])){
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th scope="col">TANGGAL</th>
-                    <th scope="col">NAMA</th>
-                    <th scope="col">MAPEL</th>
+                    <th scope="col">DATE</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">SUBJECT</th>
                     <th scope="col">DEADLINE</th>
-                    <th scope="col">KET.</th>
+                    <th scope="col">INFORMATION</th>
                     <th scope="col">EDIT</th>
 
                 </tr>
             </thead>
             <tbody>
                 <?php 
-                        
                         include 'connection.php';
+
+                        if (isset($_GET['searchButton'])){
+                            $sql = mysqli_query($conn, "select * from homework where concat(DATE, NAMA, MAPEL, DEADLINE, KETERANGAN) like '%" .$_GET['search']. "%'");
+                        } else {
+                            $sql = mysqli_query($conn, "select * from homework");
+                        };
                         
-                        $sql = mysqli_query($conn, "select * from homework");
 
                         while($row = mysqli_fetch_array($sql)){
                     
@@ -126,7 +114,12 @@ if (!isset($_SESSION['login'])){
                     <form action="createBE.php" method="POST">
                         1. MAPEL
 
-                        <?php
+
+                        <select class="form-select" name="mapel" aria-label="Default select example">
+
+                            <?php
+
+                            include 'connection.php';
                             
                             $sqlc = mysqli_query($conn, "select * from subject");
 
@@ -134,11 +127,9 @@ if (!isset($_SESSION['login'])){
 
                         ?>
 
-                        <select class="form-select" name="mapel" aria-label="Default select example">
-                            
-                            <option> <?php echo $rows['subject']; ?> </option>
+                            <option> <?php echo $rows['subject'] ?> </option>
 
-                        <?php }; ?>
+                            <?php }; ?>
                         </select>
                         2. DEADLINE
                         <input class="form-control" type="text" name="deadline" aria-label="default input example">

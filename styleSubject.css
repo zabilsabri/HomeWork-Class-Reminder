@@ -15,14 +15,30 @@ main{
     height: 50vh;
 }
 
+.container-indicator{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    border-radius: 1rem;
+    background: #dbdbdb;
+    color: black;
+}
+
 .container-heading{
     text-align: center;
-    margin-top: 10px;
+    margin-top: 20px;
     margin-bottom: 20px;
 }
 
 .container-body{
+    height: 30vh ;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
+
+.container-button{
+    text-align: right;
+    margin-top: 5vh;
+}
+
