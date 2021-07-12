@@ -68,8 +68,7 @@ if (!isset($_SESSION['login'])){
                     <th scope="col">NAME</th>
                     <th scope="col">SUBJECT</th>
                     <th scope="col">DEADLINE</th>
-                    <th scope="col">INFORMATION</th>
-                    <th scope="col">EDIT</th>
+                    <th scope="col">INFO</th>
 
                 </tr>
             </thead>
@@ -78,7 +77,7 @@ if (!isset($_SESSION['login'])){
                         include 'connection.php';
 
                         if (isset($_GET['search'])){
-                            $sql = mysqli_query($conn, "select * from homework where concat(DATE, NAMA, MAPEL, DEADLINE, KETERANGAN) like '%" .$_GET['search']. "%'");
+                            $sql = mysqli_query($conn, "select * from homework where concat(DATE, NAMA, MAPEL, DEADLINE) like '%" .$_GET['search']. "%'");
                         } else {
                             $sql = mysqli_query($conn, "select * from homework");
                         };
@@ -88,12 +87,12 @@ if (!isset($_SESSION['login'])){
                     
                     ?>
                 <tr>
+                            
                     <td><?php echo $row['DATE']; ?></td>
                     <td><b><?php echo $row['NAMA']; ?></b></td>
                     <td><?php echo $row['MAPEL']; ?></td>
                     <td><b class="deadline"><?php echo $row['DEADLINE']; ?></b></td>
-                    <td><?php echo $row['KETERANGAN']; ?></td>
-                    <td><a class="btn btn-dark" href="hapusBE.php?id= <?= $row['hw_id'] ?> " role="button">DELETE</a>
+                    <td><a class="btn btn-dark" href="moreInfo.php?id= <?= $row['hw_id'] ?> " role="button">MORE INFO</a>
                     </td>
 
                     <?php }; ?>
@@ -136,7 +135,7 @@ if (!isset($_SESSION['login'])){
                         2. DEADLINE
                         <input class="form-control" type="text" name="deadline" aria-label="default input example">
                         <div class="mb-3">
-                            <label for="textareaket" class="form-label">3. KETERANGAN</label>
+                            <label for="textareaket" class="form-label">3. INFORMATION</label>
                             <textarea class="form-control" name="keterangan" id="textareaket" rows="3"></textarea>
                         </div>
                         <div class="modal-footer">
