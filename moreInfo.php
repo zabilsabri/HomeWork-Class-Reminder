@@ -50,12 +50,12 @@ if (!isset($_SESSION['login'])){
 
                         <?php
     
-                        include 'connection.php';
+                            include 'connection.php';
 
-                        $id = $_GET['id'];
-                        $sql = mysqli_query($conn, "select * from homework where hw_id= $id");
+                            $id = $_GET['id'];
+                            $sql = mysqli_query($conn, "select * from homework where hw_id= $id");
 
-                        $row = mysqli_fetch_array($sql);
+                            $row = mysqli_fetch_array($sql);
 
                         ?>
 
@@ -79,31 +79,34 @@ if (!isset($_SESSION['login'])){
             </div>
         </div>
         <div class="input-answer">
-            <div class="mb-3">
-                <form class="form-input" method="POST">
-                    <label for="formFile" class="form-label">Input file answer:</label>
-                    <input class="form-control" name="answer-pic" type="file" id="formFile">
-                    <button class="btn btn-dark" name="submit-answer" role="button">SEND</button>
-                </form>
+            <form method="POST" enctype="multipart/form-data" >
+                <div class="mb-3">
+                    <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+                    <input class="form-control" name="my_image" type="file" id="formFileMultiple" multiple>
+                    <button type="submit" name="submit_answer">UPLOAD</button>
+                </div>
+            </form>
 
-                <?php
-                
+            <?php include 'addAnswerBE.php' ?>
 
-                if (isset($_POST['submit-answer'])){
-
-                    $answer = $_POST['answer-pic'];
-
-                    $sql = mysqli_query($conn, "insert into homework (task_picture) values ('$answer') where hw_id = $id");
-
-
-                };
-                
-                ?>
-
-            </div>
         </div>
-        <div class="answer">
+        <?php
             
+            include 'connection.php';
+
+            $sql = "SELECT * FROM uploaded_image WHERE id_id = $id";
+            $res = mysqli_query($conn, $sql);
+
+            if(mysqli_num_rows($res) > 0){
+                while ($images = mysqli_fetch_array($res))
+                {
+        
+        ?>
+        <div class="answer">
+
+            <img src="upload/<?= $images['image_url'] ?>">
+
+            <?php } }; ?>
         </div>
     </div>
 
