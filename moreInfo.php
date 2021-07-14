@@ -31,15 +31,9 @@ if (!isset($_SESSION['login'])){
 </head>
 
 <body>
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-            <span class="navbar-brand">GO-ABI</span>
-            <small>
-                <b><?php echo $_SESSION['nama'] ?></b>
-            </small>
-            <a class="btn btn-dark" href="logoutBE.php" role="button">SIGN OUT</a>
-        </div>
-    </nav>
+    
+    <?php include 'navbar.php'; ?>
+
     <a class="btn btn-dark" href="tugas.php" role="button">GO BACK<<<</a>
             <div class="heading">
                 <nav class="navbar navbar-light bg-light">
@@ -85,7 +79,8 @@ if (!isset($_SESSION['login'])){
                 <div class="input-answer">
                     <form method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
-                            <label for="formFileMultiple" class="form-label">Input <span><b class="input_bold">PDF</b></span> files:</label>
+                            <label for="formFileMultiple" class="form-label">Input <span><b
+                                        class="input_bold">PDF</b></span> files:</label>
                             <input class="form-control" name="my_image" type="file" id="formFileMultiple" multiple>
                             <button class="btn btn-dark" type="submit" name="submit_answer">UPLOAD</button>
                         </div>
@@ -103,6 +98,8 @@ if (!isset($_SESSION['login'])){
                             <th scope="col">DATE</th>
                             <th scope="col">NAME</th>
                             <th scope="col">FILES</th>
+                            <th scope="col">EDIT</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -122,6 +119,7 @@ if (!isset($_SESSION['login'])){
                             <td> <?php echo $images['DATE'] ?> </td>
                             <td> <?php echo $images['NAME'] ?> </td>
                             <td> <a href="upload/<?= $images['image_url'] ?>" download> <?php echo $images['image_url'] ?> </a> </td>
+                            <td> <a class="btn btn-danger" name="deleteAns" href="deleteAnsBE.php?id= <?= $images['img_id'] ?> " role="button">DELETE</a> </td>
                         </tr>
                         <?php
                         } };
@@ -129,7 +127,7 @@ if (!isset($_SESSION['login'])){
                     </tbody>
                 </table>
             </div>
-        
+
 </body>
 
 </html>

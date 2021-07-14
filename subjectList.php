@@ -30,15 +30,9 @@ if (!isset($_SESSION['login'])){
 </head>
 
 <body>
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-            <span class="navbar-brand">GO-ABI</span>
-            <small>
-                <b><?php echo $_SESSION['nama'] ?></b>
-            </small>
-            <a class="btn btn-dark" href="logoutBE.php" role="button">SIGN OUT</a>
-        </div>
-    </nav>
+    
+    <?php include 'navbar.php'; ?>
+
     <a class="btn btn-dark" href="tugas.php" role="button">GO BACK<<<</a>
             <div class="heading">
                 <nav class="navbar navbar-light bg-light">
@@ -56,7 +50,6 @@ if (!isset($_SESSION['login'])){
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">Add On</th>
                             <th scope="col">Name</th>
                             <th scope="col">Subject</th>
                             <th scope="col">Edit</th>
@@ -77,10 +70,9 @@ if (!isset($_SESSION['login'])){
                     
                     ?>
                         <tr>
-                            <td><?php echo $row['DATE']; ?></td>
                             <td><b><?php echo $row['NAME']; ?></b></td>
                             <td><?php echo $row['subject']; ?></td>
-                            <td><a class="btn btn-dark" href="hapusSubjectBE.php?id= <?= $row['sb_id'] ?> " role="button">DELETE</td>
+                            <td><a class="btn btn-danger" href="hapusSubjectBE.php?id= <?= $row['sb_id'] ?> " role="button">DELETE</td>
 
                             <?php }; ?>
 

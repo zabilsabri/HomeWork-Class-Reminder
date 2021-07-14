@@ -15,7 +15,7 @@ if (isset($_POST['submit_answer'])){
 
     if ($error === 0){
         if ($img_size > 2000000){
-           echo "BIG PP!";
+           echo " <b style='display:flex;color:red;justify-content:center'>YOUR FILE IS TOO BIG!</b> ";
         } else {
             $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
             $img_ex_lower = strtolower($img_ex);
@@ -31,7 +31,7 @@ if (isset($_POST['submit_answer'])){
                 $sql = mysqli_query($conn, "insert into uploaded_image(id_id, NAME, image_url) values ($pg_id, '$std_name','$new_img_name')");
 
             } else {
-                echo "WTF";
+                echo "<b style='display:flex;color:red;justify-content:center'>PDF ONLY!</b>";
             };
 
         };

@@ -30,15 +30,9 @@ if (!isset($_SESSION['login'])){
 </head>
 
 <body>
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-            <span class="navbar-brand">GO-ABI</span>
-            <small>
-                <b><?php echo $_SESSION['nama'] ?></b>
-            </small>
-            <a class="btn btn-dark" href="logoutBE.php" role="button">SIGN OUT</a>
-        </div>
-    </nav>
+    
+    <?php include 'navbar.php'; ?>
+
     <div class="heading">
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
@@ -64,7 +58,6 @@ if (!isset($_SESSION['login'])){
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th scope="col">DATE</th>
                     <th scope="col">NAME</th>
                     <th scope="col">SUBJECT</th>
                     <th scope="col">DEADLINE</th>
@@ -88,11 +81,10 @@ if (!isset($_SESSION['login'])){
                     ?>
                 <tr>
                             
-                    <td><?php echo $row['DATE']; ?></td>
                     <td><b><?php echo $row['NAMA']; ?></b></td>
                     <td><?php echo $row['MAPEL']; ?></td>
                     <td><b class="deadline"><?php echo $row['DEADLINE']; ?></b></td>
-                    <td><a class="btn btn-dark" href="moreInfo.php?id= <?= $row['hw_id'] ?> " role="button">MORE INFO</a>
+                    <td><a class="btn btn-dark" href="moreInfo.php?id= <?= $row['hw_id'] ?> " role="button">DETAILS</a>
                     </td>
 
                     <?php }; ?>
