@@ -64,51 +64,72 @@ if (!isset($_SESSION['login'])){
                 </nav>
             </div>
 
-    <div class="infoBody">
-        <div class="card mb-3" style="width: 500px;">
-            <div class="row g-0">
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h2 class="card-title"><?php echo $row['MAPEL']; ?></h2>
-                        <p class="card-text"><b class="card-bold">1. Add on: </b> <?php echo $row['DATE']; ?> </p>
-                        <p class="card-text"><b class="card-bold">2. Author: </b> <?php echo $row['NAMA']; ?></p>
-                        <p class="card-text-deadline"><b class="card-bold">3. DeadLine: </b> <?php echo $row['DEADLINE']; ?></p>
-                        <p class="card-text"><b class="card-bold">4. Info: </b> <?php echo $row['KETERANGAN']; ?></p>
+            <div class="infoBody">
+                <div class="card mb-3" style="width: 500px;">
+                    <div class="row g-0">
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h2 class="card-title"><?php echo $row['MAPEL']; ?></h2>
+                                <p class="card-text"><b class="card-bold">1. Add on: </b> <?php echo $row['DATE']; ?>
+                                </p>
+                                <p class="card-text"><b class="card-bold">2. Author: </b> <?php echo $row['NAMA']; ?>
+                                </p>
+                                <p class="card-text-deadline"><b class="card-bold">3. DeadLine: </b>
+                                    <?php echo $row['DEADLINE']; ?></p>
+                                <p class="card-text"><b class="card-bold">4. Info: </b>
+                                    <?php echo $row['KETERANGAN']; ?></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="input-answer">
-            <form method="POST" enctype="multipart/form-data" >
-                <div class="mb-3">
-                    <label for="formFileMultiple" class="form-label">Multiple files input example</label>
-                    <input class="form-control" name="my_image" type="file" id="formFileMultiple" multiple>
-                    <button type="submit" name="submit_answer">UPLOAD</button>
+                <div class="input-answer">
+                    <form method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="formFileMultiple" class="form-label">Input <span><b class="input_bold">PDF</b></span> files:</label>
+                            <input class="form-control" name="my_image" type="file" id="formFileMultiple" multiple>
+                            <button class="btn btn-dark" type="submit" name="submit_answer">UPLOAD</button>
+                        </div>
+                    </form>
+
+                    <?php include 'addAnswerBE.php' ?>
+
                 </div>
-            </form>
+            </div>
 
-            <?php include 'addAnswerBE.php' ?>
+            <div class="answer">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">DATE</th>
+                            <th scope="col">NAME</th>
+                            <th scope="col">FILES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                
+                            include 'connection.php';
 
-        </div>
-        <?php
+                            $sql = "SELECT * FROM uploaded_image WHERE id_id = $id";
+                            $res = mysqli_query($conn, $sql);
+
+                            if(mysqli_num_rows($res) > 0){
+                                while ($images = mysqli_fetch_array($res))
+                                {
             
-            include 'connection.php';
-
-            $sql = "SELECT * FROM uploaded_image WHERE id_id = $id";
-            $res = mysqli_query($conn, $sql);
-
-            if(mysqli_num_rows($res) > 0){
-                while ($images = mysqli_fetch_array($res))
-                {
+                        ?>
+                        <tr>
+                            <td> <?php echo $images['DATE'] ?> </td>
+                            <td> <?php echo $images['NAME'] ?> </td>
+                            <td> <a href="upload/<?= $images['image_url'] ?>" download> <?php echo $images['image_url'] ?> </a> </td>
+                        </tr>
+                        <?php
+                        } };
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         
-        ?>
-        <div class="answer">
-
-            <img src="upload/<?= $images['image_url'] ?>">
-
-            <?php } }; ?>
-        </div>
-    </div>
-
 </body>
+
 </html>

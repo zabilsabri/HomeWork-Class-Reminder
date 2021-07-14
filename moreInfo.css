@@ -54,3 +54,17 @@ a{
     display: flex;
     flex-direction: column;
 }
+
+.mb-3{
+    display: flex;
+    flex-direction: column;
+}
+
+.input_bold{
+    color: red;
+}
+
+.answer{
+    background: white;
+}
+
