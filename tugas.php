@@ -37,7 +37,7 @@ if (!isset($_SESSION['login'])){
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
                 <a href="tugas.php">
-                    <h1>TUGAS</h1>
+                    <h1>TASK</h1>
                 </a>
                 <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addtaskmodal">
                     + ADD TASK
