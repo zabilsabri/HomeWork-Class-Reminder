@@ -37,7 +37,7 @@ if (isset($_POST['submit_answer'])){
         };
 
     } else {
-        echo "something wrong I can feel it!";
+        echo "<b style='display:flex;color:red;justify-content:center'>SORRY, SOMETHING IS WRONG! TRY REFRESH THE PAGE!/b>";
     };
 
 };

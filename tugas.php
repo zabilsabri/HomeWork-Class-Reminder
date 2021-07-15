@@ -58,6 +58,7 @@ if (!isset($_SESSION['login'])){
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
+                    <th scope="col">#</th>
                     <th scope="col">NAME</th>
                     <th scope="col">SUBJECT</th>
                     <th scope="col">DEADLINE</th>
@@ -75,18 +76,31 @@ if (!isset($_SESSION['login'])){
                             $sql = mysqli_query($conn, "select * from homework");
                         };
                         
+                        $row = mysqli_num_rows($sql);
 
-                        while($row = mysqli_fetch_array($sql)){
+                        if ($row > 0){
+                            while($row = mysqli_fetch_array($sql)){
                     
                     ?>
                 <tr>
-                            
+                    <th scope="row"></td>         
                     <td><b><?php echo $row['NAMA']; ?></b></td>
                     <td><?php echo $row['MAPEL']; ?></td>
                     <td><b class="deadline"><?php echo $row['DEADLINE']; ?></b></td>
                     <td><a class="btn btn-dark" href="moreInfo.php?id= <?= $row['hw_id'] ?> " role="button">DETAILS</a>
                     </td>
 
+                    <?php }; 
+                
+                    } else {
+                    ?>
+                        <tr>
+                            <td><b style="color: red;">EMPTY!</b></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
                     <?php }; ?>
 
                 </tr>

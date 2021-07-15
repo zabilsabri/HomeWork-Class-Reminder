@@ -95,6 +95,7 @@ if (!isset($_SESSION['login'])){
                 <table class="table table-striped">
                     <thead>
                         <tr>
+                            <th scope="col">#</th>
                             <th scope="col">DATE</th>
                             <th scope="col">NAME</th>
                             <th scope="col">FILES</th>
@@ -109,20 +110,33 @@ if (!isset($_SESSION['login'])){
 
                             $sql = "SELECT * FROM uploaded_image WHERE id_id = $id";
                             $res = mysqli_query($conn, $sql);
+                            $row = mysqli_num_rows($res);
 
-                            if(mysqli_num_rows($res) > 0){
+                            if($row > 0){
                                 while ($images = mysqli_fetch_array($res))
                                 {
             
                         ?>
                         <tr>
+                            <th scope="row"></th>
                             <td> <?php echo $images['DATE'] ?> </td>
                             <td> <?php echo $images['NAME'] ?> </td>
                             <td> <a href="upload/<?= $images['image_url'] ?>" download> <?php echo $images['image_url'] ?> </a> </td>
                             <td> <a class="btn btn-danger" name="deleteAns" href="deleteAnsBE.php?id= <?= $images['img_id'] ?> " role="button">DELETE</a> </td>
                         </tr>
                         <?php
-                        } };
+                        }; 
+                        } else {
+                        ?>
+                        <tr>
+                            <td><b style="color: red;" >EMPTY!</b></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <?php
+                        };
                         ?>
                     </tbody>
                 </table>
