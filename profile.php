@@ -63,7 +63,7 @@ if (!isset($_SESSION['login'])){
                     
                     <br>    
                     <?php echo $row['updated on']?>
-                    
+        
                     </h5>
                 </div>
             </div>

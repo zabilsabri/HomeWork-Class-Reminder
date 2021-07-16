@@ -39,7 +39,7 @@ if (!isset($_SESSION['login'])){
                 <nav class="navbar navbar-light bg-light">
                     <div class="container-fluid">
                         <a href="tugas.php">
-                            <h1>TASK</h1>
+                            <h1>TASK DETAILS</h1>
                         </a>
 
                         <?php
@@ -59,7 +59,7 @@ if (!isset($_SESSION['login'])){
             </div>
 
             <div class="infoBody">
-                <div class="card mb-3" style="width: 500px;">
+                <div class="card mb-3" style="width: 450px;">
                     <div class="row g-0">
                         <div class="col-md-8">
                             <div class="card-body">
@@ -82,7 +82,7 @@ if (!isset($_SESSION['login'])){
                             <label for="formFileMultiple" class="form-label">Input <span><b
                                         class="input_bold">PDF</b></span> files:</label>
                             <input class="form-control" name="my_image" type="file" id="formFileMultiple" multiple>
-                            <button class="btn btn-dark" type="submit" name="submit_answer">UPLOAD</button>
+                            <button class="btn btn-dark" type="submit" name="submit_answer">UPLOAD ANSWER</button>
                         </div>
                     </form>
 
@@ -140,6 +140,19 @@ if (!isset($_SESSION['login'])){
                         ?>
                     </tbody>
                 </table>
+            </div>
+
+            <hr>
+
+            <div class="input-comment-section">
+                <div class="mb-3">
+                    <label for="student-name-comment" class="form-label">NAME:</label>
+                    <input type="email" class="form-control" id="student-name-comment" placeholder=" <?php echo $_SESSION['nama'] ?>" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="student-comment" class="form-label">COMMENT:</label>
+                    <textarea class="form-control" id="student-comment" rows="3"></textarea>
+                </div>
             </div>
 
 </body>
