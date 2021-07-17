@@ -56,22 +56,11 @@ if (!isset($_SESSION['login'])){
 
     <main>
         <article>
-            <div class="left-container">
-                <img src="profile-pic/unknown_pic.jpg" height=300 alt="profile-pic">
-                <div class="left-indicator">
-                    <h5>CREATED ON:
-                    
-                    <br>    
-                    <?php echo $row['updated on']?>
-        
-                    </h5>
-                </div>
-            </div>
-            <div class="right-container">
-                <h5>NAME: <?php echo $row['NAMA'] ?></h5>
-            </div>
+            <img src="profile-pic/unknown_pic.jpg" height=300 alt="profile-pic">
+            <h5> <?php echo $_SESSION['nama'] ?> </h5>
         </article>
     </main>
+    
 
 </body>
 </html>

@@ -4,6 +4,6 @@
         <small>
             <b><a href="profile.php"> <?php echo $_SESSION['nama'] ?></a></b>
         </small>
-        <a class="btn btn-dark" href="logoutBE.php" role="button">SIGN OUT</a>
+        <a class="btn btn-dark" href="logoutBE.php" role="button">LOGOUT</a>
     </div>
 </nav>

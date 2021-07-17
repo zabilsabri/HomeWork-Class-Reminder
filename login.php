@@ -39,9 +39,6 @@
                 <a href="Fpassword.php" class="forget-password">Forget Account?</a>
                 <button type="submit" name="login" class="btn btn-dark">LOGIN</button>
             </form>
-            <div class="footer-container">
-                <small>Configure your Name first! <a href="updt-user-name.php">Configure Here!</a></small>
-            </div>
         </div>
     </main>
 </body>

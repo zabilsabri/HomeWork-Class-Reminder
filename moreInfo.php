@@ -57,45 +57,35 @@ if (!isset($_SESSION['login'])){
                     </div>
                 </nav>
             </div>
-
-            <div class="infoBody">
-                <div class="card mb-3" style="width: 450px;">
-                    <div class="row g-0">
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h2 class="card-title"><?php echo $row['MAPEL']; ?></h2>
-                                <p class="card-text"><b class="card-bold">1. Add on: </b> <?php echo $row['DATE']; ?>
-                                </p>
-                                <p class="card-text"><b class="card-bold">2. Author: </b> <?php echo $row['NAMA']; ?>
-                                </p>
-                                <p class="card-text-deadline"><b class="card-bold">3. DeadLine: </b>
-                                    <?php echo $row['DEADLINE']; ?></p>
-                                <p class="card-text"><b class="card-bold">4. Info: </b>
-                                    <?php echo $row['KETERANGAN']; ?></p>
+            <main>
+                <div class="infoBody">
+                    <div class="container">
+                        <h2 class="container-title"><?php echo $row['MAPEL']; ?></h2>
+                        <p class="container-text"><b class="container-bold">1. Add on: </b> <?php echo $row['DATE']; ?></p>
+                        <p class="container-text"><b class="container-bold">2. Author: </b> <?php echo $row['NAMA']; ?></p>
+                        <p class="container-text-deadline"><b class="container-bold">3. DeadLine: </b><?php echo $row['DEADLINE']; ?></p>
+                        <p class="container-text"><b class="container-bold">4. Info: </b><?php echo $row['KETERANGAN']; ?></p>
+                    </div>
+                    <div class="input-answer">
+                        <form method="POST" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="formFileMultiple" class="form-label">Input <span><b
+                                            class="input_bold">PDF</b></span> files:</label>
+                                <input class="form-control" name="my_image" type="file" id="formFileMultiple" multiple>
+                                <button class="btn btn-dark" type="submit" name="submit_answer">UPLOAD ANSWER</button>
                             </div>
-                        </div>
+                        </form>
+
+                        <?php include 'addAnswerBE.php' ?>
+
                     </div>
                 </div>
-                <div class="input-answer">
-                    <form method="POST" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <label for="formFileMultiple" class="form-label">Input <span><b
-                                        class="input_bold">PDF</b></span> files:</label>
-                            <input class="form-control" name="my_image" type="file" id="formFileMultiple" multiple>
-                            <button class="btn btn-dark" type="submit" name="submit_answer">UPLOAD ANSWER</button>
-                        </div>
-                    </form>
-
-                    <?php include 'addAnswerBE.php' ?>
-
-                </div>
-            </div>
+            </main>
 
             <div class="answer">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">DATE</th>
                             <th scope="col">NAME</th>
                             <th scope="col">FILES</th>
@@ -113,16 +103,15 @@ if (!isset($_SESSION['login'])){
                             $row = mysqli_num_rows($res);
 
                             if($row > 0){
-                                while ($images = mysqli_fetch_array($res))
+                                while ($files = mysqli_fetch_array($res))
                                 {
             
                         ?>
                         <tr>
-                            <th scope="row"></th>
-                            <td> <?php echo $images['DATE'] ?> </td>
-                            <td> <?php echo $images['NAME'] ?> </td>
-                            <td> <a href="upload/<?= $images['image_url'] ?>" download> <?php echo $images['image_url'] ?> </a> </td>
-                            <td> <a class="btn btn-danger" name="deleteAns" href="deleteAnsBE.php?id= <?= $images['img_id'] ?> " role="button">DELETE</a> </td>
+                            <td> <?php echo $files['DATE'] ?> </td>
+                            <td> <?php echo $files['NAME'] ?> </td>
+                            <td> <a style="color: blue;"  href="upload/<?= $files['image_url'] ?>" download>PDF FILE</td>
+                            <td> <a class="btn btn-danger" name="deleteAns" href="deleteAnsBE.php?id= <?= $files['img_id'] ?> " role="button">-</a> </td>
                         </tr>
                         <?php
                         }; 
@@ -130,7 +119,6 @@ if (!isset($_SESSION['login'])){
                         ?>
                         <tr>
                             <td><b style="color: red;" >EMPTY!</b></td>
-                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>

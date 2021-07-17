@@ -40,33 +40,16 @@ main{
 article{
     background: white;
     display: flex;
-    height: 55vh;
-    width: 100vh;
-    border-radius: 1rem;
-}
-
-.left-container{
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-left: 40px;
-}
-
-.left-indicator{
-    text-align: center;
-    margin-top: 40px;
+    height: 55vh;
+    width: 65vh;
 }
 
 img{
     border: black solid;
     border-radius: 10rem;
+    margin-bottom: 10px;
 }
 
-.right-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding-left: 50px;
-}

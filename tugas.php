@@ -30,36 +30,38 @@ if (!isset($_SESSION['login'])){
 </head>
 
 <body>
-    
+
     <?php include 'navbar.php'; ?>
 
     <div class="heading">
-        <nav class="navbar navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a href="tugas.php">
-                    <h1>TASK</h1>
-                </a>
-                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addtaskmodal">
-                    + ADD TASK
+                <a class="navbar-brand" href="#"><h1>TASK</h1></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+                    aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-
-                <a type="button" href="subjectList.php" class="btn btn-dark">
-                    SUBJECT LIST
-                </a>
-
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" data-bs-toggle="modal" data-bs-target="#addtaskmodal" href="#">+ ADD TASK</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="subjectList.php">SUBJECT LIST</a>
+                        </li>
+                    </ul>
+                    <form class="search-task" method="GET" action="tugas.php">
+                        <input class="form-control-bar" name="search" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-dark" type="submit">Search</button>
+                    </form>
+                </div>
             </div>
         </nav>
     </div>
-    <form class="search-task" method="GET" action="tugas.php">
-        <input class="form-control-bar" name="search" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-dark" type="submit">Search</button>
-    </form>
     <article>
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">NAME</th>
                     <th scope="col">SUBJECT</th>
                     <th scope="col">DEADLINE</th>
                     <th scope="col">INFO</th>
@@ -83,8 +85,6 @@ if (!isset($_SESSION['login'])){
                     
                     ?>
                 <tr>
-                    <th scope="row"></td>         
-                    <td><b><?php echo $row['NAMA']; ?></b></td>
                     <td><?php echo $row['MAPEL']; ?></td>
                     <td><b class="deadline"><?php echo $row['DEADLINE']; ?></b></td>
                     <td><a class="btn btn-dark" href="moreInfo.php?id= <?= $row['hw_id'] ?> " role="button">DETAILS</a>
@@ -94,14 +94,13 @@ if (!isset($_SESSION['login'])){
                 
                     } else {
                     ?>
-                        <tr>
-                            <td><b style="color: red;">EMPTY!</b></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    <?php }; ?>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <?php }; ?>
 
                 </tr>
 

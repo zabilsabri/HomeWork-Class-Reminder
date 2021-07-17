@@ -37,7 +37,7 @@ if (!isset($_SESSION['login'])){
             <div class="heading">
                 <nav class="navbar navbar-light bg-light">
                     <div class="container-fluid">
-                        <h1>SUBJECT LIST</h1>
+                        <h1>SUBJECT</h1>
 
                         <a type="button" href="createSubject.php" class="btn btn-dark">
                             + ADD SUBJECT
