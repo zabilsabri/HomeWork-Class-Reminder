@@ -49,6 +49,7 @@ main{
     margin-bottom: 20px;
     text-align: center;
     width: 100%;
+    padding-top: 20px;
 }
 
 .container-text{
@@ -95,3 +96,33 @@ main{
 .mb-3{
     width: 50vh;
 }
+
+.comment-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.comment-container{
+    display: flex;
+    flex-direction: row;
+    width: 55vh;
+    height: fit-content;
+    margin-bottom: 20px;
+    border: black solid;
+    padding-top: 10px;
+}
+
+.comment-profile-pic{
+    width: 10vh;
+}
+
+.comment-body{
+    width: 100%;
+    height: fit-content;
+    padding-left: 10px;
+}
+
+
+

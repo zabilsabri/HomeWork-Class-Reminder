@@ -31,7 +31,7 @@ if (!isset($_SESSION['login'])){
 </head>
 
 <body>
-    
+
     <?php include 'navbar.php'; ?>
 
     <a class="btn btn-dark" href="tugas.php" role="button">GO BACK<<<</a>
@@ -61,10 +61,14 @@ if (!isset($_SESSION['login'])){
                 <div class="infoBody">
                     <div class="container">
                         <h2 class="container-title"><?php echo $row['MAPEL']; ?></h2>
-                        <p class="container-text"><b class="container-bold">1. Add on: </b> <?php echo $row['DATE']; ?></p>
-                        <p class="container-text"><b class="container-bold">2. Author: </b> <?php echo $row['NAMA']; ?></p>
-                        <p class="container-text-deadline"><b class="container-bold">3. DeadLine: </b><?php echo $row['DEADLINE']; ?></p>
-                        <p class="container-text"><b class="container-bold">4. Info: </b><?php echo $row['KETERANGAN']; ?></p>
+                        <p class="container-text"><b class="container-bold">1. Add on: </b> <?php echo $row['DATE']; ?>
+                        </p>
+                        <p class="container-text"><b class="container-bold">2. Author: </b> <?php echo $row['NAMA']; ?>
+                        </p>
+                        <p class="container-text-deadline"><b class="container-bold">3. DeadLine:
+                            </b><?php echo $row['DEADLINE']; ?></p>
+                        <p class="container-text"><b class="container-bold">4. Info:
+                            </b><?php echo $row['KETERANGAN']; ?></p>
                     </div>
                     <div class="input-answer">
                         <form method="POST" enctype="multipart/form-data">
@@ -110,15 +114,16 @@ if (!isset($_SESSION['login'])){
                         <tr>
                             <td> <?php echo $files['DATE'] ?> </td>
                             <td> <?php echo $files['NAME'] ?> </td>
-                            <td> <a style="color: blue;"  href="upload/<?= $files['image_url'] ?>" download>PDF FILE</td>
-                            <td> <a class="btn btn-danger" name="deleteAns" href="deleteAnsBE.php?id= <?= $files['img_id'] ?> " role="button">-</a> </td>
+                            <td> <a style="color: blue;" href="upload/<?= $files['image_url'] ?>" download>PDF FILE</td>
+                            <td> <a class="btn btn-danger" name="deleteAns"
+                                    href="deleteAnsBE.php?id= <?= $files['img_id'] ?> " role="button">-</a> </td>
                         </tr>
                         <?php
                         }; 
                         } else {
                         ?>
                         <tr>
-                            <td><b style="color: red;" >EMPTY!</b></td>
+                            <td><b style="color: red;">EMPTY!</b></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -135,11 +140,60 @@ if (!isset($_SESSION['login'])){
             <div class="input-comment-section">
                 <div class="mb-3">
                     <label for="student-name-comment" class="form-label">NAME:</label>
-                    <input type="email" class="form-control" id="student-name-comment" placeholder=" <?php echo $_SESSION['nama'] ?>" disabled>
+                    <input type="email" class="form-control" id="student-name-comment"
+                        placeholder=" <?php echo $_SESSION['nama'] ?>" disabled>
                 </div>
                 <div class="mb-3">
                     <label for="student-comment" class="form-label">COMMENT:</label>
                     <textarea class="form-control" id="student-comment" rows="3"></textarea>
+                </div>
+            </div>
+
+            <div class="comment-section">
+                <div class="comment-container">
+                    <div class="comment-profile-pic">
+                        <img src="profile-pic/unknown_pic.jpg" width=64 alt="">
+                    </div>
+                    <div class="comment-body">
+                        <div class="comment-name">
+                            <b><?php echo $_SESSION['nama'] ?> <span> <small> 11/07/2021 </small> </span></b>
+                        </div>
+                        <div class="comment">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu efficitur ipsum. Nullam
+                                pulvinar finibus mollis. Sed rhoncus pellentesque neque nec ultrices. Nunc dictum libero
+                                vel sapien pulvinar, non interdum leo consectetur. Quisque a vulputate tortor. Praesent
+                                consectetur neque vel ligula mollis sagittis. Aliquam nec arcu feugiat, placerat leo eu,
+                                vehicula enim. Cras sit amet elementum massa. Vestibulum arcu ipsum, bibendum eget
+                                venenatis et, cursus et arcu. Donec vel risus pharetra, placerat ex vitae, bibendum est.
+                                Quisque tristique malesuada ante, vel porttitor orci fermentum ac. Pellentesque ac
+                                tellus massa. Quisque scelerisque lobortis metus, at pellentesque mi rutrum eget.
+                                Quisque tempus, nisi eu vehicula accumsan, nisl diam lacinia velit, quis facilisis
+                                libero ligula vel augue. In porta erat vitae accumsan tempus.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comment-container">
+                    <div class="comment-profile-pic">
+                        <img src="profile-pic/unknown_pic.jpg" width=64 alt="">
+                    </div>
+                    <div class="comment-body">
+                        <div class="comment-name">
+                            <b><?php echo $_SESSION['nama'] ?> <span> <small> 11/07/2021 </small> </span></b>
+                        </div>
+                        <div class="comment">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu efficitur ipsum. Nullam
+                                pulvinar finibus mollis. Sed rhoncus pellentesque neque nec ultrices. Nunc dictum libero
+                                vel sapien pulvinar, non interdum leo consectetur. Quisque a vulputate tortor. Praesent
+                                consectetur neque vel ligula mollis sagittis. Aliquam nec arcu feugiat, placerat leo eu,
+                                vehicula enim. Cras sit amet elementum massa. Vestibulum arcu ipsum, bibendum eget
+                                venenatis et, cursus et arcu. Donec vel risus pharetra, placerat ex vitae, bibendum est.
+                                Quisque tristique malesuada ante, vel porttitor orci fermentum ac. Pellentesque ac
+                                tellus massa. Quisque scelerisque lobortis metus, at pellentesque mi rutrum eget.
+                                Quisque tempus, nisi eu vehicula accumsan, nisl diam lacinia velit, quis facilisis
+                                libero ligula vel augue. In porta erat vitae accumsan tempus.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
