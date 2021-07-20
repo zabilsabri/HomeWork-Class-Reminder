@@ -51,6 +51,10 @@ if (!isset($_SESSION['login'])){
 
                             $row = mysqli_fetch_array($sql);
 
+                            $time = strtotime($row['TANGGAL']);
+                            $datetimeHW = date("d/m/Y H:i:s", $time);
+
+
                         ?>
 
                         <a class="btn btn-danger" href="hapusBE.php?id= <?= $row['hw_id'] ?> " role="button">DELETE</a>
@@ -61,7 +65,7 @@ if (!isset($_SESSION['login'])){
                 <div class="infoBody">
                     <div class="container">
                         <h2 class="container-title"><?php echo $row['MAPEL']; ?></h2>
-                        <p class="container-text"><b class="container-bold">1. Add on: </b> <?php echo $row['DATE']; ?>
+                        <p class="container-text"><b class="container-bold">1. Add on: </b> <?php echo $datetimeHW; ?>
                         </p>
                         <p class="container-text"><b class="container-bold">2. Author: </b> <?php echo $row['NAMA']; ?>
                         </p>
@@ -144,10 +148,35 @@ if (!isset($_SESSION['login'])){
                         placeholder=" <?php echo $_SESSION['nama'] ?>" disabled>
                 </div>
                 <div class="mb-3">
-                    <label for="student-comment" class="form-label">COMMENT:</label>
-                    <textarea class="form-control" id="student-comment" rows="3"></textarea>
+                    <form method="POST">
+                        <label for="student-comment" class="form-label">COMMENT:</label>
+                        <textarea class="form-control" name="comment" id="student-comment" rows="3"></textarea>
+                        <button class="btn btn-dark" type="submit" name="submit_comment">POST</button>
+                    </form>
                 </div>
             </div>
+
+            <hr>
+
+            <?php include 'addCommentBE.php'; ?>
+
+
+            <?php
+            
+            $sqlco = "SELECT * FROM comment_section where task_id = $id";
+            $sen = mysqli_query($conn, $sqlco);
+            $count = mysqli_num_rows($sen);
+            
+            ?>
+            
+            <p class="comment-indicator" > Comments: <?php echo $count ?> </p>
+
+            <?php
+            if ($count > 0){
+                while ($wor = mysqli_fetch_array($sen)){
+                    $timeC = strtotime($wor['DATE']);
+                    $datetimeC = date("d/m/Y H:i:s", $timeC);
+            ?>
 
             <div class="comment-section">
                 <div class="comment-container">
@@ -156,46 +185,22 @@ if (!isset($_SESSION['login'])){
                     </div>
                     <div class="comment-body">
                         <div class="comment-name">
-                            <b><?php echo $_SESSION['nama'] ?> <span> <small> 11/07/2021 </small> </span></b>
+                            <b><?php echo $wor['NAME'] ?> <span> <small> <?php echo $datetimeC; ?> </small> </span></b>
                         </div>
                         <div class="comment">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu efficitur ipsum. Nullam
-                                pulvinar finibus mollis. Sed rhoncus pellentesque neque nec ultrices. Nunc dictum libero
-                                vel sapien pulvinar, non interdum leo consectetur. Quisque a vulputate tortor. Praesent
-                                consectetur neque vel ligula mollis sagittis. Aliquam nec arcu feugiat, placerat leo eu,
-                                vehicula enim. Cras sit amet elementum massa. Vestibulum arcu ipsum, bibendum eget
-                                venenatis et, cursus et arcu. Donec vel risus pharetra, placerat ex vitae, bibendum est.
-                                Quisque tristique malesuada ante, vel porttitor orci fermentum ac. Pellentesque ac
-                                tellus massa. Quisque scelerisque lobortis metus, at pellentesque mi rutrum eget.
-                                Quisque tempus, nisi eu vehicula accumsan, nisl diam lacinia velit, quis facilisis
-                                libero ligula vel augue. In porta erat vitae accumsan tempus.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="comment-container">
-                    <div class="comment-profile-pic">
-                        <img src="profile-pic/unknown_pic.jpg" width=64 alt="">
-                    </div>
-                    <div class="comment-body">
-                        <div class="comment-name">
-                            <b><?php echo $_SESSION['nama'] ?> <span> <small> 11/07/2021 </small> </span></b>
-                        </div>
-                        <div class="comment">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu efficitur ipsum. Nullam
-                                pulvinar finibus mollis. Sed rhoncus pellentesque neque nec ultrices. Nunc dictum libero
-                                vel sapien pulvinar, non interdum leo consectetur. Quisque a vulputate tortor. Praesent
-                                consectetur neque vel ligula mollis sagittis. Aliquam nec arcu feugiat, placerat leo eu,
-                                vehicula enim. Cras sit amet elementum massa. Vestibulum arcu ipsum, bibendum eget
-                                venenatis et, cursus et arcu. Donec vel risus pharetra, placerat ex vitae, bibendum est.
-                                Quisque tristique malesuada ante, vel porttitor orci fermentum ac. Pellentesque ac
-                                tellus massa. Quisque scelerisque lobortis metus, at pellentesque mi rutrum eget.
-                                Quisque tempus, nisi eu vehicula accumsan, nisl diam lacinia velit, quis facilisis
-                                libero ligula vel augue. In porta erat vitae accumsan tempus.</p>
+                            <p> <?php echo $wor['comment']; ?> </p>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <?php };
+            } else {
+            ?>
+
+            <h5 class="comment-indicator">NO COMMENTS YET!</h5>
+
+            <?php }; ?>
 
 </body>
 

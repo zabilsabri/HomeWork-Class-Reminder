@@ -73,7 +73,7 @@ if (!isset($_SESSION['login'])){
                         include 'connection.php';
 
                         if (isset($_GET['search'])){
-                            $sql = mysqli_query($conn, "select * from homework where concat(DATE, NAMA, MAPEL, DEADLINE) like '%" .$_GET['search']. "%'");
+                            $sql = mysqli_query($conn, "select * from homework where concat(TANGGAL, NAMA, MAPEL, DEADLINE) like '%" .$_GET['search']. "%'");
                         } else {
                             $sql = mysqli_query($conn, "select * from homework");
                         };
@@ -95,8 +95,7 @@ if (!isset($_SESSION['login'])){
                     } else {
                     ?>
                 <tr>
-                    <td></td>
-                    <td></td>
+                    <td><b style="color: red;">EMPTY!</b></td>
                     <td></td>
                     <td></td>
                 </tr>

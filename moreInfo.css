@@ -82,8 +82,11 @@ main{
 
 .answer{
     background: white;
+    text-align: center;
     margin-top: 40px;
     margin-bottom: 40px;
+    margin-left: 23px;
+    margin-right: 23px;
 }
 
 .input-comment-section{
@@ -100,7 +103,6 @@ main{
 .comment-section{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
@@ -124,5 +126,10 @@ main{
     padding-left: 10px;
 }
 
+.comment-indicator{
+    text-align: center;
+    color: black;
+    margin-bottom: 30px;
+}
 
 
