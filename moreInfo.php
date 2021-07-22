@@ -71,7 +71,7 @@ if (!isset($_SESSION['login'])){
                         </p>
                         <p class="container-text-deadline"><b class="container-bold">3. DeadLine:
                             </b><?php echo $row['DEADLINE']; ?></p>
-                        <p class="container-text"><b class="container-bold">4. Info:
+                        <p class="container-text"><b class="container-bold">4. Description:
                             </b><?php echo $row['KETERANGAN']; ?></p>
                     </div>
                     <div class="input-answer">

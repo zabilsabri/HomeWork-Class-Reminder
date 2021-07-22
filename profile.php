@@ -51,13 +51,17 @@ if (!isset($_SESSION['login'])){
         $sql = mysqli_query($conn, "select * from student_info where NAMA = '$name'");
         
         $row = mysqli_fetch_array($sql);
+
+        $createdOn = strtotime($row['updated on']);
+        $datetimeCO = date("d/m/Y H:i:s", $createdOn);
     
     ?>
 
     <main>
         <article>
             <img src="profile-pic/unknown_pic.jpg" height=300 alt="profile-pic">
-            <h5> <?php echo $_SESSION['nama'] ?> </h5>
+            <h4> <?php echo $_SESSION['nama'] ?> </h4>
+            <h6>CREATED ON: <?php echo $datetimeCO ?></h6>
         </article>
     </main>
     

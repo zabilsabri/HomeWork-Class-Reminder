@@ -95,8 +95,8 @@ if (!isset($_SESSION['login'])){
                     } else {
                     ?>
                 <tr>
-                    <td><b style="color: red;">EMPTY!</b></td>
                     <td></td>
+                    <td><b style="color: red;">NO TASK FOUND!</b></td>
                     <td></td>
                 </tr>
                 <?php }; ?>
@@ -117,7 +117,7 @@ if (!isset($_SESSION['login'])){
                 </div>
                 <div class="modal-body">
                     <form action="createBE.php" method="POST">
-                        1. MAPEL
+                        1. SUBJECT
 
 
                         <select class="form-select" name="mapel" aria-label="Default select example">
@@ -139,7 +139,7 @@ if (!isset($_SESSION['login'])){
                         2. DEADLINE
                         <input class="form-control" type="text" name="deadline" aria-label="default input example">
                         <div class="mb-3">
-                            <label for="textareaket" class="form-label">3. INFORMATION</label>
+                            <label for="textareaket" class="form-label">3. DESCRIPTION</label>
                             <textarea class="form-control" name="keterangan" id="textareaket" rows="3"></textarea>
                         </div>
                         <div class="modal-footer">
