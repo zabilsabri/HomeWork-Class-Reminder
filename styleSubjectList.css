@@ -12,6 +12,9 @@ a{
 
 article{
     background: white;
+    text-align: center;
+    margin-left: 33px;
+    margin-right: 33px;
 }
 
 .heading{

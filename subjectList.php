@@ -50,8 +50,8 @@ if (!isset($_SESSION['login'])){
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Subject</th>
+                            <th scope="col">NAME</th>
+                            <th scope="col">SUBJECT</th>
                             <th scope="col">Edit</th>
 
 
