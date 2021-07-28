@@ -7,6 +7,10 @@ if (isset($_POST['addSubject'])){
     $name = $_SESSION['nama'];
     $subject = htmlspecialchars($_POST['subject']);
 
+    $subject = stripcslashes($subject);
+
+    $subject = mysqli_real_escape_string($conn, $subject);
+
     if(!empty($subject)){
         $sql = "insert into subject(NAME, subject) values ('$name','$subject')";
 
