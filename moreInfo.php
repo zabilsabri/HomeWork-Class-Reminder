@@ -97,7 +97,7 @@ if (!isset($_SESSION['login'])){
                             <th scope="col">DATE</th>
                             <th scope="col">NAME</th>
                             <th scope="col">FILES</th>
-                            <th scope="col">EDIT</th>
+                            <th scope="col">DELETE</th>
 
                         </tr>
                     </thead>

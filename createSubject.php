@@ -33,7 +33,11 @@ if (!isset($_SESSION['login'])){
             <div class="conatiner-heading">
                 <h2 class="container-heading">ADD SUBJECT</h2>
             </div>
+
             <div class="container-indicator">
+                <?php if(isset($_GET['empty'])) { ?>
+                    <b class="failed">Fill the Input!</b>
+                <?php } ?>
                 <p>Add all of your subject by pressing "ADD" button. If done, press the "NEXT" button.</p>
             </div>
             <div class="container-body">
