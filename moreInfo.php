@@ -49,30 +49,33 @@ if (!isset($_SESSION['login'])){
                             $id = $_GET['id'];
                             $sql = mysqli_query($conn, "select * from homework where hw_id= $id");
 
-                            $row = mysqli_fetch_array($sql);
+                            $rowtest = mysqli_fetch_array($sql);
 
-                            $time = strtotime($row['TANGGAL']);
+                            $time = strtotime($rowtest['TANGGAL']);
                             $datetimeHW = date("d/m/Y H:i:s", $time);
 
 
                         ?>
-
-                        <a class="btn btn-danger" href="hapusBE.php?id= <?= $row['hw_id'] ?> " role="button">DELETE</a>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#modalDeleteTask">
+                            DELETE
+                        </button>
                     </div>
                 </nav>
             </div>
             <main>
                 <div class="infoBody">
                     <div class="container">
-                        <h2 class="container-title"><?php echo $row['MAPEL']; ?></h2>
+                        <h2 class="container-title"><?php echo $rowtest['MAPEL']; ?></h2>
                         <p class="container-text"><b class="container-bold">1. Add on: </b> <?php echo $datetimeHW; ?>
                         </p>
-                        <p class="container-text"><b class="container-bold">2. Author: </b> <?php echo $row['NAMA']; ?>
+                        <p class="container-text"><b class="container-bold">2. Author: </b>
+                            <?php echo $rowtest['NAMA']; ?>
                         </p>
                         <p class="container-text-deadline"><b class="container-bold">3. DeadLine:
-                            </b><?php echo $row['DEADLINE']; ?></p>
+                            </b><?php echo $rowtest['DEADLINE']; ?></p>
                         <p class="container-text"><b class="container-bold">4. Description:
-                            </b><?php echo $row['KETERANGAN']; ?></p>
+                            </b><?php echo $rowtest['KETERANGAN']; ?></p>
                     </div>
                     <div class="input-answer">
                         <form method="POST" enctype="multipart/form-data">
@@ -168,8 +171,8 @@ if (!isset($_SESSION['login'])){
             $count = mysqli_num_rows($sen);
             
             ?>
-            
-            <p class="comment-indicator" > Comments: <?php echo $count ?> </p>
+
+            <p class="comment-indicator"> Comments: <?php echo $count ?> </p>
 
             <?php
             if ($count > 0){
@@ -201,6 +204,27 @@ if (!isset($_SESSION['login'])){
             <h5 class="comment-indicator">NO COMMENTS YET!</h5>
 
             <?php }; ?>
+
+
+            <!----------------MODAL DELETE TASK----------------------------->
+            <div class="modal fade" id="modalDeleteTask" tabindex="-1" aria-labelledby="modalDeleteTask"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalDeleteTask">CONFIRM?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div style="text-align: center" class="modal-body">
+                            Are You Sure?
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-danger" href="hapusBE.php?id= <?= $rowtest['hw_id'] ?> "
+                                role="button">DELETE</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 </body>
 

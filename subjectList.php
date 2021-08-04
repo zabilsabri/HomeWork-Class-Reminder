@@ -72,7 +72,7 @@ if (!isset($_SESSION['login'])){
                         <tr>
                             <td><b><?php echo $row['NAME']; ?></b></td>
                             <td><?php echo $row['subject']; ?></td>
-                            <td><a class="btn btn-danger" href="hapusSubjectBE.php?id= <?= $row['sb_id'] ?> " role="button">DELETE</td>
+                            <td><a class="btn btn-danger" href="hapusSubjectBE.php?id= <?= $row['sb_id'] ?> " role="button">DELETE</a></td>
 
                             <?php }; ?>
 
@@ -82,6 +82,7 @@ if (!isset($_SESSION['login'])){
                     </tbody>
                 </table>
             </article>
+            
 </body>
 
 </html>
