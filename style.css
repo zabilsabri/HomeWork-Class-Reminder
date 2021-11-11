@@ -60,3 +60,7 @@ a{
 .search-task{
     display: flex;
 }
+
+.a_indicator{
+    color: red;
+}

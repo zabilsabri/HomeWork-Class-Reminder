@@ -82,11 +82,15 @@ if (!isset($_SESSION['login'])){
 
                         if ($row > 0){
                             while($row = mysqli_fetch_array($sql)){
+                            
                     
                     ?>
                 <tr>
-                    <td><?php echo $row['MAPEL']; ?></td>
-                    <td><b class="deadline"><?php echo $row['DEADLINE']; ?></b></td>
+                    <td><?php echo $row['MAPEL']; 
+                        $time = strtotime($row['DEADLINE']);
+                        $datetimeDL = date("d/m/Y H:i:s", $time);
+                    ?></td>
+                    <td><b class="deadline"><?php echo $datetimeDL; ?></b></td>
                     <td><a class="btn btn-dark" href="moreInfo.php?id= <?= $row['hw_id'] ?> " role="button">DETAILS</a>
                     </td>
 
@@ -137,7 +141,7 @@ if (!isset($_SESSION['login'])){
                             <?php }; ?>
                         </select>
                         2. DEADLINE
-                        <input class="form-control" type="text" name="deadline" aria-label="default input example">
+                        <input class="form-control" type="datetime-local" name="deadline" aria-label="default input example">
                         <div class="mb-3">
                             <label for="textareaket" class="form-label">3. DESCRIPTION</label>
                             <textarea class="form-control" name="keterangan" id="textareaket" rows="3"></textarea>

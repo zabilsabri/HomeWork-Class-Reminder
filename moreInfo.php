@@ -54,6 +54,8 @@ if (!isset($_SESSION['login'])){
                             $time = strtotime($rowtest['TANGGAL']);
                             $datetimeHW = date("d/m/Y H:i:s", $time);
 
+                            $timeDL = strtotime($rowtest['DEADLINE']);
+                            $dateDL = date("d/m/Y H:i:s", $timeDL);
 
                         ?>
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
@@ -73,7 +75,7 @@ if (!isset($_SESSION['login'])){
                             <?php echo $rowtest['NAMA']; ?>
                         </p>
                         <p class="container-text-deadline"><b class="container-bold">3. DeadLine:
-                            </b><?php echo $rowtest['DEADLINE']; ?></p>
+                            </b><?php echo $dateDL; ?></p>
                         <p class="container-text"><b class="container-bold">4. Description:
                             </b><?php echo $rowtest['KETERANGAN']; ?></p>
                     </div>
