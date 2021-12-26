@@ -63,20 +63,29 @@ if (!isset($_SESSION['login'])){
                         include 'connection.php';
 
                         $name = $_SESSION['nama'];
+                        $id_room = $_SESSION['id_room'];
                         
-                        $sql = mysqli_query($conn, "select sb_id, DATE, NAME, subject from subject");
+                        $sql = mysqli_query($conn, "select sb_id, DATE, NAME, subject from subject where id_room = '$id_room'");
+                        
+                        $row = mysqli_num_rows($sql);
 
-                        while($row = mysqli_fetch_array($sql)){
-                    
+                        if($row > 0){
+                            while($row = mysqli_fetch_array($sql)){
+  
                     ?>
                         <tr>
                             <td><b><?php echo $row['NAME']; ?></b></td>
                             <td><?php echo $row['subject']; ?></td>
                             <td><a class="btn btn-danger" href="hapusSubjectBE.php?id= <?= $row['sb_id'] ?> " role="button">DELETE</a></td>
-
-                            <?php }; ?>
-
                         </tr>
+                            <?php }; 
+                        } else { ?>
+                        <tr>
+                            <td></td>
+                            <td><b class="empty">NO SUBJECT FOUND!</b></td>
+                            <td></td>
+                        </tr>
+                        <?php }; ?>
 
 
                     </tbody>

@@ -16,35 +16,20 @@ if (isset($_POST['login'])){
 
     if(!empty($nama) && !empty($nis)){
         $sql = mysqli_query($conn, "select NAMA, NIS, admin_id from student_info where NAMA = '$nama' and NIS = '$nis'");
-        $sqlc = mysqli_query($conn, "select * from subject");
 
         $row = mysqli_fetch_array($sql);
-        $rowc = mysqli_fetch_array($sqlc);
 
         $_SESSION['nama'] = $nama;
-        
 
         if ($row['NAMA'] == $nama && $row['NIS'] == $nis){
-            if ($rowc['sb_id'] == 0){
-                if ($row['admin_id'] == 1){
-                    $_SESSION['admin'] = true;
-                    $_SESSION['login'] = true; 
-                    header('location: createSubject.php');
-                }
-                else {
-                    $_SESSION['login'] = true; 
-                    header('location: createSubject.php');
-                };
-            } else {
-                if ($row['admin_id'] == 1){
-                    $_SESSION['admin'] = true;
-                    $_SESSION['login'] = true; 
-                    header('location: tugas.php?admin');
-                }
-                else {
-                    $_SESSION['login'] = true; 
-                    header('location: tugas.php');
-                };
+            if ($row['admin_id'] == 1){
+                $_SESSION['admin'] = true;
+                $_SESSION['login'] = true; 
+                header('location: room.php');
+            }
+            else {
+                $_SESSION['login'] = true; 
+                header('location: room.php');
             };
     
         } else {

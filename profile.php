@@ -28,9 +28,8 @@ if (!isset($_SESSION['login'])){
     <title>PROFILE</title>
 </head>
 <body>
-    <?php include 'navbar.php'; ?>    
+    <?php include 'navbar.php'; ?>   
     <a class="btn btn-dark" href="tugas.php" role="button">GO BACK<<<</a>
-
 
     <div class="heading">
         <nav class="navbar navbar-light bg-light">
@@ -60,7 +59,19 @@ if (!isset($_SESSION['login'])){
     <main>
         <article>
             <img src="profile-pic/unknown_pic.jpg" height=300 alt="profile-pic">
-            <h4> <?php echo $_SESSION['nama'] ?> </h4>
+            <h4> <?php echo $_SESSION['nama'] ?> 
+            <?php
+                $nama = $_SESSION['nama'];
+                include 'connection.php';
+
+                $sqln = mysqli_query($conn, "select NAMA, admin_id from student_info where NAMA = '$nama'");
+                $rown = mysqli_fetch_array($sqln);
+
+                if ($rown['admin_id'] == 1){
+            ?>
+            <a style="color: gold; border-style: solid; border-width: 2px; padding-left: 2px; padding-right: 2px; background-color: white">Admin</a>
+            <?php } ?>
+            </h4>
             <h6>CREATED ON: <?php echo $datetimeCO ?></h6>
         </article>
     </main>

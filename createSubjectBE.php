@@ -5,6 +5,8 @@ include 'connection.php';
 
 if (isset($_POST['addSubject'])){
     $name = $_SESSION['nama'];
+    $id_room = $_SESSION['id_room'];
+
     $subject = htmlspecialchars($_POST['subject']);
 
     $subject = stripcslashes($subject);
@@ -12,7 +14,7 @@ if (isset($_POST['addSubject'])){
     $subject = mysqli_real_escape_string($conn, $subject);
 
     if(!empty($subject)){
-        $sql = "insert into subject(NAME, subject) values ('$name','$subject')";
+        $sql = "insert into subject(NAME, subject, id_room) values ('$name','$subject','$id_room')";
 
         if($conn->query($sql)){
             header('location: createSubject.php?success');

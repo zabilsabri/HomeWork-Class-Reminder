@@ -6,6 +6,9 @@ if (!isset($_SESSION['login'])){
     header('location: login.php?notlogin');
 };
 
+if (!isset($_SESSION['id_room'])){
+    header('location: room.php?notJoin');
+};
 
 ?>
 
@@ -36,7 +39,7 @@ if (!isset($_SESSION['login'])){
     <div class="heading">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="tugas.php"><h1>TASK</h1></a>
+                <a class="navbar-brand" href="tugas.php"><h1><?php echo $_SESSION['name_room'] ?></h1></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCP"
                     aria-controls="navbarCP" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -71,41 +74,41 @@ if (!isset($_SESSION['login'])){
             <tbody>
                 <?php 
                         include 'connection.php';
+                        $id_room = $_SESSION['id_room'];
 
                         if (isset($_GET['search'])){
-                            $sql = mysqli_query($conn, "select * from homework where concat(TANGGAL, NAMA, MAPEL, DEADLINE) like '%" .$_GET['search']. "%'");
+                            $sql = mysqli_query($conn, "select * from homework where concat(TANGGAL, NAMA, MAPEL, DEADLINE) like '%" .$_GET['search']. "%' and id_room = '$id_room'");
                         } else {
-                            $sql = mysqli_query($conn, "select * from homework");
+                            $sql = mysqli_query($conn, "select * from homework where id_room = '$id_room'");
                         };
                         
                         $row = mysqli_num_rows($sql);
 
                         if ($row > 0){
-                            while($row = mysqli_fetch_array($sql)){
-                            
-                    
-                    ?>
-                <tr>
-                    <td><?php echo $row['MAPEL']; 
-                        $time = strtotime($row['DEADLINE']);
-                        $datetimeDL = date("d/m/Y H:i:s", $time);
-                    ?></td>
-                    <td><b class="deadline"><?php echo $datetimeDL; ?></b></td>
-                    <td><a class="btn btn-dark" href="moreInfo.php?id= <?= $row['hw_id'] ?> " role="button">DETAILS</a>
-                    </td>
-
-                    <?php }; 
-                
-                    } else {
-                    ?>
-                <tr>
-                    <td></td>
-                    <td><b style="color: red;">NO TASK FOUND!</b></td>
-                    <td></td>
-                </tr>
-                <?php }; ?>
-
-                </tr>
+                            while($row = mysqli_fetch_array($sql)){ ?>
+                    <tr>
+                        <td>                
+                            <a href="moreInfo.php?id= <?= $row['hw_id'] ?> ">
+                                <?php echo $row['MAPEL']; ?> 
+                            </a>
+                            <?php
+                            $time = strtotime($row['DEADLINE']);
+                            $datetimeDL = date("d/m/Y H:i:s", $time);
+                            ?>
+                        </td>
+                        <td><b class="deadline"><?php echo $datetimeDL; ?></b></td>
+                        <td><a class="btn btn-dark" href="moreInfo.php?id= <?= $row['hw_id'] ?> " role="button">DETAILS</a>
+                        </td>
+                    </tr>
+                        <?php }; 
+                        } else {
+                        ?>
+                    <tr>
+                        <td></td>
+                        <td><b class="empty">NO TASK FOUND!</b></td>
+                        <td></td>
+                    </tr>
+                        <?php }; ?>
 
 
             </tbody>
@@ -129,8 +132,9 @@ if (!isset($_SESSION['login'])){
                             <?php
 
                             include 'connection.php';
+                            $id_room = $_SESSION['id_room'];
                             
-                            $sqlc = mysqli_query($conn, "select * from subject");
+                            $sqlc = mysqli_query($conn, "select * from subject where id_room = '$id_room'");
 
                             while($rows = mysqli_fetch_array($sqlc)){
 
@@ -177,9 +181,6 @@ if (!isset($_SESSION['login'])){
             </div>
         </div>
     </div>
-
-
-
 
 </body>
 

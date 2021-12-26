@@ -31,8 +31,8 @@ body{
 
 article{
     background: white;
-    margin-left: 23px;
-    margin-right: 23px;
+    margin-left: 20px;
+    margin-right: 20px;
     text-align: center;
 }
 
@@ -62,5 +62,9 @@ a{
 }
 
 .a_indicator{
+    color: red;
+}
+
+.empty{
     color: red;
 }

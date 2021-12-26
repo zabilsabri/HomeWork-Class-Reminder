@@ -3,6 +3,8 @@
 session_start();
 include 'connection.php';
 
+$id_room = $_SESSION['id_room'];
+
 if (isset($_POST['create'])){
 
     $nama = htmlspecialchars($_SESSION['nama']);
@@ -20,7 +22,7 @@ if (isset($_POST['create'])){
     $deadline = mysqli_real_escape_string($conn, $deadline);
     $ket = mysqli_real_escape_string($conn, $ket);
 
-    $sqli = "insert into homework(NAMA, MAPEL, DEADLINE, KETERANGAN) values ('$nama', '$mapel', '$deadline', '$ket')";
+    $sqli = "insert into homework(NAMA, MAPEL, DEADLINE, KETERANGAN, id_room) values ('$nama', '$mapel', '$deadline', '$ket','$id_room')";
     if ($conn->query($sqli)){
         header('location: tugas.php');
     } else {
