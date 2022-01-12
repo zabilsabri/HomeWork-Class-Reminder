@@ -2,9 +2,7 @@
 
 session_start();
 
-if (!isset($_SESSION['login'])){
-    header('location: login.php?notlogin');
-};
+include "roomSecurity.php";
 
 
 ?>
@@ -61,13 +59,13 @@ if (!isset($_SESSION['login'])){
             <img src="profile-pic/unknown_pic.jpg" height=300 alt="profile-pic">
             <h4> <?php echo $_SESSION['nama'] ?> 
             <?php
-                $nama = $_SESSION['nama'];
+                $name_room = $_SESSION['name_room'];
                 include 'connection.php';
 
-                $sqln = mysqli_query($conn, "select NAMA, admin_id from student_info where NAMA = '$nama'");
-                $rown = mysqli_fetch_array($sqln);
+                $sqlm = mysqli_query($conn, "select creator, Name_Room from room where Name_Room = '$name_room'");
+                $rowm = mysqli_fetch_array($sqlm);
 
-                if ($rown['admin_id'] == 1){
+                if ($rowm['creator'] == $name){
             ?>
             <a style="color: gold; border-style: solid; border-width: 2px; padding-left: 2px; padding-right: 2px; background-color: white">Admin</a>
             <?php } ?>

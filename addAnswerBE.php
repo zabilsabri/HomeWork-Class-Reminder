@@ -15,7 +15,7 @@ if (isset($_POST['submit_answer'])){
 
     if ($error === 0){
         if ($img_size > 2000000){
-           echo " <b style='display:flex;color:red;justify-content:center'>YOUR FILE IS TOO BIG!</b> ";
+           echo " <b style='display:flex;color:red;justify-content:center'>YOUR FILE IS A BIG PP!</b> ";
         } else {
             $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
             $img_ex_lower = strtolower($img_ex);

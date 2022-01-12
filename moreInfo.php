@@ -118,14 +118,33 @@ if (!isset($_SESSION['login'])){
                             if($row > 0){
                                 while ($files = mysqli_fetch_array($res))
                                 {
-            
+                                    $filesTime = strtotime($files['DATE']);
+                                    $filesTimeFX = date("d/m/Y H:i:s", $filesTime);
                         ?>
                         <tr>
-                            <td> <?php echo $files['DATE'] ?> </td>
+                            <td> <?php echo $filesTimeFX ?> </td>
                             <td> <?php echo $files['NAME'] ?> </td>
                             <td> <a style="color: blue;" href="upload/<?= $files['image_url'] ?>" download>PDF FILE</td>
-                            <td> <a class="btn btn-danger" name="deleteAns"
-                                    href="deleteAnsBE.php?id= <?= $files['img_id'] ?> " role="button">-</a> </td>
+                            <td> <a type="button" class="btn btn-danger" href="deleteAnsBE.php?id= <?= $files['img_id'] ?> " data-bs-toggle="modal" data-bs-target="#modalDeleteAns">-</a></td>
+                            
+                            <!----------------MODAL DELETE TASK----------------------------->
+                            <div class="modal fade" id="modalDeleteAns" tabindex="-1" aria-labelledby="modalDeleteAns"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalDeleteAns">CONFIRM?</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div style="text-align: center" class="modal-body">
+                                            Are You Sure?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a class="btn btn-danger" href="deleteAnsBE.php?id= <?= $files['img_id'] ?> " role="button">DELETE</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </tr>
                         <?php
                         }; 
@@ -221,8 +240,7 @@ if (!isset($_SESSION['login'])){
                             Are You Sure?
                         </div>
                         <div class="modal-footer">
-                            <a class="btn btn-danger" href="hapusBE.php?id= <?= $rowtest['hw_id'] ?> "
-                                role="button">DELETE</a>
+                            <a class="btn btn-danger" href="hapusBE.php?id= <?= $rowtest['hw_id'] ?> " role="button">DELETE</a>
                         </div>
                     </div>
                 </div>

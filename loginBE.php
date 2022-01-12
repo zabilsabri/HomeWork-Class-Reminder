@@ -15,26 +15,19 @@ if (isset($_POST['login'])){
     $nis = mysqli_real_escape_string($conn, $nis);
 
     if(!empty($nama) && !empty($nis)){
-        $sql = mysqli_query($conn, "select NAMA, NIS, admin_id from student_info where NAMA = '$nama' and NIS = '$nis'");
+        $sql = mysqli_query($conn, "select NAMA, NIS from student_info where NAMA = '$nama' and NIS = '$nis'");
 
         $row = mysqli_fetch_array($sql);
 
         $_SESSION['nama'] = $nama;
 
         if ($row['NAMA'] == $nama && $row['NIS'] == $nis){
-            if ($row['admin_id'] == 1){
-                $_SESSION['admin'] = true;
-                $_SESSION['login'] = true; 
-                header('location: room.php');
-            }
-            else {
-                $_SESSION['login'] = true; 
-                header('location: room.php');
-            };
-    
+            $_SESSION['login'] = true; 
+            header('location: room.php');
         } else {
             header('location: login.php?wrong');
         };
+        
     } else {
         header('location: login.php?empty');
     };

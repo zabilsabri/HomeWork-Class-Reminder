@@ -2,13 +2,7 @@
 
 session_start();
 
-if (!isset($_SESSION['login'])){
-    header('location: login.php?notlogin');
-};
-
-if (!isset($_SESSION['id_room'])){
-    header('location: room.php?notJoin');
-};
+include "roomSecurity.php";
 
 ?>
 
@@ -52,6 +46,21 @@ if (!isset($_SESSION['id_room'])){
                         <li class="nav-item">
                             <a class="nav-link active" href="subjectList.php">SUBJECT LIST</a>
                         </li>
+                        <?php include "connection.php"; 
+
+                        $nama = $_SESSION['nama'];
+                        $name_room = $_SESSION['name_room'];
+                        
+                        $sql = mysqli_query($conn, "select creator, Name_Room from room where Name_Room = '$name_room'");
+                        $row = mysqli_fetch_array($sql);
+
+                        if ($row['creator'] == $nama){ ?>
+                            <li>
+                                <a class="nav-link active" href="roomSetting.php">ROOM SETTING</a>
+                            </li>
+                        
+                        <?php } ?>
+
                     </ul>
                     <form class="search-task" method="GET" action="tugas.php">
                         <input class="form-control-bar" name="search" type="search" placeholder="Search" aria-label="Search">

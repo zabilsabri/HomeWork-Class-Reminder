@@ -40,8 +40,7 @@ include 'connection.php';
 
                     <button type="submit" name="joinRoom" class="btn btn-dark">JOIN</button>
             </form>
-            </div>
-
+        </div>
     </main>
 
 </body>

@@ -41,7 +41,7 @@ include 'connection.php';
                         <input type="password" class="form-content" name="roomPassword" placeholder="Password">
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" name="roomRules" value="1" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
                             Only Admin Can Change The Room Settings
                         </label>

@@ -76,7 +76,26 @@ if (!isset($_SESSION['login'])){
                         <tr>
                             <td><b><?php echo $row['NAME']; ?></b></td>
                             <td><?php echo $row['subject']; ?></td>
-                            <td><a class="btn btn-danger" href="hapusSubjectBE.php?id= <?= $row['sb_id'] ?> " role="button">DELETE</a></td>
+                            <td><a type="button" class="btn btn-danger" href="hapusSubjectBE.php?id= <?= $row['sb_id'] ?> " data-bs-toggle="modal" data-bs-target="#modalDeleteSubject">DELETE</a></td>
+                            
+                            <!----------------MODAL DELETE TASK----------------------------->
+                            <div class="modal fade" id="modalDeleteSubject" tabindex="-1" aria-labelledby="modalDeleteSubject"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalDeleteSubject">CONFIRM?</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div style="text-align: center" class="modal-body">
+                                            Are You Sure?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a class="btn btn-danger" href="hapusSubjectBE.php?id= <?= $row['sb_id'] ?> " role="button">DELETE</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </tr>
                             <?php }; 
                         } else { ?>
@@ -91,7 +110,6 @@ if (!isset($_SESSION['login'])){
                     </tbody>
                 </table>
             </article>
-            
 </body>
 
 </html>

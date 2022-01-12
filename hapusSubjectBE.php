@@ -7,13 +7,13 @@ $id = $_GET['id'];
 $nama = $_SESSION['nama'];
 
 $sql = mysqli_query($conn, "select NAME from subject where sb_id = $id");
-$sql2 = mysqli_query($conn, "select admin_id from student_info where NAMA = '$nama'");
+$sql2 = mysqli_query($conn, "select creator, Name_Room from room where Name_Room = '$name_room'");
 
 $row = mysqli_fetch_array($sql);
 $rowc = mysqli_fetch_array($sql2);
 
 
-if ($row['NAME'] == $nama || $rowc['admin_id'] == 1){
+if ($row['NAME'] == $nama || $rowc['creator'] == $nama || $_SESSION["rules_room"] == 0){
     $sqli = mysqli_query($conn, "delete from subject where sb_id = $id");
     header('location: subjectList.php');
 
