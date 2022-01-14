@@ -24,3 +24,8 @@ a{
 button{
     margin-top: 15px;
 }
+
+.containerFooter{
+    display: flex;
+    justify-content: right;
+}

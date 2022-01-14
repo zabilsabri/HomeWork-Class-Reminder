@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 26 Des 2021 pada 16.06
+-- Waktu pembuatan: 14 Jan 2022 pada 14.24
 -- Versi server: 10.4.19-MariaDB
 -- Versi PHP: 8.0.6
 
@@ -75,17 +75,16 @@ CREATE TABLE `student_info` (
   `st_id` int(11) NOT NULL,
   `updated on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `NAMA` varchar(100) NOT NULL,
-  `NIS` int(11) NOT NULL,
-  `admin_id` int(1) NOT NULL
+  `NIS` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `student_info`
 --
 
-INSERT INTO `student_info` (`st_id`, `updated on`, `NAMA`, `NIS`, `admin_id`) VALUES
-(1, '2021-11-10 23:53:49', 'zabil sabri muhammad', 181175, 1),
-(2, '2021-07-10 12:40:41', 'wahyudi nugraha', 181174, 0);
+INSERT INTO `student_info` (`st_id`, `updated on`, `NAMA`, `NIS`) VALUES
+(1, '2021-11-10 23:53:49', 'zabil sabri muhammad', 181175),
+(2, '2021-07-10 12:40:41', 'wahyudi nugraha', 181174);
 
 -- --------------------------------------------------------
 
@@ -193,7 +192,7 @@ ALTER TABLE `subject`
 -- AUTO_INCREMENT untuk tabel `uploaded_image`
 --
 ALTER TABLE `uploaded_image`
-  MODIFY `img_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

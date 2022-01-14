@@ -1,6 +1,19 @@
 <?php
 session_start();
 include 'connection.php';
+include 'roomSecurity.php';
+
+    $name_room = $_SESSION['name_room'];
+    $nama = $_SESSION['nama'];
+
+    $sql = mysqli_query($conn, "select Name_Room, creator from room where Name_Room = '$name_room'");
+
+    $row = mysqli_fetch_array($sql);
+
+    if ($row['creator'] != $nama){
+        header('location: tugas.php');
+    };
+
 ?>
 
 <!DOCTYPE html>
@@ -21,21 +34,44 @@ include 'connection.php';
     <a class="btn btn-dark" href="tugas.php" role="button">GO BACK<<<</a>
     <div class="container">
         <h4>ROOM SETTING</h4>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">                    
-                Default checkbox
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            <label class="form-check-label" for="flexCheckChecked">
-                Checked checkbox
-            </label>
-        </div>
-        <div class="button">
-            <input class="btn btn-dark" type="submit" value="Submit">
-        </div>
+        <form action="roomSettingChange.php" method="POST">
+            <?php
+                    
+            $name_room = $_SESSION["name_room"];
+
+            $sql = mysqli_query($conn, "select Name_Room, Rules_Room from room where Name_Room = '$name_room'");
+
+            $row = mysqli_fetch_array($sql);
+
+            if($row['Rules_Room'] == 1){
+
+            ?>
+
+            <div class="form-check">
+                <input class="form-check-input" name="roomRules" type="checkbox" value="1" id="flexCheckChecked" checked>
+                <label class="form-check-label" for="flexCheckChecked">
+                Only Admin Can Edit Task and Subject
+                </label>
+            </div>
+
+            <?php } else {?>
+
+            <div class="form-check">
+                <input class="form-check-input" name="roomRules" type="checkbox" value="1" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">                    
+                Only Admin Can Edit Task and Subject
+                </label>
+            </div>
+
+            <?php } ?>
+            
+            <div class="containerFooter">
+                <div class="button">
+                    <input class="btn btn-dark" name="changeSetting" type="submit" value="Submit">
+                </div>
+            </div>
+        </form>
+
     </div>
 </body>
 
