@@ -6,10 +6,12 @@ include 'connection.php';
 if (isset($_POST['createRoom'])){
     $name = $_SESSION['nama'];
 
+    $roomName = $_POST['roomName'];
+    $roomPassword = password_hash($_POST['roomPassword'], PASSWORD_DEFAULT);
     $roomRules = $_POST['roomRules'];
 
-    $roomName = htmlspecialchars($_POST['roomName']);
-    $roomPassword = htmlspecialchars($_POST['roomPassword']);
+    $roomName = htmlspecialchars($roomName);
+    $roomPassword = htmlspecialchars($roomPassword);
 
     $roomName = stripcslashes($roomName);
     $roomPassword = stripcslashes($roomPassword);
@@ -19,7 +21,7 @@ if (isset($_POST['createRoom'])){
 
 
     if(!empty($roomName) && !empty($roomPassword)){
-            $sqlc = mysqli_query($conn, "select Name_Room from room");
+            $sqlc = mysqli_query($conn, "select Name_Room from room where Name_Room = '$roomName'");
             $row = mysqli_fetch_array($sqlc);
 
 
