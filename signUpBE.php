@@ -2,13 +2,21 @@
 
 include 'connection.php';
 
-switch ($_POST['action']){
-    case 'registration':
-        $nama = $_POST['username'];
-        $password = password_hash($_POST['nis'], PASSWORD_DEFAULT);
+if(isset($_POST['register'])){
+    $nama = $_POST['username'];
+    $password = password_hash($_POST['nis'], PASSWORD_DEFAULT);
+
+    // AVOID SQL INJECTION
+    $nama = stripcslashes($nama);
+    $password = stripcslashes($password);
+ 
+    $nama = mysqli_real_escape_string($conn, $nama);
+    $password = mysqli_real_escape_string($conn, $password);
         
-        $sqlc = mysqli_query($conn, "select NAMA from student_info where NAMA = '$nama'");
-        $row = mysqli_fetch_array($sqlc);
+    $sqlc = mysqli_query($conn, "select NAMA from student_info where NAMA = '$nama'");
+    $row = mysqli_fetch_array($sqlc);
+
+    if(!empty($nama) && !empty($password)){
 
         if($row['NAMA'] != $nama){
             $sql = "insert into student_info (NAMA, NIS) values ('$nama', '$password')";
@@ -19,22 +27,12 @@ switch ($_POST['action']){
             };
         } else {
             header('location: signUp.php?exist');
-        }
-        break;
-    case 'login':
-        $nama = $_POST['username'];
-        $password = $_POST['nis'];
+        };
 
-        $sqli = mysqli_query($conn, "select NAMA, NIS from student_info where NAMA = '$nama'");
-        $row = mysqli_fetch_array($sqli);
-
-        $password = password_verify($password, $row['NIS']);
-        if($password == $row['NIS']){
-            header('location: login.php?success');
-        }
-
-
-    default:
-        #code
-        break;
-}
+    } else {
+        header('location: signUp.php?empty');
+    };
+    
+} else {
+    header('location: signUp.php?notLogin');
+};

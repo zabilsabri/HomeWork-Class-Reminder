@@ -18,7 +18,6 @@
             </div>
             
             <form action="signUpBE.php" method="POST">
-                <input type="hidden" name="action" value="registration">
                 <div class="text-box">
                     <input type="text" class="form-content" name="username" placeholder="Nama">
                 </div>

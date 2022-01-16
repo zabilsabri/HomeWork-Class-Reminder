@@ -30,7 +30,6 @@
             <?php } ?>
             
             <form action="loginBE.php" method="POST">
-                <input type="hidden" name="action" value="login">
                 <div class="text-box">
                     <input type="text" class="form-content" name="username" placeholder="Nama">
                 </div>
