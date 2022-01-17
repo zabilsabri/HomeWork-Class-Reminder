@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">    
     <link rel="stylesheet" href="loginstyle.css">
+    <script src="https://kit.fontawesome.com/645f3ace4e.js" crossorigin="anonymous"></script>
     <title>LOGIN</title>
 </head>
 
@@ -34,7 +35,10 @@
                     <input type="text" class="form-content" name="username" placeholder="Nama">
                 </div>
                 <div class="text-box">
-                    <input type="password" class="form-content" name="nis" placeholder="NIS">
+                    <input type="password" class="form-content" id="password" name="nis" placeholder="Password">
+                    <div class="eye">
+                        <i class="fas fa-eye-slash" onclick="showHide()" id="toogle"></i>
+                    </div>
                 </div>
                 <a href="Fpassword.php" class="forget-password">Forget Account?</a>
                 <button type="submit" name="login" class="btn btn-dark">LOGIN</button>
@@ -44,6 +48,7 @@
             </div>
         </div>
     </main>
+    <script type="text/javascript" src="script.js"></script>
 </body>
 
 </html>

@@ -63,3 +63,16 @@ button{
 .failed{
     color: red;
 }
+
+.eye{
+    display: inline;
+}
+
+i{
+    cursor: pointer;
+    font-size: 21px;
+}
+
+.eye i.hide::before{
+    content: '\f06e';
+}
