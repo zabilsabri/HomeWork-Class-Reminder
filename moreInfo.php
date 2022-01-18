@@ -1,9 +1,7 @@
 <?php
 
 session_start();
-
 include 'roomSecurity.php';
-
 
 ?>
 
@@ -45,9 +43,16 @@ include 'roomSecurity.php';
                             include 'connection.php';
 
                             $id = $_GET['id'];
+                            $roomId = $_SESSION['id_room'];
                             $sql = mysqli_query($conn, "select * from homework where hw_id= $id");
 
                             $rowtest = mysqli_fetch_array($sql);
+
+                            if($rowtest['id_room'] == $roomId){
+                                #pass
+                            } else {
+                                header('location: tugas.php?unknown');
+                            }
 
                             $time = strtotime($rowtest['TANGGAL']);
                             $datetimeHW = date("d/m/Y H:i:s", $time);
