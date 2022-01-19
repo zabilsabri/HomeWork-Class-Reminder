@@ -20,14 +20,21 @@ if (isset($_POST['joinRoom'])){
             $sqlc = mysqli_query($conn, "select id_room, Name_Room, room_password, Rules_Room from room where Name_Room = '$roomName'");
             $row = mysqli_fetch_array($sqlc);
 
+            $id_room = $row['id_room'];
+            $std_id = $_SESSION['std_id'];
+
             $roomPasswordVerify = password_verify($roomPassword, $row['room_password']);
 
             if($row['Name_Room'] == $roomName && $roomPasswordVerify == $roomPassword){
-                $_SESSION["id_room"] = $row['id_room'];    
-                $_SESSION["name_room"] = $row['Name_Room']; 
-                $_SESSION["rules_room"] = $row['Rules_Room'];
-                      
-                header('location: tugas.php');
+                $sql = "insert into room_path(std_id, r_id) values ('$std_id','$id_room')";
+                
+                if($conn->query($sql)){
+                    $_SESSION['std_id'] = $std_id;
+                    header('location: room.php?success');
+                } else {
+                    header('location: room.php?failed');
+                };
+                
             } else {
                 header('location: joinRoom.php?wrong');
             };

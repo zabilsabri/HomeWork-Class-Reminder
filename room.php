@@ -40,33 +40,32 @@ include 'connection.php';
     </div>
 
     <main>
+
         <div class="row">
-            <div class="card border-info mb-3" style="max-width: 18rem;">
-                <div class="card-header">Header</div>
-                <div class="card-body">
-                    <h5 class="card-title">Info card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-            </div>
+
+            <?php  
+            $std_id = $_SESSION['std_id'];
+            
+            $sql = mysqli_query($conn, "select * from room_path where std_id = '$std_id'");
+            $row = mysqli_fetch_array($sql);
+            $id_room = $row['r_id'];
+
+            $sqls = mysqli_query($conn, "select * from room where id_room = '$id_room'");
+
+            while($rows = mysqli_fetch_array($sqls)){  ?>
 
             <div class="card border-info mb-3" style="max-width: 18rem;">
-                <div class="card-header">Header</div>
+                <div class="card-header"> <?php echo $rows['Name_Room']; ?> </div>
                 <div class="card-body">
                     <h5 class="card-title">Info card title</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     <a href="#" class="stretched-link"></a>
                 </div>
             </div>
-
-            <div class="card border-info mb-3" style="max-width: 18rem;">
-                <div class="card-header">Header</div>
-                <div class="card-body">
-                    <h5 class="card-title">Info card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-            </div>
         </div>
-       
+
+        <?php };
+        ?>
         
     </main>
 
