@@ -30,7 +30,12 @@ include 'roomSecurity.php';
 
     <?php include 'navbar.php'; ?>
 
-    <a class="btn btn-dark" href="tugas.php" role="button">GO BACK<<<</a>
+    <button class="btn btn-dark" onclick="goback()" role="button">GO BACK<<<</button>
+    <script>
+        function goback(){
+            javascript:history.go(-1)
+        }
+    </script>
             <div class="heading">
                 <nav class="navbar navbar-light bg-light">
                     <div class="container-fluid">
@@ -44,7 +49,7 @@ include 'roomSecurity.php';
 
                             $id = $_GET['id'];
                             $roomId = $_SESSION['id_room'];
-                            $sql = mysqli_query($conn, "select * from homework where hw_id= $id");
+                            $sql = mysqli_query($conn, "select * from homework where hw_id= '$id'");
 
                             $rowtest = mysqli_fetch_array($sql);
 

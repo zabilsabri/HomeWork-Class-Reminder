@@ -1,5 +1,5 @@
 const password = document.getElementById("password");
-        const toogle = document.getElementById("toogle");
+const toogle = document.getElementById("toogle");
         
         function showHide(){
             if (password.type === 'password'){

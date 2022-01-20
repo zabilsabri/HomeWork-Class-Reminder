@@ -3,7 +3,10 @@
 session_start();
 include 'connection.php';
 include "roomSecurity.php";
-$id_room = $_GET['id_r'];
+
+$_SESSION['id_room'] = $_GET['id_r'];
+$id_room = $_SESSION['id_room'];
+$std_id = $_SESSION['std_id'];
 
 $sql_main = mysqli_query($conn, "select * from room where id_room = '$id_room'");
 $row_main = mysqli_fetch_array($sql_main);

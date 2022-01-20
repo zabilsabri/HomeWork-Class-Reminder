@@ -2,7 +2,6 @@
 session_start();
 include 'connection.php';
 
-
 ?>
 
 <!DOCTYPE html>
@@ -43,12 +42,12 @@ include 'connection.php';
             $sql = mysqli_query($conn, "select * from room_path where std_id = '$std_id'");
             
             while($row = mysqli_fetch_array($sql)){
-                $id_room = $row['r_id'];
+                $id_rooms = $row['r_id'];
 
-                $sqls = mysqli_query($conn, "select * from room where id_room = '$id_room'");
+                $sqls = mysqli_query($conn, "select * from room where id_room = '$id_rooms'");
 
                 while($rows = mysqli_fetch_array($sqls)){  
-                    if($rows['creator'] === $_SESSION['nama']){ ?>
+                    if($rows['creator'] == $_SESSION['nama']){ ?>
                         <div class="card border-danger mb-3" style="max-width: 18rem;">
                             <div class="card-header">
                                 <h3> <?php echo $rows['Name_Room']; ?> </h3>
@@ -78,7 +77,7 @@ include 'connection.php';
                     </div>
 
             <?php };
-            };
+                };
             };
             ?>
         </div>
