@@ -23,7 +23,8 @@ if (isset($_POST['joinRoom'])){
             $id_room = $row['id_room'];
             $std_id = $_SESSION['std_id'];
 
-            $roomPasswordVerify = password_verify($roomPassword, $row['room_password']);
+            $roomPasswordVerify = $row['room_password'];
+            //$roomPasswordVerify = password_verify($roomPassword, $row['room_password']);
 
             if($row['Name_Room'] == $roomName && $roomPasswordVerify == $roomPassword){
                 $sql = "insert into room_path(std_id, r_id) values ('$std_id','$id_room')";

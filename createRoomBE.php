@@ -7,7 +7,8 @@ if (isset($_POST['createRoom'])){
     $name = $_SESSION['nama'];
 
     $roomName = $_POST['roomName'];
-    $roomPassword = password_hash($_POST['roomPassword'], PASSWORD_DEFAULT);
+    $roomPassword = $_POST['roomPassword'];
+    //$roomPassword = password_hash($_POST['roomPassword'], PASSWORD_DEFAULT);
     $roomRules = $_POST['roomRules'];
 
     $roomName = htmlspecialchars($roomName);
@@ -38,7 +39,7 @@ if (isset($_POST['createRoom'])){
                     $_SESSION["name_room"] = $row['Name_Room'];
                     $_SESSION["rules_room"] = $row['Rules_Room'];
 
-                    header('location: createSubject.php');
+                    header('location: room.php');
                 } else {
                     header('location: createRoom.php?failed');
                 };

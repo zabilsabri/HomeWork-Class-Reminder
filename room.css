@@ -49,7 +49,17 @@ a{
     justify-content: space-around;
 }
 
-.card-body{
+
+.card-header{
     display: flex;
     flex-direction: row;
+}
+
+.roomImg{
+    width: 100%;
+    text-align: right;
+}
+
+.roomImg img{
+    border-radius: 50%;
 }
