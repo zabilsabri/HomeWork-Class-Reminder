@@ -30,7 +30,6 @@ if (isset($_POST['joinRoom'])){
                 $sql = "insert into room_path(std_id, r_id) values ('$std_id','$id_room')";
                 
                 if($conn->query($sql)){
-                    $_SESSION['std_id'] = $std_id;
                     header('location: room.php?success');
                 } else {
                     header('location: room.php?failed');

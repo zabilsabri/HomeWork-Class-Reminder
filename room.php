@@ -22,10 +22,6 @@ include 'connection.php';
 
 <body>
     <?php include "navbarRoom.php"; ?>
-
-    <?php if(isset($_GET['notJoin'])) { ?>
-        <b class="failed">You Should Join A Room First!</b>
-    <?php } ?>
     
     <div class="dropright">
         <div class="btn-group dropend">
@@ -51,22 +47,38 @@ include 'connection.php';
 
                 $sqls = mysqli_query($conn, "select * from room where id_room = '$id_room'");
 
-                while($rows = mysqli_fetch_array($sqls)){  ?>
-                <div class="card border-info mb-3" style="max-width: 18rem;">
-                    <div class="card-header"> 
-                        <h3> <?php echo $rows['Name_Room']; ?> </h3>
-                        <div class="roomImg">
-                            <img src="profile-pic/unknown_pic.jpg" width="50px" height="50px" alt="gambar">
+                while($rows = mysqli_fetch_array($sqls)){  
+                    if($rows['creator'] === $_SESSION['nama']){ ?>
+                        <div class="card border-danger mb-3" style="max-width: 18rem;">
+                            <div class="card-header">
+                                <h3> <?php echo $rows['Name_Room']; ?> </h3>
+                                <div class="roomImg">
+                                    <img src="profile-pic/unknown_pic.jpg" width="50px" height="50px" alt="gambar">
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text"> Creator: <?php echo $rows['creator']; ?> </p>
+                                <p class="card-text"> Status: Admin </p>
+                                <a href="tugas.php?id_r= <?= $rows['id_room']; ?> " class="stretched-link"></a>
+                            </div>
+                        </div>
+                    <?php } else { ?>
+                    <div class="card border-info mb-3" style="max-width: 18rem;">
+                        <div class="card-header"> 
+                            <h3> <?php echo $rows['Name_Room']; ?> </h3>
+                            <div class="roomImg">
+                                <img src="profile-pic/unknown_pic.jpg" width="50px" height="50px" alt="gambar">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text"> Creator: <?php echo $rows['creator'] ?> </p>
+                            <p class="card-text"> Status: Member </p>
+                            <a href="tugas.php?id_r= <?= $rows['id_room']; ?> " class="stretched-link"></a>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <p class="card-text"> Creator: <?php echo $rows['creator'] ?> </p>
-                        <p class="card-text"> Status: Member </p>
-                        <a href="tugas.php?id= <?= $rows['id_room']; ?> " class="stretched-link"></a>
-                    </div>
-                </div>
 
             <?php };
+            };
             };
             ?>
         </div>

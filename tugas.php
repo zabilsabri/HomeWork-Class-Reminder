@@ -1,8 +1,12 @@
 <?php
 
 session_start();
-
+include 'connection.php';
 include "roomSecurity.php";
+$id_room = $_GET['id_r'];
+
+$sql_main = mysqli_query($conn, "select * from room where id_room = '$id_room'");
+$row_main = mysqli_fetch_array($sql_main);
 
 ?>
 
@@ -33,7 +37,7 @@ include "roomSecurity.php";
     <div class="heading">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="tugas.php"><h1><?php echo $_SESSION['name_room'] ?></h1></a>
+                <a class="navbar-brand" href="tugas.php"><h1><?php echo $row_main['Name_Room']; ?></h1></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCP"
                     aria-controls="navbarCP" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -48,13 +52,7 @@ include "roomSecurity.php";
                         </li>
                         <?php include "connection.php"; 
 
-                        $nama = $_SESSION['nama'];
-                        $name_room = $_SESSION['name_room'];
-                        
-                        $sql = mysqli_query($conn, "select creator, Name_Room from room where Name_Room = '$name_room'");
-                        $row = mysqli_fetch_array($sql);
-
-                        if ($row['creator'] == $nama){ ?>
+                        if ($row_main['creator'] === $_SESSION['nama']){ ?>
                             <li>
                                 <a class="nav-link active" href="roomSetting.php">ROOM SETTING</a>
                             </li>
@@ -83,7 +81,6 @@ include "roomSecurity.php";
             <tbody>
                 <?php 
                         include 'connection.php';
-                        $id_room = $_SESSION['id_room'];
 
                         if (isset($_GET['search'])){
                             $sql = mysqli_query($conn, "select * from homework where concat(TANGGAL, NAMA, MAPEL, DEADLINE) like '%" .$_GET['search']. "%' and id_room = '$id_room'");
@@ -141,7 +138,6 @@ include "roomSecurity.php";
                             <?php
 
                             include 'connection.php';
-                            $id_room = $_SESSION['id_room'];
                             
                             $sqlc = mysqli_query($conn, "select * from subject where id_room = '$id_room'");
 

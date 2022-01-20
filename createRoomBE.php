@@ -32,14 +32,20 @@ if (isset($_POST['createRoom'])){
                 $sql = "insert into room(creator, Name_Room, room_password, Rules_Room) values ('$name','$roomName','$roomPassword','$roomRules')";
                 
                 if($conn->query($sql)){
-                    $sqls = mysqli_query($conn, "select id_room, Name_Room, Rules_Room from room where Name_Room = '$roomName'");
+                    $sqls = mysqli_query($conn, "select id_room, Name_Room from room where Name_Room = '$roomName'");
                     $row = mysqli_fetch_array($sqls);
 
-                    $_SESSION["id_room"] = $row['id_room'];
-                    $_SESSION["name_room"] = $row['Name_Room'];
-                    $_SESSION["rules_room"] = $row['Rules_Room'];
+                    $std_id = $_SESSION['std_id'];
+                    $id_room = $row['id_room'];
 
-                    header('location: room.php');
+                    $sqlm = "insert into room_path(std_id, r_id) values ('$std_id','$id_room')";
+                
+                    if($conn->query($sqlm)){
+                        header('location: room.php?success');
+                    } else {
+                        header('location: room.php?failed');
+                    };
+
                 } else {
                     header('location: createRoom.php?failed');
                 };
