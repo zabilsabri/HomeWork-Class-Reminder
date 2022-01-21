@@ -3,6 +3,9 @@
 session_start();
 include 'roomSecurity.php';
 
+$id_hw_ecrypt = base64_decode(urldecode($_GET['id']));
+$id_hw = ((($id_hw_ecrypt * '26091971')/'08082020')/'10052003');
+
 ?>
 
 <!DOCTYPE html>
@@ -47,17 +50,11 @@ include 'roomSecurity.php';
     
                             include 'connection.php';
 
-                            $id = $_GET['id'];
+                            $id = $id_hw;
                             $roomId = $_SESSION['id_room'];
                             $sql = mysqli_query($conn, "select * from homework where hw_id= '$id'");
 
                             $rowtest = mysqli_fetch_array($sql);
-
-                            if($rowtest['id_room'] == $roomId){
-                                #pass
-                            } else {
-                                header('location: tugas.php?unknown');
-                            }
 
                             $time = strtotime($rowtest['TANGGAL']);
                             $datetimeHW = date("d/m/Y H:i:s", $time);

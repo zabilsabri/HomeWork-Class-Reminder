@@ -1,0 +1,36 @@
+body{
+    background: #dbdbdb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+article{
+    background: white;
+    text-align: center;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.heading{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.empty{
+    color: red;
+}
+
+.table>thead{
+    vertical-align: middle;
+}

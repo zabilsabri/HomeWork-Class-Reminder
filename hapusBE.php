@@ -16,14 +16,18 @@ $rowc = mysqli_fetch_array($sql2);
 
 if ($row['NAME'] == $nama || $rowc['creator'] == $nama || $_SESSION["rules_room"] == 0){
     $sqli = mysqli_query($conn, "delete from homework where hw_id = $id");
-    header('location: tugas.php');
+    echo "
+    <script>
+    javascript:history.go(-1)
+    </script>
+    ";
 
 } else {
     
     echo "
     <script>
         alert('ANDA BUKAN PEMILIK TUGAS!')
-        document.location.href = 'tugas.php'
+        javascript:history.go(-1)
     </script>
     
     ";

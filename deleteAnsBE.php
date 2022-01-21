@@ -25,7 +25,7 @@ if ($row['NAME'] == $nama || $_SESSION["rules_room"] == 0){
     echo "
     <script>
         alert('ANDA BUKAN PEMILIK TUGAS!')
-        document.location.href = 'tugas.php'
+        javascript:history.go(-1)
     </script>
     
     ";

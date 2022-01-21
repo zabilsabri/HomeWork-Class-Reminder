@@ -4,12 +4,15 @@ session_start();
 include 'connection.php';
 include "roomSecurity.php";
 
-$_SESSION['id_room'] = $_GET['id_r'];
-$id_room = $_SESSION['id_room'];
+$id_room_ecrypt = base64_decode(urldecode($_GET['id_r']));
+$id_room = ((($id_room_ecrypt * '26091971')/'08082020')/'10052003');
+$_SESSION['id_room'] = $id_room;
+
 $std_id = $_SESSION['std_id'];
 
 $sql_main = mysqli_query($conn, "select * from room where id_room = '$id_room'");
 $row_main = mysqli_fetch_array($sql_main);
+$_SESSION['name_room'] = $row_main['Name_Room'];
 
 ?>
 
@@ -53,13 +56,18 @@ $row_main = mysqli_fetch_array($sql_main);
                         <li class="nav-item">
                             <a class="nav-link active" href="subjectList.php">SUBJECT LIST</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="memberRoom.php">ROOM MEMBER</a>
+                        </li>
+
                         <?php include "connection.php"; 
 
-                        if ($row_main['creator'] === $_SESSION['nama']){ ?>
+                        if ($row_main['creator'] === $_SESSION['nama']){ 
+                            $_SESSION['admin'] = true;
+                            ?>
                             <li>
                                 <a class="nav-link active" href="roomSetting.php">ROOM SETTING</a>
                             </li>
-                        
                         <?php } ?>
 
                     </ul>
@@ -94,7 +102,11 @@ $row_main = mysqli_fetch_array($sql_main);
                         $row = mysqli_num_rows($sql);
 
                         if ($row > 0){
-                            while($row = mysqli_fetch_array($sql)){ ?>
+                            while($row = mysqli_fetch_array($sql)){ 
+                                $id_hw_pass = $row['hw_id'];
+                                $id_hw_ecrypt = (($id_hw_pass * '10052003' * '08082020')/'26091971');
+                                $link = "moreInfo.php?id=".urlencode(base64_encode($id_hw_ecrypt));
+                            ?>
                     <tr>
                         <td>                
                             <a href="moreInfo.php?id= <?= $row['hw_id'] ?> ">
@@ -106,7 +118,7 @@ $row_main = mysqli_fetch_array($sql_main);
                             ?>
                         </td>
                         <td><b class="deadline"><?php echo $datetimeDL; ?></b></td>
-                        <td><a class="btn btn-dark" href="moreInfo.php?id= <?= $row['hw_id'] ?> " role="button">DETAILS</a>
+                        <td><a class="btn btn-dark" href="<?= $link; ?>" role="button">DETAILS</a>
                         </td>
                     </tr>
                         <?php }; 

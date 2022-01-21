@@ -10,8 +10,8 @@ include 'roomSecurity.php';
 
     $row = mysqli_fetch_array($sql);
 
-    if ($row['creator'] != $nama){
-        header('location: tugas.php');
+    if (!isset($_SESSION['admin'])){
+        echo "<script> javascript:history.go(-1) </script>";
     };
 
 ?>
@@ -31,7 +31,12 @@ include 'roomSecurity.php';
 
 <body>
     <?php include "navbarRoom.php"; ?>
-    <a class="btn btn-dark" href="tugas.php" role="button">GO BACK<<<</a>
+    <a class="btn btn-dark" onclick="goback()" role="button">GO BACK<<<</a>
+    <script>
+        function goback(){
+            javascript:history.go(-1)
+        }
+    </script>
     <div class="container">
         <h4>ROOM SETTING</h4>
         <form action="roomSettingChange.php" method="POST">

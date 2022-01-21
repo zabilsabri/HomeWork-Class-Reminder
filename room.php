@@ -46,8 +46,12 @@ include 'connection.php';
 
                 $sqls = mysqli_query($conn, "select * from room where id_room = '$id_rooms'");
 
-                while($rows = mysqli_fetch_array($sqls)){  
-                    if($rows['creator'] == $_SESSION['nama']){ ?>
+                while($rows = mysqli_fetch_array($sqls)){
+                    $id_room_pass = $rows['id_room'];
+                    $id_room_ecrypt = (($id_room_pass * '10052003' * '08082020')/'26091971');
+                    $link = "tugas.php?id_r=".urlencode(base64_encode($id_room_ecrypt));
+                    
+                    if($rows['creator'] == $_SESSION['nama']){?>
                         <div class="card border-danger mb-3" style="max-width: 18rem;">
                             <div class="card-header">
                                 <h3> <?php echo $rows['Name_Room']; ?> </h3>
@@ -58,7 +62,7 @@ include 'connection.php';
                             <div class="card-body">
                                 <p class="card-text"> Creator: <?php echo $rows['creator']; ?> </p>
                                 <p class="card-text"> Status: Admin </p>
-                                <a href="tugas.php?id_r= <?= $rows['id_room']; ?> " class="stretched-link"></a>
+                                <a href="<?= $link; ?>" class="stretched-link"></a>
                             </div>
                         </div>
                     <?php } else { ?>
@@ -72,7 +76,7 @@ include 'connection.php';
                         <div class="card-body">
                             <p class="card-text"> Creator: <?php echo $rows['creator'] ?> </p>
                             <p class="card-text"> Status: Member </p>
-                            <a href="tugas.php?id_r= <?= $rows['id_room']; ?> " class="stretched-link"></a>
+                            <a href="<?= $link; ?>" class="stretched-link"></a>
                         </div>
                     </div>
 

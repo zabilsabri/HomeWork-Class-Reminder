@@ -24,7 +24,7 @@ if (isset($_POST['create'])){
 
     $sqli = "insert into homework(NAMA, MAPEL, DEADLINE, KETERANGAN, id_room) values ('$nama', '$mapel', '$deadline', '$ket','$id_room')";
     if ($conn->query($sqli)){
-        header('location: tugas.php');
+        echo "<script> javascript:history.go(-1) </script>";
     } else {
         header('location: tugas.php?cfailed');
     };
