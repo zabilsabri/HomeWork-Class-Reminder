@@ -6,6 +6,9 @@ include 'roomSecurity.php';
 $id_hw_ecrypt = base64_decode(urldecode($_GET['id']));
 $id_hw = ((($id_hw_ecrypt * '26091971')/'08082020')/'10052003');
 
+$id_moreInfo_ecrypt = (($_SESSION['id_room'] * '10052003' * '08082020')/'26091971');
+$link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
+
 ?>
 
 <!DOCTYPE html>
@@ -33,12 +36,7 @@ $id_hw = ((($id_hw_ecrypt * '26091971')/'08082020')/'10052003');
 
     <?php include 'navbar.php'; ?>
 
-    <button class="btn btn-dark" onclick="goback()" role="button">GO BACK<<<</button>
-    <script>
-        function goback(){
-            javascript:history.go(-1)
-        }
-    </script>
+    <a class="btn btn-dark" href="<?= $link; ?>" role="button">GO BACK<<<</a>
             <div class="heading">
                 <nav class="navbar navbar-light bg-light">
                     <div class="container-fluid">

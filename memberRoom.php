@@ -6,6 +6,10 @@ if (!isset($_SESSION['login'])){
     header('location: login.php?notlogin');
 };
 
+$id_memberRoom_ecrypt = (($_SESSION['id_room'] * '10052003' * '08082020')/'26091971');
+$link = "tugas.php?id_r=".urlencode(base64_encode($id_memberRoom_ecrypt));
+
+
 ?>
 
 
@@ -32,12 +36,7 @@ if (!isset($_SESSION['login'])){
     
     <?php include 'navbar.php'; ?>
 
-    <button class="btn btn-dark" onclick="goback()" role="button">GO BACK<<<</button>
-    <script>
-        function goback(){
-            javascript:history.go(-1)
-        }
-    </script>
+    <a class="btn btn-dark" href="<?= $link; ?>" role="button">GO BACK<<<</a>
             <div class="heading">
                 <nav class="navbar navbar-light bg-light">
                     <div class="container-fluid">
@@ -73,15 +72,15 @@ if (!isset($_SESSION['login'])){
                         <tr>
                             <td><b><?php echo $row['NAMA']; ?></b></td>
                             <td> <?php echo $row_path['status']; ?> </td>
-                            <td><a type="button" class="btn btn-danger" href="kickMemberBE.php?id= <?= $row_path['p_id'] ?> " data-bs-toggle="modal" data-bs-target="#modalDeleteMember">Kick</a></td>
+                            <td><a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteMember<?= $row_path['p_id']; ?>">Kick</a></td>
                             
                             <!----------------MODAL DELETE TASK----------------------------->
-                            <div class="modal fade" id="modalDeleteMember" tabindex="-1" aria-labelledby="modalDeleteMember"
+                            <div class="modal fade" id="modalDeleteMember<?= $row_path['p_id']; ?>" tabindex="-1" aria-labelledby="modalDeleteMember<?= $row_path['p_id']; ?>"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="modalDeleteMember">CONFIRM?</h5>
+                                            <h5 class="modal-title" id="modalDeleteMember<?= $row_path['p_id']; ?>">CONFIRM?</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div style="text-align: center" class="modal-body">

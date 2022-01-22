@@ -63,7 +63,7 @@ $_SESSION['name_room'] = $row_main['Name_Room'];
                         <?php include "connection.php"; 
 
                         if ($row_main['creator'] === $_SESSION['nama']){ 
-                            $_SESSION['admin'] = true;
+                            $_SESSION['admin'] = 1;
                             ?>
                             <li>
                                 <a class="nav-link active" href="roomSetting.php">ROOM SETTING</a>
@@ -105,7 +105,9 @@ $_SESSION['name_room'] = $row_main['Name_Room'];
                             while($row = mysqli_fetch_array($sql)){ 
                                 $id_hw_pass = $row['hw_id'];
                                 $id_hw_ecrypt = (($id_hw_pass * '10052003' * '08082020')/'26091971');
+
                                 $link = "moreInfo.php?id=".urlencode(base64_encode($id_hw_ecrypt));
+                                $link_admin = "adminCMS.php?id=".urlencode(base64_encode($id_hw_ecrypt));
                             ?>
                     <tr>
                         <td>                
@@ -118,8 +120,12 @@ $_SESSION['name_room'] = $row_main['Name_Room'];
                             ?>
                         </td>
                         <td><b class="deadline"><?php echo $datetimeDL; ?></b></td>
-                        <td><a class="btn btn-dark" href="<?= $link; ?>" role="button">DETAILS</a>
-                        </td>
+
+                        <?php if(isset($_SESSION['admin'])) {?>
+                            <td><a class="btn btn-dark" href="<?= $link_admin; ?>" role="button">DETAILS</a></td>
+                        <?php } else { ?>
+                            <td><a class="btn btn-dark" href="<?= $link; ?>" role="button">DETAILS</a></td>
+                        <?php }; ?>
                     </tr>
                         <?php }; 
                         } else {

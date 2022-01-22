@@ -13,6 +13,9 @@ include 'roomSecurity.php';
     if (!isset($_SESSION['admin'])){
         echo "<script> javascript:history.go(-1) </script>";
     };
+    
+    $id_roomSetting_ecrypt = (($_SESSION['id_room'] * '10052003' * '08082020')/'26091971');
+    $link = "tugas.php?id_r=".urlencode(base64_encode($id_roomSetting_ecrypt));
 
 ?>
 
@@ -31,12 +34,8 @@ include 'roomSecurity.php';
 
 <body>
     <?php include "navbarRoom.php"; ?>
-    <a class="btn btn-dark" onclick="goback()" role="button">GO BACK<<<</a>
-    <script>
-        function goback(){
-            javascript:history.go(-1)
-        }
-    </script>
+    <a class="btn btn-dark" href=" <?= $link; ?> " role="button">GO BACK<<<</a>
+    
     <div class="container">
         <h4>ROOM SETTING</h4>
         <form action="roomSettingChange.php" method="POST">

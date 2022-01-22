@@ -6,6 +6,9 @@ if (!isset($_SESSION['login'])){
     header('location: login.php?notlogin');
 };
 
+$id_hw_ecrypt = (($_SESSION['id_room'] * '10052003' * '08082020')/'26091971');
+$link = "tugas.php?id_r=".urlencode(base64_encode($id_hw_ecrypt));
+
 
 ?>
 
@@ -33,12 +36,7 @@ if (!isset($_SESSION['login'])){
     
     <?php include 'navbar.php'; ?>
 
-    <button class="btn btn-dark" onclick="goback()" role="button">GO BACK<<<</button>
-    <script>
-        function goback(){
-            javascript:history.go(-1)
-        }
-    </script>
+    <a class="btn btn-dark" href="<?= $link; ?>" role="button">GO BACK<<<</a>
             <div class="heading">
                 <nav class="navbar navbar-light bg-light">
                     <div class="container-fluid">
@@ -81,15 +79,15 @@ if (!isset($_SESSION['login'])){
                         <tr>
                             <td><b><?php echo $row['NAME']; ?></b></td>
                             <td><?php echo $row['subject']; ?></td>
-                            <td><a type="button" class="btn btn-danger" href="hapusSubjectBE.php?id= <?= $row['sb_id'] ?> " data-bs-toggle="modal" data-bs-target="#modalDeleteSubject">DELETE</a></td>
+                            <td><a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteSubject<?= $row['sb_id']; ?>">DELETE</a></td>
                             
                             <!----------------MODAL DELETE TASK----------------------------->
-                            <div class="modal fade" id="modalDeleteSubject" tabindex="-1" aria-labelledby="modalDeleteSubject"
+                            <div class="modal fade" id="modalDeleteSubject<?= $row['sb_id']; ?>" tabindex="-1" aria-labelledby="modalDeleteSubject<?= $row['sb_id']; ?>"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="modalDeleteSubject">CONFIRM?</h5>
+                                            <h5 class="modal-title" id="modalDeleteSubject<?= $row['sb_id']; ?>">CONFIRM?</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div style="text-align: center" class="modal-body">
