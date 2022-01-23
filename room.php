@@ -2,7 +2,9 @@
 session_start();
 include 'connection.php';
 
-
+if(isset($_SESSION['id_room'])){
+    unset($_SESSION["id_room"]);
+}
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +55,7 @@ include 'connection.php';
                     $link = "tugas.php?id_r=".urlencode(base64_encode($id_room_ecrypt));
                     
                     if($rows['creator'] == $_SESSION['nama']){?>
-                        <div class="card border-danger mb-3" style="max-width: 18rem;">
+                        <div class="card border-danger mb-3" style="max-width: 20rem;">
                             <div class="card-header">
                                 <h3> <?php echo $rows['Name_Room']; ?> </h3>
                                 <div class="roomImg">
@@ -67,7 +69,7 @@ include 'connection.php';
                             </div>
                         </div>
                     <?php } else { ?>
-                    <div class="card border-info mb-3" style="max-width: 18rem;">
+                    <div class="card border-info mb-3" style="max-width: 20rem;">
                         <div class="card-header"> 
                             <h3> <?php echo $rows['Name_Room']; ?> </h3>
                             <div class="roomImg">

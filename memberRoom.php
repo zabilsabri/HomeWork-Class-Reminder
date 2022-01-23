@@ -1,15 +1,12 @@
 <?php
 
 session_start();
+include 'connection.php';
 
-if (!isset($_SESSION['login'])){
-    header('location: login.php?notlogin');
-};
+include 'roomSecurity.php';
 
-$id_memberRoom_ecrypt = (($_SESSION['id_room'] * '10052003' * '08082020')/'26091971');
-$link = "tugas.php?id_r=".urlencode(base64_encode($id_memberRoom_ecrypt));
-
-
+$id_roomMember_ecrypt = (($_SESSION['id_room'] * '10052003' * '08082020')/'26091971');
+$link = "tugas.php?id_r=".urlencode(base64_encode($id_roomMember_ecrypt));
 ?>
 
 

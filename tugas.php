@@ -2,7 +2,6 @@
 
 session_start();
 include 'connection.php';
-include "roomSecurity.php";
 
 $id_room_ecrypt = base64_decode(urldecode($_GET['id_r']));
 $id_room = ((($id_room_ecrypt * '26091971')/'08082020')/'10052003');
@@ -13,6 +12,9 @@ $std_id = $_SESSION['std_id'];
 $sql_main = mysqli_query($conn, "select * from room where id_room = '$id_room'");
 $row_main = mysqli_fetch_array($sql_main);
 $_SESSION['name_room'] = $row_main['Name_Room'];
+
+include "roomSecurity.php";
+
 
 ?>
 
@@ -39,6 +41,7 @@ $_SESSION['name_room'] = $row_main['Name_Room'];
 <body>
 
     <?php include 'navbar.php'; ?>
+    <a class="btn btn-dark" href="room.php" role="button">Change Room <<<</a>
 
     <div class="heading">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">

@@ -1,6 +1,8 @@
 <?php
 
 session_start();
+include 'connection.php';
+include 'roomSecurity.php';
 
 if (!isset($_SESSION['login'])){
     header('location: login.php?notlogin');
