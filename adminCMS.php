@@ -28,7 +28,7 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
-    <link rel="stylesheet" href="moreInfo.css">
+    <link rel="stylesheet" href="adminCMS.css">
 
     <title>MORE INFO</title>
 </head>
@@ -84,88 +84,32 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
                         <p class="container-text"><b class="container-bold">4. Description:
                             </b><?php echo $rowtest['KETERANGAN']; ?></p>
                     </div>
-                    <div class="input-answer">
-                        <form method="POST" enctype="multipart/form-data">
-                            <div class="mb-3" style="width: auto" >
-                                <label for="formFileMultiple" class="form-label">Input <span><b
-                                            class="input_bold">PDF</b></span> files:</label>
-                                <input class="form-control" name="my_image" type="file" id="formFileMultiple" multiple>
-                                <button class="btn btn-dark" type="submit" name="submit_answer">UPLOAD ANSWER</button>
-                            </div>
-                        </form>
-
-                        <?php include 'addAnswerBE.php' ?>
-
-                    </div>
                 </div>
             </main>
 
             <div class="answer">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">DATE</th>
-                            <th scope="col">NAME</th>
-                            <th scope="col">FILES</th>
-                            <th scope="col">DELETE</th>
+                <div class="answer-title">
+                    <h2>Statistic</h2>
+                </div>
+                <?php
+                    
+                    include 'connection.php';
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                
-                            include 'connection.php';
+                    $id_room = $_SESSION['id_room'];
 
-                            $sql = "SELECT * FROM uploaded_image WHERE id_id = $id";
-                            $res = mysqli_query($conn, $sql);
-                            $row = mysqli_num_rows($res);
+                    $sql_hw_room = mysqli_query($conn, "SELECT * FROM uploaded_image WHERE id_id = $id");
+                    $sql_std_room = mysqli_query($conn, "select std_id, r_id, status from room_path where r_id = '$id_room' and status = 'member'");
 
-                            if($row > 0){
-                                while ($files = mysqli_fetch_array($res))
-                                {
-                                    $filesTime = strtotime($files['DATE']);
-                                    $filesTimeFX = date("d/m/Y H:i:s", $filesTime);
-                        ?>
-                        <tr>
-                            <td> <?php echo $filesTimeFX ?> </td>
-                            <td> <?php echo $files['NAME'] ?> </td>
-                            <td> <a style="color: blue;" href="upload/<?= $files['image_url'] ?>" download>PDF FILE</td>
-                            <td> <a type="button" class="btn btn-danger" href="deleteAnsBE.php?id= <?= $files['img_id'] ?> " data-bs-toggle="modal" data-bs-target="#modalDeleteAns">-</a></td>
-                            
-                            <!----------------MODAL DELETE TASK----------------------------->
-                            <div class="modal fade" id="modalDeleteAns" tabindex="-1" aria-labelledby="modalDeleteAns"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="modalDeleteAns">CONFIRM?</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div style="text-align: center" class="modal-body">
-                                            Are You Sure?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <a class="btn btn-danger" href="deleteAnsBE.php?id= <?= $files['img_id'] ?> " role="button">DELETE</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </tr>
-                        <?php
-                        }; 
-                        } else {
-                        ?>
-                        <tr>
-                            <td><b style="color: red;">EMPTY!</b></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <?php
-                        };
-                        ?>
-                    </tbody>
-                </table>
+                    $hw_check = mysqli_num_rows($sql_hw_room);
+                    $std_check = mysqli_num_rows($sql_std_room);
+                    
+                ?>
+
+                <div class="answer-body"></div>
+                    <b>Task Done: <?php echo $hw_check ?></b>
+                    <hr>
+                    <b>Task Undone: <?php echo $std_check - $hw_check ?></b>
+                </div>
             </div>
 
             <hr>

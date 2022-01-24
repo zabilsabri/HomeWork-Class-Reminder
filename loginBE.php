@@ -19,8 +19,8 @@ if (isset($_POST['login'])){
 
         $row = mysqli_fetch_array($sql);
 
-        //$nis = $password;
-        $password = password_verify($nis, $row['nis']);
+        $nis = $password;
+        //$password = password_verify($nis, $row['nis']);
 
         if ($row['NAMA'] == $nama && $password == $row['nis']){
             $_SESSION['std_id'] = $row['st_id'];

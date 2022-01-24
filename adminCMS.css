@@ -11,13 +11,11 @@ body{
 
 
 .heading{
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
     margin-top: 20px;
-    margin-right: 20px;
-    margin-left: 20px;
+    margin-bottom: 20px;
+    width: 88%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 a{
@@ -83,11 +81,15 @@ main{
 
 .answer{
     background: white;
+    width: 50%;
     text-align: center;
     margin-top: 40px;
     margin-bottom: 40px;
-    margin-left: 23px;
-    margin-right: 23px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 1cm;
 }
 
 .input-comment-section{
@@ -132,4 +134,15 @@ main{
 
 .navbar>.container, .navbar>.container-fluid, .navbar>.container-lg, .navbar>.container-md, .navbar>.container-sm, .navbar>.container-xl, .navbar>.container-xxl {
     flex-wrap: nowrap;
+}
+
+.answer-body{
+    text-align: center;
+}
+
+.answer-title{
+    display: flex;
+    flex-direction: row;
+    padding-left: 30px;
+    padding-bottom: 10px;
 }
