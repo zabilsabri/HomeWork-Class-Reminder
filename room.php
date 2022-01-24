@@ -5,6 +5,10 @@ include 'connection.php';
 if(isset($_SESSION['id_room'])){
     unset($_SESSION["id_room"]);
 }
+
+if(isset($_SESSION['admin'])){
+    unset($_SESSION["admin"]);
+}
 ?>
 
 <!DOCTYPE html>

@@ -4,8 +4,10 @@ include 'connection.php';
 
 if (isset($_POST['submit_answer'])){
 
-
-    $pg_id = $_GET['id'];
+    $id_hw_ecrypt = base64_decode(urldecode($_GET['id']));
+    $id_hw = ((($id_hw_ecrypt * '26091971')/'08082020')/'10052003');
+    
+    $pg_id = $id_hw;
     $std_name = $_SESSION['nama'];
 
     $img_name = $_FILES['my_image']['name'];

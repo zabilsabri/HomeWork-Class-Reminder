@@ -105,11 +105,21 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
                     
                 ?>
 
-                <div class="answer-body"></div>
-                    <b>Task Done: <?php echo $hw_check ?></b>
-                    <hr>
-                    <b>Task Undone: <?php echo $std_check - $hw_check ?></b>
+                <div class="container-answer">
+                    <a href="#">
+                        <div class="row">
+                            <div class="col" style="border-right: black solid">
+                                <h2><?php echo $hw_check; ?></h2>
+                                <p>Task Done</p>
+                            </div>
+                            <div class="col" style="border-left: black solid">
+                                <h2><?php echo $std_check - $hw_check; ?></h2>
+                                <p>Task Undone</p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
+                
             </div>
 
             <hr>

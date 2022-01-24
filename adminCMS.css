@@ -80,7 +80,6 @@ main{
 }
 
 .answer{
-    background: white;
     width: 50%;
     text-align: center;
     margin-top: 40px;
@@ -141,8 +140,5 @@ main{
 }
 
 .answer-title{
-    display: flex;
-    flex-direction: row;
-    padding-left: 30px;
     padding-bottom: 10px;
 }

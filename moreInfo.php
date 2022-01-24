@@ -28,6 +28,7 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
+    <script src="https://kit.fontawesome.com/645f3ace4e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="moreInfo.css">
 
     <title>MORE INFO</title>
@@ -38,7 +39,7 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
     <?php include 'navbar.php'; ?>
 
     <a class="btn btn-dark" href="<?= $link; ?>" role="button">GO BACK<<<</a>
-            <div class="big-container" style="width: 75%;">
+            <div class="big-container">
                 <div class="heading">
                     <nav class="navbar navbar-light bg-light">
                         <div class="container-fluid">
@@ -121,16 +122,16 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
                                 $row = mysqli_num_rows($res);
 
                                 if($row > 0){
-                                    while ($files = mysqli_fetch_array($res))
-                                    {
-                                        $filesTime = strtotime($files['DATE']);
-                                        $filesTimeFX = date("d/m/Y H:i:s", $filesTime);
+                                    while ($files = mysqli_fetch_array($res)){
+                                        if($_SESSION['nama'] == $files['NAME']){
+                                            $filesTime = strtotime($files['DATE']);
+                                            $filesTimeFX = date("d/m/Y H:i:s", $filesTime);
                             ?>
                             <tr>
                                 <td> <?php echo $filesTimeFX ?> </td>
                                 <td> <?php echo $files['NAME'] ?> </td>
-                                <td> <a style="color: blue;" href="upload/<?= $files['image_url'] ?>" download>PDF FILE</td>
-                                <td> <a type="button" class="btn btn-danger" href="deleteAnsBE.php?id= <?= $files['img_id'] ?> " data-bs-toggle="modal" data-bs-target="#modalDeleteAns">-</a></td>
+                                <td> <a style="color: blue;" href="upload/<?= $files['image_url'] ?>" download><i class="fas fa-file-download"></i></td>
+                                <td> <a type="button" class="btn btn-danger" href="deleteAnsBE.php?id= <?= $files['img_id'] ?> " data-bs-toggle="modal" data-bs-target="#modalDeleteAns"><i class="fas fa-trash-alt"></i></a></td>
                                 
                                 <!----------------MODAL DELETE TASK----------------------------->
                                 <div class="modal fade" id="modalDeleteAns" tabindex="-1" aria-labelledby="modalDeleteAns"
@@ -152,7 +153,16 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
                                 </div>
                             </tr>
                             <?php
-                            }; 
+                            } else { ?>
+                                <tr>
+                                <td><b style="color: red;">EMPTY!</b></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <?php
+                            }
+                            };
                             } else {
                             ?>
                             <tr>

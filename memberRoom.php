@@ -25,6 +25,8 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_roomMember_ecrypt));
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
+    <script src="https://kit.fontawesome.com/645f3ace4e.js" crossorigin="anonymous"></script>
+
     <link href="memberRoom.css" rel="stylesheet">
     <title>ROOM MEMBERS</title>
 </head>
@@ -69,7 +71,7 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_roomMember_ecrypt));
                         <tr>
                             <td><b><?php echo $row['NAMA']; ?></b></td>
                             <td> <?php echo $row_path['status']; ?> </td>
-                            <td><a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteMember<?= $row_path['p_id']; ?>">Kick</a></td>
+                            <td><a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteMember<?= $row_path['p_id']; ?>"><i class="fas fa-user-slash"></i></a></td>
                             
                             <!----------------MODAL DELETE TASK----------------------------->
                             <div class="modal fade" id="modalDeleteMember<?= $row_path['p_id']; ?>" tabindex="-1" aria-labelledby="modalDeleteMember<?= $row_path['p_id']; ?>"
