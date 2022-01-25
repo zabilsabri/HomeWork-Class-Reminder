@@ -90,7 +90,7 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
                                 <div class="mb-3">
                                     <label for="formFileMultiple" class="form-label">Input <span><b
                                                 class="input_bold">PDF</b></span> files:</label>
-                                    <input class="form-control" name="my_image" type="file" id="formFileMultiple" multiple>
+                                    <input class="form-control" name="my_file" type="file" id="formFileMultiple" multiple>
                                     <button class="btn btn-dark" type="submit" name="submit_answer">UPLOAD ANSWER</button>
                                 </div>
                             </form>
@@ -130,7 +130,7 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
                             <tr>
                                 <td> <?php echo $filesTimeFX ?> </td>
                                 <td> <?php echo $files['NAME'] ?> </td>
-                                <td> <a style="color: blue;" href="upload/<?= $files['image_url'] ?>" download><i class="fas fa-file-download"></i></td>
+                                <td> <a target="_blank" href="view.php?id=<?= $files['img_id']; ?>"><i class="fas fa-file-download"></i></td>
                                 <td> <a type="button" class="btn btn-danger" href="deleteAnsBE.php?id= <?= $files['img_id'] ?> " data-bs-toggle="modal" data-bs-target="#modalDeleteAns"><i class="fas fa-trash-alt"></i></a></td>
                                 
                                 <!----------------MODAL DELETE TASK----------------------------->
