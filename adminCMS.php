@@ -99,14 +99,14 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
 
                     $sql_hw_room = mysqli_query($conn, "SELECT * FROM uploaded_image WHERE id_id = $id");
                     $sql_std_room = mysqli_query($conn, "select std_id, r_id, status from room_path where r_id = '$id_room' and status = 'member'");
-
+                    
                     $hw_check = mysqli_num_rows($sql_hw_room);
                     $std_check = mysqli_num_rows($sql_std_room);
                     
                 ?>
 
                 <div class="container-answer">
-                    <a href="#">
+                    <a href="stdTask.php?t_id= <?= $_GET['id']; ?>">
                         <div class="row">
                             <div class="col" style="border-right: black solid">
                                 <h2><?php echo $hw_check; ?></h2>
