@@ -43,7 +43,8 @@ if(!isset($_SESSION['admin'])){
                 <nav class="navbar navbar-light bg-light">
                     <div class="container-fluid">
                         <h1>STUDENT TASK</h1>
-                        <a type="button" href="saveStdTask.php?s_id=<?= $id_stdTask; ?>" class="btn btn-dark"><i class="far fa-save"></i></a>
+                        <form action="saveStdTask.php" method="POST">
+                        <a type="button" name="savestdTask" href="saveStdTask.php?s_id=<?= $id_stdTask; ?>" class="btn btn-dark"><i class="far fa-save"></i></a>
                     </div>
                 </nav>
             </div>
@@ -93,7 +94,8 @@ if(!isset($_SESSION['admin'])){
                                         <td style="width: 1cm;" ><a target="_blank" href="view.php?id=<?= $row['img_id']; ?>"><i class="fas fa-file-download"></i></td>
                                         <td style="width: 1cm;">
                                             <div class="grade">
-                                                <input class="form-control form-control-sm" style="width: 1.1cm;" type="text" placeholder="" aria-label=".form-control-sm example">
+                                                <input class="form-control form-control-sm" style="width: 1.1cm;" name="grade" type="text" aria-label=".form-control-sm example">
+                                                </form>
                                                 <p>/100</p>
                                             </div>
                                         </td>
@@ -121,7 +123,9 @@ if(!isset($_SESSION['admin'])){
                                     } else { ?>
                                     <tr>
                                         <td></td>
-                                        <td><b class="empty">NO SUBJECT FOUND!</b></td>
+                                        <td></td>
+                                        <td><b class="empty">NO TASK FOUND!</b></td>
+                                        <td></td>
                                         <td></td>
                                     </tr>
                                     <?php }; ?>
@@ -174,8 +178,8 @@ if(!isset($_SESSION['admin'])){
                                     } else { ?>
                                     <tr>
                                         <td></td>
-                                        <td><b class="empty">NO TASK FOUND!</b></td>
                                         <td></td>
+                                        <td><b class="empty">NO TASK FOUND!</b></td>
                                         <td></td>
                                     </tr>
                                     <?php }; ?>
@@ -219,7 +223,7 @@ if(!isset($_SESSION['admin'])){
                                         <td style="width: 1cm;" ><a target="_blank" href="view.php?id=<?= $row['img_id']; ?>"><i class="fas fa-file-download"></i></td>
                                         <td style="width: 1cm;">
                                             <div class="grade">
-                                                <input class="form-control form-control-sm" style="width: 1.1cm;"  type="text" placeholder="" aria-label=".form-control-sm example">
+                                                <input class="form-control form-control-sm" style="width: 1.1cm;" name="gradeTask" type="text" placeholder="" aria-label=".form-control-sm example">
                                                 <p>/100</p>
                                             </div>
                                         </td>
