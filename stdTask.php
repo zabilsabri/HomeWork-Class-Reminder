@@ -43,8 +43,6 @@ if(!isset($_SESSION['admin'])){
                 <nav class="navbar navbar-light bg-light">
                     <div class="container-fluid">
                         <h1>STUDENT TASK</h1>
-                        <form action="saveStdTask.php" method="POST">
-                        <a type="button" name="savestdTask" href="saveStdTask.php?s_id=<?= $id_stdTask; ?>" class="btn btn-dark"><i class="far fa-save"></i></a>
                     </div>
                 </nav>
             </div>
@@ -83,43 +81,30 @@ if(!isset($_SESSION['admin'])){
                                     $row = mysqli_num_rows($sql);
 
                                     if($row > 0){
-                                        while($row = mysqli_fetch_array($sql)){
-                                            $taskTime = strtotime($row['DATE']);
+                                        while($rowg = mysqli_fetch_array($sql)){
+                                            $taskTime = strtotime($rowg['DATE']);
                                             $taskTimeFX = date("d/m/Y H:i:s", $taskTime);
             
                                 ?>
                                     <tr>
-                                        <td style="width: 1cm;" ><b><?php echo $row['NAME']; ?></b></td>
+                                        <td style="width: 1cm;" ><b><?php echo $rowg['NAME']; ?></b></td>
                                         <td style="width: 1cm;" ><?php echo $taskTimeFX; ?></td>
-                                        <td style="width: 1cm;" ><a target="_blank" href="view.php?id=<?= $row['img_id']; ?>"><i class="fas fa-file-download"></i></td>
+                                        <td style="width: 1cm;" ><a target="_blank" href="view.php?id=<?= $rowg['img_id']; ?>"><i class="fas fa-file-download"></i></td>
                                         <td style="width: 1cm;">
                                             <div class="grade">
-                                                <input class="form-control form-control-sm" style="width: 1.1cm;" name="grade" type="text" aria-label=".form-control-sm example">
+                                                <form action="saveStdTask.php" method="POST">
+                                                <input class="form-control form-control-sm" style="width: 1.1cm;" name="grade<?=$rowg['img_id'];?>" type="text" aria-label=".form-control-sm example">
                                                 </form>
                                                 <p>/100</p>
                                             </div>
                                         </td>
-                                        <td style="width: 1cm;" ><a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalAddNote<?= $row['img_id']; ?>"><i class="fas fa-comment"></i></a></td>
-                                        <!----------------MODAL DELETE TASK----------------------------->
-                                        <div class="modal fade" id="modalAddNote<?= $row['img_id']; ?>" tabindex="-1" aria-labelledby="modalDeleteSubject<?= $row['img_id']; ?>"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="modalDeleteSubject<?= $row['img_id']; ?>">CONFIRM?</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div style="text-align: center" class="modal-body">
-                                                        Are You Sure?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <a class="btn btn-danger" href="addNoteBE.php?id= <?= $row['img_id']; ?> " role="button">DELETE</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <td style="width: 1cm;" ><a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalAddNote<?= $rowg['img_id']; ?>"><i class="fas fa-comment"></i></a></td>
+                                        
                                     </tr>
                                         <?php }; 
+                                    ?> 
+
+                                    <?php
                                     } else { ?>
                                     <tr>
                                         <td></td>
@@ -130,136 +115,17 @@ if(!isset($_SESSION['admin'])){
                                     </tr>
                                     <?php }; ?>
 
-
                                 </tbody>
                             </table>
                         </article>
+                        <div class="test" style="display: flex;"><button type="submit" name="saveStdTask" class="btn btn-dark"><i class="far fa-save"></i></button></div>
+                        </form>
                     </div>
                     <div class="tab-pane fade" id="grade" role="tabpanel" aria-labelledby="profile-tab">
-                        <article>
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Time</th>
-                                        <th scopr="col">Task</th>
-                                        <th scope="col">Grade</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php 
-                                    
-                                    $name = $_SESSION['nama'];
-                                    $id_room = $_SESSION['id_room'];
-                                    
-                                    $sql1 = mysqli_query($conn, "select * from uploaded_image where id_id = '$id_room'");
-                                    
-                                    $row1 = mysqli_num_rows($sql1);
-                                    $row1 = mysqli_fetch_array($sql1);
-
-                                    if($row1['grade'] != 0){
-                                        while($row1 = mysqli_fetch_array($sql1)){
-                                            $taskTime = strtotime($row1['DATE']);
-                                            $taskTimeFX = date("d/m/Y H:i:s", $taskTime);
-            
-                                ?>
-                                    <tr>
-                                        <td style="width: 1cm;" ><b><?php echo $row1['NAME']; ?></b></td>
-                                        <td style="width: 1cm;" ><?php echo $taskTimeFX; ?></td>
-                                        <td style="width: 1cm;" ><a target="_blank" href="view.php?id=<?= $row1['img_id']; ?>"><i class="fas fa-file-download"></i></td>
-                                        <td style="width: 1cm;">
-                                            <div class="grade">
-                                                <?php echo $row1['grade']; ?>
-                                                <p>/100</p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                        <?php }; 
-                                    } else { ?>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td><b class="empty">NO TASK FOUND!</b></td>
-                                        <td></td>
-                                    </tr>
-                                    <?php }; ?>
-
-
-                                </tbody>
-                            </table>
-                        </article>
+                        
                     </div>
                     <div class="tab-pane fade" id="late-task" role="tabpanel" aria-labelledby="contact-tab">
-                    <article>
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Time</th>
-                                        <th scopr="col">Task</th>
-                                        <th scope="col">Grade</th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php 
-                                    
-                                    $name = $_SESSION['nama'];
-                                    $id_room = $_SESSION['id_room'];
-                                    
-                                    $sql = mysqli_query($conn, "select * from uploaded_image where id_id = '$id_room'");
-                                    
-                                    $row = mysqli_num_rows($sql);
-
-                                    if($row > 0){
-                                        while($row = mysqli_fetch_array($sql)){
-                                            $taskTime = strtotime($row['DATE']);
-                                            $taskTimeFX = date("d/m/Y H:i:s", $taskTime);
-            
-                                ?>
-                                    <tr>
-                                        <td style="width: 1cm;" ><b><?php echo $row['NAME']; ?></b></td>
-                                        <td style="width: 1cm;" ><?php echo $taskTimeFX; ?></td>
-                                        <td style="width: 1cm;" ><a target="_blank" href="view.php?id=<?= $row['img_id']; ?>"><i class="fas fa-file-download"></i></td>
-                                        <td style="width: 1cm;">
-                                            <div class="grade">
-                                                <input class="form-control form-control-sm" style="width: 1.1cm;" name="gradeTask" type="text" placeholder="" aria-label=".form-control-sm example">
-                                                <p>/100</p>
-                                            </div>
-                                        </td>
-                                        <td style="width: 1cm;" ><a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalAddNote<?= $row['img_id']; ?>"><i class="fas fa-comment"></i></a></td>
-                                        <!----------------MODAL DELETE TASK----------------------------->
-                                        <div class="modal fade" id="modalAddNote<?= $row['img_id']; ?>" tabindex="-1" aria-labelledby="modalDeleteSubject<?= $row['img_id']; ?>"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="modalDeleteSubject<?= $row['img_id']; ?>">CONFIRM?</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div style="text-align: center" class="modal-body">
-                                                        Are You Sure?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <a class="btn btn-danger" href="addNoteBE.php?id= <?= $row['img_id']; ?> " role="button">DELETE</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </tr>
-                                        <?php }; 
-                                    } else { ?>
-                                    <tr>
-                                        <td></td>
-                                        <td><b class="empty">No Task Found</b></td>
-                                        <td></td>
-                                    </tr>
-                                    <?php }; ?>
-
-
-                                </tbody>
-                            </table>
-                        </article>
+                    
                     </div>
                 </div>
 </body>

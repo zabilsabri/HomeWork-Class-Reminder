@@ -152,17 +152,9 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
                                     </div>
                                 </div>
                             </tr>
-                            <?php
-                            } else { ?>
-                                <tr>
-                                <td><b style="color: red;">EMPTY!</b></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <?php
-                            }
-                            };
+                            <?php 
+                                    }
+                                }
                             } else {
                             ?>
                             <tr>
