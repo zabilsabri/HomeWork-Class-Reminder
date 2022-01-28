@@ -3,7 +3,10 @@
 session_start();
 include 'connection.php';
 
-$id = $_GET['id'];
+if(isset($_GET['id'])){
+$id_pstd_ecrypt = base64_decode(urldecode($_GET['id']));
+$id = ((($id_pstd_ecrypt * '26091971')/'08082020')/'10052003');
+
 $std_id = $_SESSION['std_id'];
 
 $sql = mysqli_query($conn, "select * from room_path where std_id = '$std_id' and p_id = '$id'");
@@ -21,7 +24,10 @@ elseif($std_id == $row['std_id']){
 }
 
 else {
-    header('location: memberRoom.php?c');
+    echo "<script> javascript:history.go(-1) </script>";
 };
 
+} else {
+    echo "<script> javascript:history.go(-1) </script>";
+};
 ?>

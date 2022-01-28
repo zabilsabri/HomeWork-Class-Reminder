@@ -13,6 +13,10 @@ $sql_main = mysqli_query($conn, "select * from room where id_room = '$id_room'")
 $row_main = mysqli_fetch_array($sql_main);
 $_SESSION['name_room'] = $row_main['Name_Room'];
 
+if($_SESSION['nama'] === $row_main['creator']){
+    $_SESSION['admin'] = 1;
+}
+
 include "roomSecurity.php";
 
 
@@ -53,9 +57,11 @@ include "roomSecurity.php";
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCP">
                     <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                        <?php if(isset($_SESSION['admin'])){ ?>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" data-bs-toggle="modal" data-bs-target="#addtaskmodal" href="#">+ ADD TASK</a>
                         </li>
+                        <?php }; ?>
                         <li class="nav-item">
                             <a class="nav-link active" href="subjectList.php">SUBJECT LIST</a>
                         </li>
@@ -65,9 +71,7 @@ include "roomSecurity.php";
 
                         <?php include "connection.php"; 
 
-                        if ($row_main['creator'] === $_SESSION['nama']){ 
-                            $_SESSION['admin'] = 1;
-                            ?>
+                        if (isset($_SESSION['admin'])){ ?>
                             <li>
                                 <a class="nav-link active" href="roomSetting.php">ROOM SETTING</a>
                             </li>

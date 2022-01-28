@@ -62,8 +62,12 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_roomMember_ecrypt));
                         $sql = mysqli_query($conn, "select * from room_path where r_id = '$id_room'");
                         
                         while($row_path = mysqli_fetch_array($sql)){
+                            $id_std = $row_path['p_id'];
+                            $id_std_ecrypt = (($id_std * '10052003' * '08082020')/'26091971');
+                            $link_kick = "kickMemberBE.php?id=".urlencode(base64_encode($id_std_ecrypt));
+                            
                             $std_id = $row_path['std_id'];
-                            $sql_room = mysqli_query($conn, "select NAMA from student_info where st_id = '$std_id'");
+                            $sql_room = mysqli_query($conn, "select NAMA, st_id from student_info where st_id = '$std_id'");
                             
                             while($row = mysqli_fetch_array($sql_room)){
   
@@ -71,8 +75,9 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_roomMember_ecrypt));
                         <tr>
                             <td><b><?php echo $row['NAMA']; ?></b></td>
                             <td> <?php echo $row_path['status']; ?> </td>
+                            <?php if(isset($_SESSION['admin']) || $_SESSION['std_id'] == $row['st_id']){ ?>
                             <td><a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteMember<?= $row_path['p_id']; ?>"><i class="fas fa-user-slash"></i></a></td>
-                            
+                            <?php } ?>
                             <!----------------MODAL DELETE TASK----------------------------->
                             <div class="modal fade" id="modalDeleteMember<?= $row_path['p_id']; ?>" tabindex="-1" aria-labelledby="modalDeleteMember<?= $row_path['p_id']; ?>"
                                 aria-hidden="true">
@@ -86,7 +91,7 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_roomMember_ecrypt));
                                             Are You Sure?
                                         </div>
                                         <div class="modal-footer">
-                                            <a class="btn btn-danger" href="kickMemberBE.php?id= <?= $row_path['p_id'] ?> " role="button">Kick</a>
+                                            <a class="btn btn-danger" href="<?= $link_kick ?>" role="button">Kick</a>
                                         </div>
                                     </div>
                                 </div>

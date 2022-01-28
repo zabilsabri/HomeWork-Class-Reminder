@@ -43,10 +43,12 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_hw_ecrypt));
                 <nav class="navbar navbar-light bg-light">
                     <div class="container-fluid">
                         <h1>SUBJECT</h1>
-
+                        
+                        <?php if(isset($_SESSION['admin'])){ ?>
                         <a type="button" href="createSubject.php" class="btn btn-dark">
                             + ADD SUBJECT
                         </a>
+                        <?php }; ?>
 
                     </div>
                 </nav>
