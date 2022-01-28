@@ -77,13 +77,14 @@ if(!isset($_SESSION['admin'])){
                                     $id_room = $_SESSION['id_room'];
                                     
                                     $sql = mysqli_query($conn, "select * from uploaded_image where id_id = '$id_room'");
-                                    
-                                    $row = mysqli_num_rows($sql);
+                                    $sql_grade = mysqli_query($conn, "select grd_room, grd_task, grade from grade_path where grd_room = '$id_room'");
 
-                                    if($row > 0){
+                                    if($row = mysqli_num_rows($sql) > 0){
                                         while($rowg = mysqli_fetch_array($sql)){
-                                            $taskTime = strtotime($rowg['DATE']);
-                                            $taskTimeFX = date("d/m/Y H:i:s", $taskTime);
+                                            $row_grade = mysqli_fetch_array($sql_grade);
+                                            if($row_grade['grd_task'] != $rowg['img_id']){
+                                                $taskTime = strtotime($rowg['DATE']);
+                                                $taskTimeFX = date("d/m/Y H:i:s", $taskTime);
             
                                 ?>
                                     <tr>
@@ -91,20 +92,17 @@ if(!isset($_SESSION['admin'])){
                                         <td style="width: 1cm;" ><?php echo $taskTimeFX; ?></td>
                                         <td style="width: 1cm;" ><a target="_blank" href="view.php?id=<?= $rowg['img_id']; ?>"><i class="fas fa-file-download"></i></td>
                                         <td style="width: 1cm;">
+                                            <form action="saveStdTask.php" method="POST">
                                             <div class="grade">
-                                                <form action="saveStdTask.php" method="POST">
                                                 <input class="form-control form-control-sm" style="width: 1.1cm;" name="grade<?=$rowg['img_id'];?>" type="text" aria-label=".form-control-sm example">
-                                                </form>
                                                 <p>/100</p>
                                             </div>
                                         </td>
                                         <td style="width: 1cm;" ><a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalAddNote<?= $rowg['img_id']; ?>"><i class="fas fa-comment"></i></a></td>
                                         
                                     </tr>
-                                        <?php }; 
-                                    ?> 
-
-                                    <?php
+                                        <?php }
+                                        };
                                     } else { ?>
                                     <tr>
                                         <td></td>
@@ -114,7 +112,6 @@ if(!isset($_SESSION['admin'])){
                                         <td></td>
                                     </tr>
                                     <?php }; ?>
-
                                 </tbody>
                             </table>
                         </article>
@@ -122,7 +119,45 @@ if(!isset($_SESSION['admin'])){
                         </form>
                     </div>
                     <div class="tab-pane fade" id="grade" role="tabpanel" aria-labelledby="profile-tab">
+                        <article>
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Time Grade</th>
+                                        <th scopr="col">Task</th>
+                                        <th scope="col">Grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
                         
+                                    $sql_grade1 = mysqli_query($conn, "select * from grade_path where grd_room = $id_room");
+                                    while($row_grade1 = mysqli_fetch_array($sql_grade1)){
+                                        $img_id = $row_grade1['grd_task'];
+                                    
+                                        $sql1 = mysqli_query($conn, "select * from uploaded_image where img_id = $img_id");
+                                        $row1 = mysqli_num_rows($sql1);
+                                        
+                                        if($row1 > 0){
+                                            while($rowg1 = mysqli_fetch_array($sql1)){
+                                                $taskTime1 = strtotime($row_grade1['grd_time']);
+                                                $taskTimeFX1 = date("d/m/Y H:i:s", $taskTime1);
+                                    ?>
+                                    <tr>
+                                        <td style="width: 1cm;" ><b><?php echo $rowg1['NAME']; ?></b></td>
+                                        <td style="width: 1cm;" ><?php echo $taskTimeFX1; ?></td>
+                                        <td style="width: 1cm;" ><a target="_blank" href="view.php?id=<?= $rowg1['img_id']; ?>"><i class="fas fa-file-download"></i></td>
+                                        <td style="width: 1cm;" ><b><?php echo $row_grade1['grade']; ?></b></td>
+                                    </tr>
+                                        <?php };
+                                        } 
+                                    } 
+                                        ?>
+                                    
+                                </tbody>
+                            </table>
+                        </article>
                     </div>
                     <div class="tab-pane fade" id="late-task" role="tabpanel" aria-labelledby="contact-tab">
                     

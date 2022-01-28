@@ -119,13 +119,13 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
 
                                 $sql = "SELECT * FROM uploaded_image WHERE id_id = $id";
                                 $res = mysqli_query($conn, $sql);
+                                $row_check = mysqli_fetch_array($res);
                                 $row = mysqli_num_rows($res);
 
-                                if($row > 0){
+                                if($row > 0 && $_SESSION['nama'] == $row_check['NAME']){
                                     while ($files = mysqli_fetch_array($res)){
-                                        if($_SESSION['nama'] == $files['NAME']){
-                                            $filesTime = strtotime($files['DATE']);
-                                            $filesTimeFX = date("d/m/Y H:i:s", $filesTime);
+                                        $filesTime = strtotime($files['DATE']);
+                                        $filesTimeFX = date("d/m/Y H:i:s", $filesTime);
                             ?>
                             <tr>
                                 <td> <?php echo $filesTimeFX ?> </td>
@@ -153,8 +153,7 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
                                 </div>
                             </tr>
                             <?php 
-                                    }
-                                }
+                            };
                             } else {
                             ?>
                             <tr>

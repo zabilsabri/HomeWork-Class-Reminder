@@ -46,7 +46,8 @@ a{
 .row{
     --bs-gutter-x: 0rem;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
+    margin-right: 2cm;
 }
 
 
@@ -64,4 +65,9 @@ a{
 
 .roomImg img{
     border-radius: 50%;
+}
+
+.mb-3{
+    margin-left: 1cm;
+    margin-right: 1cm;
 }
