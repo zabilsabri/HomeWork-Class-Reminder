@@ -40,6 +40,9 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_roomMember_ecrypt));
                 <nav class="navbar navbar-light bg-light">
                     <div class="container-fluid">
                         <h1>ROOM MEMBER</h1>
+                        <?php if(!isset($_SESSION['admin'])){ ?>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteMemberstd">Leave</button>
+                        <?php }; ?>
                     </div>
                 </nav>
             </div>
@@ -49,7 +52,9 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_roomMember_ecrypt));
                         <tr>
                             <th scope="col">Name</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Edit</th>
+                            <?php if(isset($_SESSION['admin'])){ ?>
+                            <th scope="col">Kick</th>
+                            <?php }; ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -73,12 +78,11 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_roomMember_ecrypt));
   
                     ?>
                         <tr>
-                            <td><b><?php echo $row['NAMA']; ?></b></td>
-                            <td> <?php echo $row_path['status']; ?> </td>
-                            <?php if(isset($_SESSION['admin']) || $_SESSION['std_id'] == $row['st_id']){ ?>
-                            <td><a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteMember<?= $row_path['p_id']; ?>"><i class="fas fa-user-slash"></i></a></td>
-                            <?php } ?>
-                            <!----------------MODAL DELETE TASK----------------------------->
+                            <td style="width: 1cm;" ><b><?php echo $row['NAMA']; ?></b></td>
+                            <td style="width: 1cm;"> <?php echo $row_path['status']; ?> </td>
+                            <?php if(isset($_SESSION['admin'])){ ?>
+                            <td style="width: 1cm;"><a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteMember<?= $row_path['p_id']; ?>"><i class="fas fa-user-slash"></i></a></td>
+                            <!----------------MODAL DELETE TASK ADMIN----------------------------->
                             <div class="modal fade" id="modalDeleteMember<?= $row_path['p_id']; ?>" tabindex="-1" aria-labelledby="modalDeleteMember<?= $row_path['p_id']; ?>"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
@@ -96,6 +100,7 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_roomMember_ecrypt));
                                     </div>
                                 </div>
                             </div>
+                            <?php } ?>
                         </tr>
                             <?php }; 
                             
@@ -104,6 +109,35 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_roomMember_ecrypt));
                     </tbody>
                 </table>
             </article>
+            <!----------------MODAL DELETE TASK----------------------------->
+                    <?php
+                    $ses_std_id = $_SESSION['std_id'];
+                    $sql_std = mysqli_query($conn, "select p_id, std_id, r_id from room_path where std_id = '$ses_std_id' and r_id = '$id_room'");
+                    $row_std = mysqli_fetch_array($sql_std);
+                    
+                    $p_id_std = $row_std['p_id'];
+
+                    $id_std_ecrypt_std = (($p_id_std * '10052003' * '08082020')/'26091971');
+                    $link_kick_std = "kickMemberBE.php?id=".urlencode(base64_encode($id_std_ecrypt_std));
+                    echo $p_id_std;
+                    ?>
+                            <div class="modal fade" id="modalDeleteMemberstd" tabindex="-1" aria-labelledby="modalDeleteMemberstd"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalDeleteMemberstd">CONFIRM?</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div style="text-align: center" class="modal-body">
+                                            Are You Sure?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a class="btn btn-danger" href="<?= $link_kick_std ?>" role="button">Leave</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 </body>
 
 </html>
