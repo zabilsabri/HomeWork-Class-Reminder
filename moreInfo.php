@@ -64,10 +64,12 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
                                 $dateDL = date("d/m/Y H:i:s", $timeDL);
 
                             ?>
+                            <?php if(isset($_SESSION['admin'])){ ?>
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#modalDeleteTask">
                                 DELETE
                             </button>
+                            <?php }; ?>
                         </div>
                     </nav>
                 </div>
@@ -116,14 +118,19 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
                             <?php
                     
                                 include 'connection.php';
+                                
+                                $ses_name = $_SESSION['nama'];
 
-                                $sql = "SELECT * FROM uploaded_image WHERE id_id = $id";
-                                $res = mysqli_query($conn, $sql);
+                                $sql_check_task = "select * from uploaded_image where id_id = $id and NAME = '$ses_name' ";
+                                $res = mysqli_query($conn, $sql_check_task);
+
+                                $sql_show_task = mysqli_query($conn, "select * from uploaded_image where id_id = $id and NAME = '$ses_name'");
+
                                 $row_check = mysqli_fetch_array($res);
                                 $row = mysqli_num_rows($res);
 
-                                if($row > 0 && $_SESSION['nama'] == $row_check['NAME']){
-                                    while ($files = mysqli_fetch_array($res)){
+                                if($row > 0){
+                                    while ($files = mysqli_fetch_array($sql_show_task)){
                                         $filesTime = strtotime($files['DATE']);
                                         $filesTimeFX = date("d/m/Y H:i:s", $filesTime);
                             ?>
@@ -132,26 +139,26 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
                                 <td> <?php echo $files['NAME'] ?> </td>
                                 <td> <a target="_blank" href="view.php?id=<?= $files['img_id']; ?>"><i class="fas fa-file-download"></i></td>
                                 <td> <a type="button" class="btn btn-danger" href="deleteAnsBE.php?id= <?= $files['img_id'] ?> " data-bs-toggle="modal" data-bs-target="#modalDeleteAns"><i class="fas fa-trash-alt"></i></a></td>
-                                
-                                <!----------------MODAL DELETE TASK----------------------------->
-                                <div class="modal fade" id="modalDeleteAns" tabindex="-1" aria-labelledby="modalDeleteAns"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="modalDeleteAns">CONFIRM?</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div style="text-align: center" class="modal-body">
-                                                Are You Sure?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <a class="btn btn-danger" href="deleteAnsBE.php?id= <?= $files['img_id'] ?> " role="button">DELETE</a>
-                                            </div>
+                            </tr>
+                            <!----------------MODAL DELETE ANSWER----------------------------->
+                            <div class="modal fade" id="modalDeleteAns" tabindex="-1" aria-labelledby="modalDeleteAns"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalDeleteAns">CONFIRM?</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div style="text-align: center" class="modal-body">
+                                            Are You Sure?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a class="btn btn-danger" href="deleteAnsBE.php?id= <?= $files['img_id'] ?> "
+                                                role="button">DELETE</a>
                                         </div>
                                     </div>
                                 </div>
-                            </tr>
+                            </div>
                             <?php 
                             };
                             } else {
@@ -253,7 +260,6 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
                     </div>
                 </div>
             </div>
-
 </body>
 
 </html>
