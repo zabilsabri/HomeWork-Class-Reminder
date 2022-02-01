@@ -4,8 +4,8 @@ include 'connection.php';
 
 if(isset($_POST['register'])){
     $nama = $_POST['username'];
-    //$password = $_POST['nis'];
-    $password = password_hash($_POST['nis'], PASSWORD_DEFAULT);
+    $password = $_POST['nis'];
+    //$password = password_hash($_POST['nis'], PASSWORD_DEFAULT);
 
     // AVOID SQL INJECTION
     $nama = stripcslashes($nama);

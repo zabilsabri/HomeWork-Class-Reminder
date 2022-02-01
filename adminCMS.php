@@ -110,11 +110,11 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
                         <div class="row">
                             <div class="col" style="border-right: black solid">
                                 <h2><?php echo $hw_check; ?></h2>
-                                <p>Task Done</p>
+                                <p>Finished Task</p>
                             </div>
                             <div class="col" style="border-left: black solid">
                                 <h2><?php echo $std_check - $hw_check; ?></h2>
-                                <p>Task Undone</p>
+                                <p>Un-Finished Task</p>
                             </div>
                         </div>
                     </a>

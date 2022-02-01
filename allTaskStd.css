@@ -1,0 +1,31 @@
+body{
+    background: #dbdbdb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+article{
+    background: white;
+    width: 97%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.heading{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 88%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.empty{
+    color: red;
+}

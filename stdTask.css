@@ -37,6 +37,28 @@ article{
 .grade{
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: baseline;
     justify-content: center;
+}
+
+.card-body-undone{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+    height: 1.5cm;
+}
+
+.card-body{
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+    width: 88%;
+    justify-content: space-around;
 }

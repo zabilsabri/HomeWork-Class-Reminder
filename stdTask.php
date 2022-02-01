@@ -48,13 +48,13 @@ if(!isset($_SESSION['admin'])){
             </div>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#un-grade" type="button" role="tab" aria-controls="home" aria-selected="true">Un-Grade</button>
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#un-grade" type="button" role="tab" aria-controls="home" aria-selected="true">Finished Task</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#grade" type="button" role="tab" aria-controls="profile" aria-selected="false">Grade</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#late-task" type="button" role="tab" aria-controls="contact" aria-selected="false">Late-Task</button>
+                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#undone_task" type="button" role="tab" aria-controls="contact" aria-selected="false">Un-finished Task</button>
                 </li>
             </ul>
                 <div class="tab-content" id="myTabContent">
@@ -103,19 +103,12 @@ if(!isset($_SESSION['admin'])){
                                     </tr>
                                         <?php }
                                         };
-                                    } else { ?>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td><b class="empty">NO TASK FOUND!</b></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <?php }; ?>
+                                    }?>
+                                       
                                 </tbody>
                             </table>
                         </article>
-                        <div class="test" style="display: flex;"><button type="submit" name="saveStdTask" class="btn btn-dark"><i class="far fa-save"></i></button></div>
+                        <div class="test" style="display: flex; justify-content: flex-end; margin-right: 1cm; "><button type="submit" name="saveStdTask" class="btn btn-dark" style="width: 2cm;" ><i class="far fa-save"></i></button></div>
                         </form>
                     </div>
                     <div class="tab-pane fade" id="grade" role="tabpanel" aria-labelledby="profile-tab">
@@ -123,23 +116,24 @@ if(!isset($_SESSION['admin'])){
                             <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Time Grade</th>
-                                        <th scopr="col">Task</th>
-                                        <th scope="col">Grade</th>
+                                        <th scope="col" style="width: 1cm;" >Name</th>
+                                        <th scope="col" style="width: 1cm;" >Time Grade</th>
+                                        <th scopr="col" style="width: 1cm;" >Task</th>
+                                        <th scope="col" style="width: 1cm;" >Grade</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
                         
-                                    $sql_grade1 = mysqli_query($conn, "select * from grade_path where grd_room = $id_room");
-                                    while($row_grade1 = mysqli_fetch_array($sql_grade1)){
-                                        $img_id = $row_grade1['grd_task'];
-                                    
-                                        $sql1 = mysqli_query($conn, "select * from uploaded_image where img_id = $img_id");
-                                        $row1 = mysqli_num_rows($sql1);
+                                    $sql_grade1 = "select * from grade_path where grd_room = $id_room";
+                                    $num_grade1_std = mysqli_query($conn, $sql_grade1);
+                                    $row1 = mysqli_num_rows($num_grade1_std);
+
+                                    if($row1 > 0){
+                                        while($row_grade1 = mysqli_fetch_array($num_grade1_std)){
+                                            $img_id = $row_grade1['grd_task'];
                                         
-                                        if($row1 > 0){
+                                            $sql1 = mysqli_query($conn, "select * from uploaded_image where img_id = $img_id");                                        
                                             while($rowg1 = mysqli_fetch_array($sql1)){
                                                 $taskTime1 = strtotime($row_grade1['grd_time']);
                                                 $taskTimeFX1 = date("d/m/Y H:i:s", $taskTime1);
@@ -152,15 +146,33 @@ if(!isset($_SESSION['admin'])){
                                     </tr>
                                         <?php };
                                         } 
-                                    } 
-                                        ?>
+                                    } ?>
                                     
                                 </tbody>
                             </table>
                         </article>
                     </div>
-                    <div class="tab-pane fade" id="late-task" role="tabpanel" aria-labelledby="contact-tab">
-                    
+                    <div class="tab-pane fade" id="undone_task" role="tabpanel" aria-labelledby="contact-tab">
+                        <?php
+                        
+                        $sql_std_id = mysqli_query($conn, "select * from room_path where r_id = $id_room and status = 'member'");
+                        while($row_std_id = mysqli_fetch_array($sql_std_id)){
+                            $std_id = $row_std_id['std_id'];
+                            $sql_task_check = mysqli_query($conn, "select * from uploaded_image where std_id = $std_id");
+                            $row_task_check = mysqli_fetch_array($sql_task_check);
+                            if($row_task_check['std_id'] != $std_id){ 
+                                $sql_std_info = mysqli_query($conn, "select st_id, NAMA from student_info where st_id = $std_id");
+                                $row_std_info = mysqli_fetch_array($sql_std_info);                               
+                        ?>
+                        <div class="card-body-undone">
+                            <div class="card-body">
+                                <p id="mycopy" ><?php echo $row_std_info['NAMA']; ?></p>
+                                <b class="empty">Unfinished!</b>
+                            </div>
+                        </div>
+                        <?php };
+                        }
+                        ?>
                     </div>
                 </div>
 </body>

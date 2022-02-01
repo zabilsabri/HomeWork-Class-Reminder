@@ -69,6 +69,13 @@ include "roomSecurity.php";
                             <a class="nav-link active" href="memberRoom.php">ROOM MEMBER</a>
                         </li>
 
+                        <?php  
+                        if (!isset($_SESSION['admin'])){ ?>
+                            <li>
+                                <a class="nav-link active" href="allTaskStd.php">ALL TASK</a>
+                            </li>
+                        <?php } ?>
+
                         <?php include "connection.php"; 
 
                         if (isset($_SESSION['admin'])){ ?>
@@ -159,7 +166,6 @@ include "roomSecurity.php";
                 <div class="modal-body">
                     <form action="createBE.php" method="POST">
                         1. SUBJECT
-
 
                         <select class="form-select" name="mapel" aria-label="Default select example">
 

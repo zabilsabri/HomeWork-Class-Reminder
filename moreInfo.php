@@ -50,7 +50,7 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
                             <?php
         
                                 include 'connection.php';
-
+                                $ses_name = $_SESSION['nama'];
                                 $id = $id_hw;
                                 $roomId = $_SESSION['id_room'];
                                 $sql = mysqli_query($conn, "select * from homework where hw_id= '$id'");
@@ -69,7 +69,31 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
                                 data-bs-target="#modalDeleteTask">
                                 DELETE
                             </button>
-                            <?php }; ?>
+                            <?php } else {
+                                $sql_task_id = "select * from uploaded_image where id_id = $id and NAME = '$ses_name' ";
+                                $num_task_id = mysqli_query($conn, $sql_task_id);
+
+                                while($row_task_id = mysqli_fetch_array($num_task_id)){
+                                    $task_id = $row_task_id['img_id'];
+                                    $sql_grade_task_std = "select * from grade_path where grd_task = $task_id";
+                                    $num_grade_id = mysqli_query($conn, $sql_grade_task_std);
+                                    if(mysqli_num_rows($num_grade_id) > 0){
+                                        while($row_grade_std = mysqli_fetch_array($sql_grade_task_std)){
+                            ?>
+
+                            <b> <?php echo $row_grade_std['grade']; ?> / 100 </b>
+
+                            <?php }
+
+                            } else { ?>
+
+                            <b> 0 / 100 </b>
+
+                            <?php }
+                                }; 
+                            };
+                            ?>
+
                         </div>
                     </nav>
                 </div>
@@ -119,8 +143,6 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
                     
                                 include 'connection.php';
                                 
-                                $ses_name = $_SESSION['nama'];
-
                                 $sql_check_task = "select * from uploaded_image where id_id = $id and NAME = '$ses_name' ";
                                 $res = mysqli_query($conn, $sql_check_task);
 
