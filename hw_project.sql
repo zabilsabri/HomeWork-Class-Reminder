@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 28 Jan 2022 pada 10.19
+-- Generation Time: 08 Feb 2022 pada 16.42
 -- Versi Server: 5.5.39
 -- PHP Version: 5.4.31
 
@@ -108,28 +108,16 @@ CREATE TABLE IF NOT EXISTS `student_info` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `subject`
---
-
-CREATE TABLE IF NOT EXISTS `subject` (
-`sb_id` int(11) NOT NULL,
-  `DATE` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `NAME` varchar(100) NOT NULL,
-  `subject` varchar(100) NOT NULL,
-  `id_room` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
 -- Struktur dari tabel `uploaded_image`
 --
 
 CREATE TABLE IF NOT EXISTS `uploaded_image` (
 `img_id` int(11) NOT NULL,
   `id_id` int(11) NOT NULL,
+  `sb_name` varchar(100) NOT NULL,
   `DATE` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `NAME` varchar(100) NOT NULL,
+  `std_id` int(11) NOT NULL,
   `file_name` varchar(255) NOT NULL,
   `file` mediumblob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
@@ -175,12 +163,6 @@ ALTER TABLE `student_info`
  ADD PRIMARY KEY (`st_id`) USING BTREE;
 
 --
--- Indexes for table `subject`
---
-ALTER TABLE `subject`
- ADD PRIMARY KEY (`sb_id`);
-
---
 -- Indexes for table `uploaded_image`
 --
 ALTER TABLE `uploaded_image`
@@ -220,11 +202,6 @@ MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 ALTER TABLE `student_info`
 MODIFY `st_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `subject`
---
-ALTER TABLE `subject`
-MODIFY `sb_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `uploaded_image`
 --
