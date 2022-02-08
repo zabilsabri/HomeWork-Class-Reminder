@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+
 include 'connection.php';
 include 'roomSecurity.php';
 
@@ -9,6 +10,12 @@ $id_hw = ((($id_hw_ecrypt * '26091971')/'08082020')/'10052003');
 
 $id_moreInfo_ecrypt = (($_SESSION['id_room'] * '10052003' * '08082020')/'26091971');
 $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
+
+$ac_id = $_GET['id'];
+
+if (!isset($_SESSION['admin'])){
+    header("location: moreInfo.php?id=$ac_id");
+};
 
 ?>
 

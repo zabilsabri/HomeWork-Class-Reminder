@@ -7,8 +7,8 @@ if (isset($_POST['createRoom'])){
     $name = $_SESSION['nama'];
 
     $roomName = $_POST['roomName'];
-    //$roomPassword = $_POST['roomPassword'];
-    $roomPassword = password_hash($_POST['roomPassword'], PASSWORD_DEFAULT);
+    $roomPassword = $_POST['roomPassword'];
+    //$roomPassword = password_hash($_POST['roomPassword'], PASSWORD_DEFAULT);
     $roomRules = $_POST['roomRules'];
 
     $roomName = htmlspecialchars($roomName);

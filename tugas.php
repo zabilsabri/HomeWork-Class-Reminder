@@ -61,10 +61,10 @@ include "roomSecurity.php";
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" data-bs-toggle="modal" data-bs-target="#addtaskmodal" href="#">+ ADD TASK</a>
                         </li>
-                        <?php }; ?>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="subjectList.php">SUBJECT LIST</a>
+                        <li>
+                            <a class="nav-link active" href="allTaskADM.php">ALL TASK</a>
                         </li>
+                        <?php }; ?>
                         <li class="nav-item">
                             <a class="nav-link active" href="memberRoom.php">ROOM MEMBER</a>
                         </li>
@@ -116,7 +116,15 @@ include "roomSecurity.php";
                         $row = mysqli_num_rows($sql);
 
                         if ($row > 0){
-                            while($row = mysqli_fetch_array($sql)){ 
+                            while($row = mysqli_fetch_array($sql)){
+                            $time = strtotime($row['DEADLINE']);
+                            $datetimeDL = date("d/m/Y H:i:s", $time);
+
+                            date_default_timezone_set("Asia/Makassar");
+                            $today_date = date("d/m/Y H:i:s");
+
+                            if($today_date < $datetimeDL){
+
                                 $id_hw_pass = $row['hw_id'];
                                 $id_hw_ecrypt = (($id_hw_pass * '10052003' * '08082020')/'26091971');
 
@@ -128,10 +136,6 @@ include "roomSecurity.php";
                             <a href="moreInfo.php?id= <?= $row['hw_id'] ?> ">
                                 <?php echo $row['MAPEL']; ?> 
                             </a>
-                            <?php
-                            $time = strtotime($row['DEADLINE']);
-                            $datetimeDL = date("d/m/Y H:i:s", $time);
-                            ?>
                         </td>
                         <td><b class="deadline"><?php echo $datetimeDL; ?></b></td>
 
@@ -141,7 +145,8 @@ include "roomSecurity.php";
                             <td><a class="btn btn-dark" href="<?= $link; ?>" role="button">DETAILS</a></td>
                         <?php }; ?>
                     </tr>
-                        <?php }; 
+                        <?php }
+                        }; 
                         } else {
                         ?>
                     <tr>
@@ -166,23 +171,7 @@ include "roomSecurity.php";
                 <div class="modal-body">
                     <form action="createBE.php" method="POST">
                         1. SUBJECT
-
-                        <select class="form-select" name="mapel" aria-label="Default select example">
-
-                            <?php
-
-                            include 'connection.php';
-                            
-                            $sqlc = mysqli_query($conn, "select * from subject where id_room = '$id_room'");
-
-                            while($rows = mysqli_fetch_array($sqlc)){
-
-                        ?>
-
-                            <option> <?php echo $rows['subject'] ?> </option>
-
-                            <?php }; ?>
-                        </select>
+                        <input class="form-control" name="mapel" type="text" aria-label="default input example">
                         2. DEADLINE
                         <input class="form-control" type="datetime-local" name="deadline" aria-label="default input example">
                         <div class="mb-3">

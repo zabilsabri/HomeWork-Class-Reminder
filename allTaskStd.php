@@ -110,6 +110,7 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_allTask_ecrypt));
                             <td></td>
                             <td><b class="empty">NO SUBJECT FOUND!</b></td>
                             <td></td>
+                            <td></td>
                         </tr>
                         <?php }; ?>
 
