@@ -12,7 +12,7 @@ $id_allTask_ecrypt = (($_SESSION['id_room'] * '10052003' * '08082020')/'26091971
 $link = "tugas.php?id_r=".urlencode(base64_encode($id_allTask_ecrypt));
 
 if(!isset($_SESSION['admin'])){
-    header("location: $link");
+    header("location: allTaskStd.php");
 }
 
 
@@ -35,7 +35,7 @@ if(!isset($_SESSION['admin'])){
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
     <script src="https://kit.fontawesome.com/645f3ace4e.js" crossorigin="anonymous"></script>
-    <link href="allTaskStd.css" rel="stylesheet">
+    <link href="allTaskADM.css" rel="stylesheet">
     <title>ALL TASK ADMIN</title>
 </head>
 
@@ -59,14 +59,48 @@ if(!isset($_SESSION['admin'])){
                     
                 if($num_row > 0){
                     while($row = mysqli_fetch_array($sql)){
+                        $time = strtotime($row['DEADLINE']);
+                        $datetimeDL = date("d/m/Y H:i:s", $time);
+
+                        $t_id_crypt = (($row['hw_id'] * '10052003' * '08082020')/'26091971');
+                        $t_link = "stdTask.php?t_id=".urlencode(base64_encode($t_id_crypt));
+
             ?>
             <div class="card">
                 <div class="card-body">
-                    <?php echo $row['MAPEL']; ?>
-                    <?php echo $row['DEADLINE']; ?>
+                    <h4><?php echo $row['MAPEL']; ?></h4>
+                    <b class="empty" ><?php echo $datetimeDL; ?></b>
+                    <?php
+
+                    $id_room = $_SESSION['id_room'];
+                    $id = $row['hw_id'];
+
+                    $sql_hw_room = mysqli_query($conn, "SELECT * FROM uploaded_image WHERE id_id = $id");
+                    $sql_std_room = mysqli_query($conn, "select std_id, r_id, status from room_path where r_id = '$id_room' and status = 'member'");
+                    
+                    $hw_check = mysqli_num_rows($sql_hw_room);
+                    $std_check = mysqli_num_rows($sql_std_room);
+                    
+                    
+                    ?>
+                    <div class="container-answer">
+                        <a href="<?= $t_link ?>">
+                            <div class="row">
+                                <div class="col" style="border-right: black solid">
+                                    <h4><?php echo $hw_check; ?></h4>
+                                    <p>Finished Task</p>
+                                </div>
+                                <div class="col" style="border-left: black solid">
+                                    <h4><?php echo $std_check - $hw_check; ?></h4>
+                                    <p>Un-Finished Task</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
-            <?php } } ?>
+            <?php } 
+            } ?>
             </article>
 </body>
 

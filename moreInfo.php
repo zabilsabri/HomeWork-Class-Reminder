@@ -78,7 +78,7 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
                                     $sql_grade_task_std = "select * from grade_path where grd_task = $task_id";
                                     $num_grade_id = mysqli_query($conn, $sql_grade_task_std);
                                     if(mysqli_num_rows($num_grade_id) > 0){
-                                        while($row_grade_std = mysqli_fetch_array($sql_grade_task_std)){
+                                        while($row_grade_std = mysqli_fetch_array($num_grade_id)){
                             ?>
 
                             <b> <?php echo $row_grade_std['grade']; ?> / 100 </b>

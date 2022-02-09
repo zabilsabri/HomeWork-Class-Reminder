@@ -1,5 +1,8 @@
 <?php
 
+ini_set('display_errors', 0);
+error_reporting(E_ERROR | E_WARNING | E_PARSE); 
+
 session_start();
 include 'connection.php';
 include 'roomSecurity.php';
@@ -65,26 +68,52 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_allTask_ecrypt));
                         $id_room = $_SESSION['id_room'];
                         $std_id = $_SESSION['std_id'];
                         
-                        $sql = mysqli_query($conn, "select * from uploaded_image where std_id = '$std_id' and id_id = $id_room");
+                        $sql = mysqli_query($conn, "select * from homework where id_room = $id_room");
                         $num_row = mysqli_num_rows($sql);
 
                         if($num_row > 0){
                             while($row = mysqli_fetch_array($sql)){
-                                $img_id = $row['img_id'];
+                                $hw_id = $row['hw_id'];
+                                
+                                $time = strtotime($row['DEADLINE']);
+                                $datetimeDL = date("d/m/Y H:i:s", $time);
+                                date_default_timezone_set("Asia/Makassar");
+                                $today_date = date("d/m/Y H:i:s");
+
+                                $sql_file = mysqli_query($conn, "select * from uploaded_image where id_id = $hw_id");
+                                $row_file = mysqli_fetch_array($sql_file);
+                                $img_id = $row_file['img_id'];
+
+                                if($img_id != null){
                                 $sql_grade = mysqli_query($conn, "select * from grade_path where grd_task = $img_id");
+                                };
+
                                 $row_grade = mysqli_fetch_array($sql_grade);
-                                $num_grade = mysqli_num_rows($sql_grade);
-  
                     ?>
                         <tr>
-                            <td style="width: 1cm;" ><b><?php echo $row['sb_name']; ?></b></td>
-                            <td style="width: 1cm; font-size: 12px;" ><?php echo $row['file_name']; ?></td>
-                            <td style="width: 1cm;"><a target="_blank" href="view.php?id=<?= $row['img_id']; ?>"><i class="fas fa-file-download"></i></td>
-                            <?php if($num_grade > 0){ ?>
-                            <td style="width: 1cm;"> <b> <?php echo $row_grade['grade']; ?> / 100 </b> </td>
+                            <td style="width: 1cm;" ><b><?php echo $row['MAPEL']; ?></b></td>
+
+
+                            <?php if($row_file['file_name'] != null){ ?>
+                                <td style="width: 1cm; font-size: 12px;" ><?php echo $row_file['file_name']; ?></td>
                             <?php } else { ?>
-                            <td style="width: 1cm;"> <b class="empty" > -/100 </b> </td>
+                                <td style="width: 1cm; font-size: 12px;" >-</td>
                             <?php }; ?>
+
+                            <?php if($row_file['file'] != null){ ?>
+                                <td style="width: 1cm;"><a target="_blank" href="view.php?id=<?= $row_file['img_id']; ?>"><i class="fas fa-file-download"></i></td>
+                            <?php } else { ?>
+                                <td style="width: 1cm;">-</td>
+                            <?php }; ?>
+
+                            
+                            <?php if($row_grade['grade'] != null){ ?>
+                                <td style="width: 1cm;"> <b> <?php echo $row_grade['grade']; ?>/100 </b> </td>
+                            <?php } elseif($today_date > $datetimeDL) { ?>
+                                <td style="width: 1cm;"> <b class="empty" > 0/100 </b> </td>
+                            <?php } else { ?>
+                                <td style="width: 1cm;"> <b> -/100 </b> </td>
+                            <?php } ?>
                             <!----------------MODAL DELETE TASK----------------------------->
                             <div class="modal fade" id="modalDeleteSubject<?= $row['sb_id']; ?>" tabindex="-1" aria-labelledby="modalDeleteSubject<?= $row['sb_id']; ?>"
                                 aria-hidden="true">
@@ -104,7 +133,8 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_allTask_ecrypt));
                                 </div>
                             </div>
                         </tr>
-                            <?php }; 
+                            <?php
+                            }; 
                         } else { ?>
                         <tr>
                             <td></td>

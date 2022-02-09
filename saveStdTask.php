@@ -4,8 +4,9 @@ session_start();
 
 if(isset($_POST['saveStdTask'])){
     
+    $hw_id = $_GET['t_id'];
     $id_room = $_SESSION['id_room'];
-    $sql = mysqli_query($conn, "select img_id, NAME from uploaded_image where id_id = '$id_room'");
+    $sql = mysqli_query($conn, "select img_id, NAME from uploaded_image where id_id = '$hw_id'");
 
     while($row = mysqli_fetch_array($sql)){
         

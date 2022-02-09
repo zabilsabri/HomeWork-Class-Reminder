@@ -119,7 +119,6 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_roomMember_ecrypt));
 
                     $id_std_ecrypt_std = (($p_id_std * '10052003' * '08082020')/'26091971');
                     $link_kick_std = "kickMemberBE.php?id=".urlencode(base64_encode($id_std_ecrypt_std));
-                    echo $p_id_std;
                     ?>
                             <div class="modal fade" id="modalDeleteMemberstd" tabindex="-1" aria-labelledby="modalDeleteMemberstd"
                                 aria-hidden="true">

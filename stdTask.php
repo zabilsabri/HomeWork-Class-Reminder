@@ -1,8 +1,13 @@
 <?php
 
+ini_set('display_errors', 0);
+error_reporting(E_ERROR | E_WARNING | E_PARSE); 
+
 session_start();
 include 'connection.php';
 include 'roomSecurity.php';
+
+$id_room = $_SESSION['id_room'];
 
 $id_stdTask_ecrypt = base64_decode(urldecode($_GET['t_id']));
 $id_stdTask = ((($id_stdTask_ecrypt * '26091971')/'08082020')/'10052003');
@@ -73,28 +78,22 @@ if(!isset($_SESSION['admin'])){
                                 <tbody>
                                     <?php 
                                     
-                                    $name = $_SESSION['nama'];
-                                    $id_room = $_SESSION['id_room'];
-                                    
-                                    $sql = mysqli_query($conn, "select * from uploaded_image where id_id = '$id_room'");
-                                    $sql_grade = mysqli_query($conn, "select grd_room, grd_task, grade from grade_path where grd_room = '$id_room'");
+                                    $sql_file1 = mysqli_query($conn, "select * from uploaded_image where id_id = $id_stdTask");
+                                    while($row_file1 = mysqli_fetch_array($sql_file1)){
+                                        $img_id = $row_file1['img_id'];
 
-                                    if($row = mysqli_num_rows($sql) > 0){
-                                        while($rowg = mysqli_fetch_array($sql)){
-                                            $row_grade = mysqli_fetch_array($sql_grade);
-                                            if($row_grade['grd_task'] != $rowg['img_id']){
-                                                $taskTime = strtotime($rowg['DATE']);
-                                                $taskTimeFX = date("d/m/Y H:i:s", $taskTime);
-            
+                                        $sql_grade1 = mysqli_query($conn, "select * from grade_path where grd_task = $img_id");
+                                        $row_grade1 = mysqli_fetch_array($sql_grade1);            
+                                        if($img_id != $row_grade1['grd_task']){
                                 ?>
                                     <tr>
-                                        <td style="width: 1cm;" ><b><?php echo $rowg['NAME']; ?></b></td>
-                                        <td style="width: 1cm;" ><?php echo $taskTimeFX; ?></td>
-                                        <td style="width: 1cm;" ><a target="_blank" href="view.php?id=<?= $rowg['img_id']; ?>"><i class="fas fa-file-download"></i></td>
+                                        <td style="width: 1cm;" ><b><?php echo $row_file1['NAME']; ?></b></td>
+                                        <td style="width: 1cm;" ><?php echo $row_file1['DATE']; ?></td>
+                                        <td style="width: 1cm;" ><a target="_blank" href="view.php?id=<?= $row_file1['img_id']; ?>"><i class="fas fa-file-download"></i></td>
                                         <td style="width: 1cm;">
-                                            <form action="saveStdTask.php" method="POST">
+                                            <form action="saveStdTask.php?t_id=<?= $id_stdTask ?>" method="POST">
                                             <div class="grade">
-                                                <input class="form-control form-control-sm" style="width: 1.1cm;" name="grade<?=$rowg['img_id'];?>" type="text" aria-label=".form-control-sm example">
+                                                <input class="form-control form-control-sm" style="width: 1.1cm;" name="grade<?=$row_file1['img_id'];?>" type="text" aria-label=".form-control-sm example">
                                                 <p>/100</p>
                                             </div>
                                         </td>
@@ -102,8 +101,8 @@ if(!isset($_SESSION['admin'])){
                                         
                                     </tr>
                                         <?php }
-                                        };
-                                    }?>
+                                    }
+                                    ?>
                                        
                                 </tbody>
                             </table>
@@ -124,29 +123,24 @@ if(!isset($_SESSION['admin'])){
                                 </thead>
                                 <tbody>
                                 <?php
-                        
-                                    $sql_grade1 = "select * from grade_path where grd_room = $id_room";
-                                    $num_grade1_std = mysqli_query($conn, $sql_grade1);
-                                    $row1 = mysqli_num_rows($num_grade1_std);
 
-                                    if($row1 > 0){
-                                        while($row_grade1 = mysqli_fetch_array($num_grade1_std)){
-                                            $img_id = $row_grade1['grd_task'];
-                                        
-                                            $sql1 = mysqli_query($conn, "select * from uploaded_image where img_id = $img_id");                                        
-                                            while($rowg1 = mysqli_fetch_array($sql1)){
-                                                $taskTime1 = strtotime($row_grade1['grd_time']);
-                                                $taskTimeFX1 = date("d/m/Y H:i:s", $taskTime1);
+                                    $sql_file2 = mysqli_query($conn, "select * from uploaded_image where id_id = $id_stdTask");
+                                    while($row_file2 = mysqli_fetch_array($sql_file2)){
+                                        $img_id2 = $row_file2['img_id'];
+
+                                        $sql_grade2 = mysqli_query($conn, "select * from grade_path where grd_task = $img_id2");
+                                        $row_grade2 = mysqli_fetch_array($sql_grade2);            
+                                        if($img_id2 == $row_grade2['grd_task']){                                    
                                     ?>
                                     <tr>
-                                        <td style="width: 1cm;" ><b><?php echo $rowg1['NAME']; ?></b></td>
-                                        <td style="width: 1cm;" ><?php echo $taskTimeFX1; ?></td>
-                                        <td style="width: 1cm;" ><a target="_blank" href="view.php?id=<?= $rowg1['img_id']; ?>"><i class="fas fa-file-download"></i></td>
-                                        <td style="width: 1cm;" ><b><?php echo $row_grade1['grade']; ?></b></td>
+                                        <td style="width: 1cm;" ><b><?php echo $row_file2['NAME']; ?></b></td>
+                                        <td style="width: 1cm;" ><?php echo $row_grade2['grd_time']; ?></td>
+                                        <td style="width: 1cm;" ><a target="_blank" href="view.php?id=<?= $row_file2['img_id']; ?>"><i class="fas fa-file-download"></i></td>
+                                        <td style="width: 1cm;" ><b><?php echo $row_grade2['grade']; ?></b></td>
                                     </tr>
-                                        <?php };
-                                        } 
-                                    } ?>
+                                    <?php };
+                                    } 
+                                    ?>
                                     
                                 </tbody>
                             </table>
@@ -158,8 +152,10 @@ if(!isset($_SESSION['admin'])){
                         $sql_std_id = mysqli_query($conn, "select * from room_path where r_id = $id_room and status = 'member'");
                         while($row_std_id = mysqli_fetch_array($sql_std_id)){
                             $std_id = $row_std_id['std_id'];
-                            $sql_task_check = mysqli_query($conn, "select * from uploaded_image where std_id = $std_id");
+
+                            $sql_task_check = mysqli_query($conn, "select * from uploaded_image where std_id = $std_id and id_id = $id_stdTask");
                             $row_task_check = mysqli_fetch_array($sql_task_check);
+
                             if($row_task_check['std_id'] != $std_id){ 
                                 $sql_std_info = mysqli_query($conn, "select st_id, NAMA from student_info where st_id = $std_id");
                                 $row_std_info = mysqli_fetch_array($sql_std_info);                               
