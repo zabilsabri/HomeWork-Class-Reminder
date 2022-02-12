@@ -8,9 +8,6 @@ include 'roomSecurity.php';
 $id_hw_ecrypt = base64_decode(urldecode($_GET['id']));
 $id_hw = ((($id_hw_ecrypt * '26091971')/'08082020')/'10052003');
 
-$id_moreInfo_ecrypt = (($_SESSION['id_room'] * '10052003' * '08082020')/'26091971');
-$link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
-
 $ac_id = $_GET['id'];
 
 if (!isset($_SESSION['admin'])){
@@ -44,7 +41,6 @@ if (!isset($_SESSION['admin'])){
 
     <?php include 'navbar.php'; ?>
 
-    <a class="btn btn-dark" href="<?= $link; ?>" role="button">GO BACK<<<</a>
         <div class="big-container" style="width: 88%; margin-left: auto; margin-right: auto;">
             <div class="heading">
                 <nav class="navbar navbar-light bg-light">
@@ -57,7 +53,7 @@ if (!isset($_SESSION['admin'])){
     
                             include 'connection.php';
 
-                            $id = $id_hw;
+                            $id = round($id_hw);
                             $roomId = $_SESSION['id_room'];
                             $sql = mysqli_query($conn, "select * from homework where hw_id= '$id'");
 

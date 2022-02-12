@@ -147,16 +147,8 @@ include "roomSecurity.php";
                     </tr>
                         <?php }
                         }; 
-                        } else {
+                        }
                         ?>
-                    <tr>
-                        <td></td>
-                        <td><b class="empty">NO TASK FOUND!</b></td>
-                        <td></td>
-                    </tr>
-                        <?php }; ?>
-
-
             </tbody>
         </table>
     </article>
@@ -181,28 +173,6 @@ include "roomSecurity.php";
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" name="create" class="btn btn-primary">CREATE</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!------------MODAL CREATE SUBJECT------------------------->
-    <div class="modal fade" id="addsubjectmodal" tabindex="-1" aria-labelledby="HomeworkModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="HomeworkModalLabel">ADD SUBJECT</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="createSubjectBE.php" method="POST">
-                        1. SUBJECT
-                        <input class="form-control" name="subject" type="text" aria-label="default input example">
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" name="createSubject" class="btn btn-primary">CREATE</button>
                         </div>
                     </form>
                 </div>

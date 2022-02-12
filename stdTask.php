@@ -42,8 +42,6 @@ if(!isset($_SESSION['admin'])){
 <body>
     
     <?php include 'navbar.php'; ?>
-
-    <a class="btn btn-dark" href="adminCMS.php?id=<?= $_GET['t_id']; ?>" role="button">GO BACK<<<</a>
             <div class="heading">
                 <nav class="navbar navbar-light bg-light">
                     <div class="container-fluid">
@@ -72,7 +70,6 @@ if(!isset($_SESSION['admin'])){
                                         <th scope="col">Time</th>
                                         <th scopr="col">Task</th>
                                         <th scope="col">Grade</th>
-                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -96,9 +93,7 @@ if(!isset($_SESSION['admin'])){
                                                 <input class="form-control form-control-sm" style="width: 1.1cm;" name="grade<?=$row_file1['img_id'];?>" type="text" aria-label=".form-control-sm example">
                                                 <p>/100</p>
                                             </div>
-                                        </td>
-                                        <td style="width: 1cm;" ><a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalAddNote<?= $rowg['img_id']; ?>"><i class="fas fa-comment"></i></a></td>
-                                        
+                                        </td>                                        
                                     </tr>
                                         <?php }
                                     }

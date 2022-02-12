@@ -23,7 +23,7 @@
                     <input type="text" class="form-content" name="username" placeholder="Nama">
                 </div>
                 <div class="text-box">
-                    <input type="password" id="password" class="form-content" name="nis" placeholder="NIS">
+                    <input type="password" id="password" class="form-content" name="nis" placeholder="Password">
                     <div class="eye">
                         <i class="fas fa-eye-slash" onclick="showHide()" id="toogle"></i>
                     </div>

@@ -8,7 +8,6 @@ if (isset($_POST['createRoom'])){
 
     $roomName = $_POST['roomName'];
     $roomPassword = password_hash($_POST['roomPassword'], PASSWORD_DEFAULT);
-    $roomRules = $_POST['roomRules'];
 
     $roomName = htmlspecialchars($roomName);
     $roomPassword = htmlspecialchars($roomPassword);
@@ -28,7 +27,7 @@ if (isset($_POST['createRoom'])){
             if($row['Name_Room'] == $roomName){
                 header('location: createRoom.php?exist');
             } else {
-                $sql = "insert into room(creator, Name_Room, room_password, Rules_Room) values ('$name','$roomName','$roomPassword','$roomRules')";
+                $sql = "insert into room(creator, Name_Room, room_password) values ('$name','$roomName','$roomPassword')";
                 
                 if($conn->query($sql)){
                     $sqls = mysqli_query($conn, "select id_room, creator, Name_Room from room where Name_Room = '$roomName'");

@@ -18,8 +18,6 @@ include 'connection.php';
 
 <body>
     <?php include "navbarRoom.php"; ?>
-    <a class="btn btn-dark" href="room.php" role="button">GO BACK<<<</a>
-
     <main>
         <div class="container">
             <div class="heading-container">
@@ -44,13 +42,6 @@ include 'connection.php';
                             <i class="fas fa-eye-slash" onclick="showHide()" id="toogle"></i>
                         </div>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="roomRules" value="1" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Only Admin Can Change The Room Settings
-                        </label>
-                    </div>
-
                     <button type="submit" name="createRoom" class="btn btn-dark">CREATE</button>
             </form>
             </div>

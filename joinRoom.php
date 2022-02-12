@@ -19,8 +19,6 @@ include 'connection.php';
 
 <body>
     <?php include "navbarRoom.php"; ?>
-    <a class="btn btn-dark" href="room.php" role="button">GO BACK<<<</a>
-
     <main>
         <div class="container">
             <div class="heading-container">

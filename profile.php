@@ -26,14 +26,7 @@ include "roomSecurity.php";
     <title>PROFILE</title>
 </head>
 <body>
-    <?php include 'navbar.php'; ?>   
-    <button class="btn btn-dark" onclick="goback()" role="button">GO BACK<<<</button>
-    <script>
-        function goback(){
-            javascript:history.go(-1)
-        }
-    </script>
-
+    <?php include 'navbar.php'; ?>
     <div class="heading">
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">

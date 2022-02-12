@@ -8,9 +8,6 @@ if (!isset($_SESSION['login'])){
     header('location: login.php?notlogin');
 };
 
-$id_allTask_ecrypt = (($_SESSION['id_room'] * '10052003' * '08082020')/'26091971');
-$link = "tugas.php?id_r=".urlencode(base64_encode($id_allTask_ecrypt));
-
 if(!isset($_SESSION['admin'])){
     header("location: allTaskStd.php");
 }
@@ -43,7 +40,6 @@ if(!isset($_SESSION['admin'])){
     
     <?php include 'navbar.php'; ?>
 
-    <a class="btn btn-dark" href="<?= $link; ?>" role="button">GO BACK<<<</a>
             <div class="heading">
                 <nav class="navbar navbar-light bg-light">
                     <div class="container-fluid">
@@ -63,7 +59,7 @@ if(!isset($_SESSION['admin'])){
                         $datetimeDL = date("d/m/Y H:i:s", $time);
 
                         $t_id_crypt = (($row['hw_id'] * '10052003' * '08082020')/'26091971');
-                        $t_link = "stdTask.php?t_id=".urlencode(base64_encode($t_id_crypt));
+                        $t_link = "adminCMS.php?id=".urlencode(base64_encode($t_id_crypt));
 
             ?>
             <div class="card">

@@ -3,19 +3,11 @@ session_start();
 include 'connection.php';
 include 'roomSecurity.php';
 
-    $name_room = $_SESSION['name_room'];
-    $nama = $_SESSION['nama'];
+    $id_room = $_SESSION['id_room'];
 
-    $sql = mysqli_query($conn, "select Name_Room, creator from room where Name_Room = '$name_room'");
-
-    $row = mysqli_fetch_array($sql);
-
-    if (!isset($_SESSION['admin'])){
-        echo "<script> javascript:history.go(-1) </script>";
+    if(!isset($_SESSION['admin'])){
+        header("location: $link");
     };
-    
-    $id_roomSetting_ecrypt = (($_SESSION['id_room'] * '10052003' * '08082020')/'26091971');
-    $link = "tugas.php?id_r=".urlencode(base64_encode($id_roomSetting_ecrypt));
 
 ?>
 
@@ -33,48 +25,29 @@ include 'roomSecurity.php';
 </head>
 
 <body>
-    <?php include "navbarRoom.php"; ?>
-    <a class="btn btn-dark" href=" <?= $link; ?> " role="button">GO BACK<<<</a>
-    
+    <?php include "navbarRoom.php"; ?>    
     <div class="container">
         <h4>ROOM SETTING</h4>
-        <form action="roomSettingChange.php" method="POST">
-            <?php
-                    
-            $name_room = $_SESSION["name_room"];
+        <img src="profile-pic/unknown_pic.jpg" height=250 alt="profile-pic">
+        <div class="form-container">
+            <form action="roomSettingChange.php" method="POST">
+                <?php
+                        
+                $sql = mysqli_query($conn, "select * from room where id_room = '$id_room'");
 
-            $sql = mysqli_query($conn, "select Name_Room, Rules_Room from room where Name_Room = '$name_room'");
+                $row = mysqli_fetch_array($sql);
 
-            $row = mysqli_fetch_array($sql);
-
-            if($row['Rules_Room'] == 1){
-
-            ?>
-
-            <div class="form-check">
-                <input class="form-check-input" name="roomRules" type="checkbox" value="1" id="flexCheckChecked" checked>
-                <label class="form-check-label" for="flexCheckChecked">
-                Only Admin Can Edit Task and Subject
-                </label>
-            </div>
-
-            <?php } else {?>
-
-            <div class="form-check">
-                <input class="form-check-input" name="roomRules" type="checkbox" value="1" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">                    
-                Only Admin Can Edit Task and Subject
-                </label>
-            </div>
-
-            <?php } ?>
-            
-            <div class="containerFooter">
-                <div class="button">
-                    <input class="btn btn-dark" name="changeSetting" type="submit" value="Submit">
+                ?>
+                <p>1. Name Room</p>
+                <input class="form-control" type="text" name="name_room" value="<?= $row['Name_Room'] ?>" aria-label="default input example">
+                
+                <div class="containerFooter">
+                    <div class="button">
+                        <input class="btn btn-dark" name="changeSetting" type="submit" value="Update">
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
 
     </div>
 </body>

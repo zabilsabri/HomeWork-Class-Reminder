@@ -4,12 +4,28 @@ session_start();
 include 'connection.php';
 include 'roomSecurity.php';
 
+$roomId = $_SESSION['id_room'];
+
 $id_hw_ecrypt = base64_decode(urldecode($_GET['id']));
-$id_hw = ((($id_hw_ecrypt * '26091971')/'08082020')/'10052003');
+$id_hw_r = ((($id_hw_ecrypt * '26091971')/'08082020')/'10052003');
+$id_hw = round($id_hw_r);
+
+$sql_dl_check = mysqli_query($conn, "select * from homework where id_room = '$roomId' and hw_id = $id_hw");
 
 $id_moreInfo_ecrypt = (($_SESSION['id_room'] * '10052003' * '08082020')/'26091971');
 $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
 
+while($row_dl_check = mysqli_fetch_array($sql_dl_check)){
+    $time = strtotime($row_dl_check['DEADLINE']);
+    $datetimeDL = date("d/m/Y H:i:s", $time);
+
+    date_default_timezone_set("Asia/Makassar");
+    $today_date = date("d/m/Y H:i:s");
+
+    if($today_date > $datetimeDL){
+        header("location: ");
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -37,8 +53,6 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
 <body>
 
     <?php include 'navbar.php'; ?>
-
-    <a class="btn btn-dark" href="<?= $link; ?>" role="button">GO BACK<<<</a>
             <div class="big-container">
                 <div class="heading">
                     <nav class="navbar navbar-light bg-light">
@@ -52,7 +66,6 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
                                 include 'connection.php';
                                 $ses_name = $_SESSION['nama'];
                                 $id = $id_hw;
-                                $roomId = $_SESSION['id_room'];
                                 $sql = mysqli_query($conn, "select * from homework where hw_id= '$id'");
 
                                 $rowtest = mysqli_fetch_array($sql);

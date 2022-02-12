@@ -17,7 +17,7 @@ if (isset($_POST['joinRoom'])){
 
 
     if(!empty($roomName) && !empty($roomPassword)){
-            $sqlc = mysqli_query($conn, "select id_room, creator, Name_Room, room_password, Rules_Room from room where Name_Room = '$roomName'");
+            $sqlc = mysqli_query($conn, "select id_room, creator, Name_Room, room_password from room where Name_Room = '$roomName'");
             $row = mysqli_fetch_array($sqlc);
 
             $id_room = $row['id_room'];

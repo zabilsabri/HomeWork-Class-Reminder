@@ -5,12 +5,12 @@ include 'connection.php';
 
 if (isset($_POST['changeSetting'])){
     
-    $rules_room = $_POST['roomRules'];
+    $name_room_updt = $_POST['name_room'];
     $name_room = $_SESSION['name_room'];
 
-    $sql = mysqli_query($conn, "UPDATE room SET Rules_Room='$rules_room' WHERE Name_Room='$name_room'");
+    $sql = mysqli_query($conn, "UPDATE room SET Name_Room='$name_room_updt' WHERE Name_Room='$name_room'");
 
-    header("location: roomSetting.php");
+    header("location: roomSetting.php?success");
     
 } else {
     header("location: roomSetting.php");

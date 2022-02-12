@@ -5,8 +5,6 @@ include 'connection.php';
 
 include 'roomSecurity.php';
 
-$id_roomMember_ecrypt = (($_SESSION['id_room'] * '10052003' * '08082020')/'26091971');
-$link = "tugas.php?id_r=".urlencode(base64_encode($id_roomMember_ecrypt));
 ?>
 
 
@@ -34,8 +32,6 @@ $link = "tugas.php?id_r=".urlencode(base64_encode($id_roomMember_ecrypt));
 <body>
     
     <?php include 'navbar.php'; ?>
-
-    <a class="btn btn-dark" href="<?= $link; ?>" role="button">GO BACK<<<</a>
             <div class="heading">
                 <nav class="navbar navbar-light bg-light">
                     <div class="container-fluid">
