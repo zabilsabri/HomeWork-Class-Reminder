@@ -49,7 +49,7 @@ include 'roomSecurity.php';
                             <th scope="col">Name</th>
                             <th scope="col">Status</th>
                             <?php if(isset($_SESSION['admin'])){ ?>
-                            <th scope="col">Kick</th>
+                            <th scope="col">Details</th>
                             <?php }; ?>
                         </tr>
                     </thead>
@@ -77,7 +77,7 @@ include 'roomSecurity.php';
                             <td style="width: 1cm;" ><b><?php echo $row['NAMA']; ?></b></td>
                             <td style="width: 1cm;"> <?php echo $row_path['status']; ?> </td>
                             <?php if(isset($_SESSION['admin'])){ ?>
-                            <td style="width: 1cm;"><a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteMember<?= $row_path['p_id']; ?>"><i class="fas fa-user-slash"></i></a></td>
+                            <td style="width: 1cm;"><a type="button" class="btn btn-dark" href="stdDetails.php?p_id=<?= $row_path['p_id'] ?>"><i class="fa-thin fa-child"></i></a></td>
                             <!----------------MODAL DELETE TASK ADMIN----------------------------->
                             <div class="modal fade" id="modalDeleteMember<?= $row_path['p_id']; ?>" tabindex="-1" aria-labelledby="modalDeleteMember<?= $row_path['p_id']; ?>"
                                 aria-hidden="true">
