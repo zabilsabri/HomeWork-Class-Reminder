@@ -10,7 +10,9 @@ include 'roomSecurity.php';
 $id_room = $_SESSION['id_room'];
 
 $id_stdTask_ecrypt = base64_decode(urldecode($_GET['t_id']));
-$id_stdTask = ((($id_stdTask_ecrypt * '26091971')/'08082020')/'10052003');
+$id_stdTask1 = ((($id_stdTask_ecrypt * '26091971')/'08082020')/'10052003');
+$id_stdTask = round($id_stdTask1);
+
 
 if(!isset($_SESSION['admin'])){
     header("location: $link");

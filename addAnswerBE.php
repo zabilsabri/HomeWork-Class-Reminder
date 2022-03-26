@@ -11,6 +11,7 @@ if (isset($_POST['submit_answer'])){
     $pg_id = $id_hw;
     $std_name = $_SESSION['nama'];
     $sb_name = $rowtest['MAPEL'];
+    $id_room = $_SESSION['id_room'];
 
     $file_name = $_FILES['my_file']['name'];
     $file_type = $_FILES['my_file']['type'];
@@ -22,13 +23,14 @@ if (isset($_POST['submit_answer'])){
         if ($file_size > 2000000){
            echo " <b style='display:flex;color:red;justify-content:center'>YOUR FILE IS A BIG PP!</b> ";
         } else {
-            $stmt = $dbh->prepare("insert into uploaded_image(id_id, sb_name, NAME, std_id, file_name, file) values(?,?,?,?,?,?)");
+            $stmt = $dbh->prepare("insert into uploaded_image(id_id, id_room, sb_name, NAME, std_id, file_name, file) values(?,?,?,?,?,?,?)");
             $stmt->bindParam(1, $pg_id);
-            $stmt->bindParam(2, $sb_name);
-            $stmt->bindParam(3, $std_name);
-            $stmt->bindParam(4, $std_id);
-            $stmt->bindParam(5, $file_name);
-            $stmt->bindParam(6, $tmp_name);
+            $stmt->bindParam(2, $id_room);
+            $stmt->bindParam(3, $sb_name);
+            $stmt->bindParam(4, $std_name);
+            $stmt->bindParam(5, $std_id);
+            $stmt->bindParam(6, $file_name);
+            $stmt->bindParam(7, $tmp_name);
             $stmt->execute();
         };
 

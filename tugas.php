@@ -76,8 +76,14 @@ include "roomSecurity.php";
                             </li>
                         <?php } ?>
 
-                        <?php include "connection.php"; 
+                        <?php 
+                        if (isset($_SESSION['admin'])){ ?>
+                            <li>
+                                <a class="nav-link active" href="report.php">REPORT</a>
+                            </li>
+                        <?php } ?>
 
+                        <?php 
                         if (isset($_SESSION['admin'])){ ?>
                             <li>
                                 <a class="nav-link active" href="roomSetting.php">ROOM SETTING</a>

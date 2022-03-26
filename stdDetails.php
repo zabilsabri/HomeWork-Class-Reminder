@@ -10,7 +10,9 @@ if(!isset($_SESSION['admin'])){
 
 $p_id = $_GET['p_id'];
 
-$sql_room = mysqli_query($conn, "select p_id, std_id from room_path where p_id = $p_id");
+$id_room = $_SESSION['id_room'];
+
+$sql_room = mysqli_query($conn, "select p_id, std_id, join_room_time from room_path where p_id = $p_id");
 $fetch_room = mysqli_fetch_array($sql_room);
 
 
@@ -43,7 +45,7 @@ $fetch_room = mysqli_fetch_array($sql_room);
                 <a href="profile.php">
                     <h1>PROFILE</h1>
                 </a>
-                <button type="button" class="btn btn-danger">Kick</button>
+                <button type="button" class="btn btn-danger">KICK</button>
             </div>
         </nav>
     </div>
@@ -54,83 +56,41 @@ $fetch_room = mysqli_fetch_array($sql_room);
     $sql_profile = mysqli_query($conn, "select * from student_info where st_id = $std_id");
     $fetch_profile = mysqli_fetch_array($sql_profile);
 
-    $createdOn = strtotime($fetch_profile['updated on']);
-    $datetimeCO = date("d/m/Y H:i:s", $createdOn);
+    $joinOn = strtotime($fetch_room['join_room_time']);
+    $datetimeCO = date("d/m/Y H:i:s", $joinOn);
+    
+    $sql_task = mysqli_query($conn, "select img_id from uploaded_image where std_id = $std_id and id_room = $id_room");
+    $sum_grade = 0;
+    
+    while($fetch_task = mysqli_fetch_array($sql_task)){
+        $img_id = $fetch_task['img_id'];
+        $sql_grade = mysqli_query($conn, "select grade from grade_path where grd_task = $img_id");
+        $fetch_grade = mysqli_fetch_array($sql_grade);
+        $task_grade = $fetch_grade['grade'];
+        $sum_grade = $sum_grade + $task_grade;
+    }
+
     
     ?>
 
     <main>
-    <img src="profile-pic/unknown_pic.jpg" alt="profile-pic">
-    <div class="card">
-        <div class="card-body">
-            <h3><?php echo strtoupper($fetch_profile['NAMA']); ?></h3>
+        <img src="profile-pic/unknown_pic.jpg" alt="profile-pic">
+        <div class="card">
+            <div class="card-body">
+                <h3><?php echo strtoupper($fetch_profile['NAMA']); ?></h3>
+                <ol>
+                    <li>
+                        <p> Join in : <b> <?php echo $datetimeCO ?></b> </p> 
+                    </li>
+                    <li>
+                        <p> Ovr Point : <b> <?php echo $sum_grade; ?> </b> </p> 
+                    </li>
+                </ol>
+            </div>
         </div>
-        <div>
-            <canvas id="myChart"></canvas>
-        </div>
-    </div>
     </main>
 
-    <?php
     
-    $id_room = $_SESSION['id_room'];
-    
-    $sql_hw = mysqli_query($conn, "select * from homework where id_room = $id_room");
-    
-    foreach($sql_hw as $data){
-        $mapel[] = $data['MAPEL'];
-        $hw_id[] = $data['hw_id'];
-    }
-    
-    ?>
-
-    <script>
-        const labels = <?php echo json_encode($mapel) ?>;
-        const data = {
-        labels: labels,
-        datasets: [{
-            label: 'My First Dataset',
-            data: <?php echo json_encode($hw_id) ?>,
-            backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255, 205, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(201, 203, 207, 0.2)'
-            ],
-            borderColor: [
-            'rgb(255, 99, 132)',
-            'rgb(255, 159, 64)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(54, 162, 235)',
-            'rgb(153, 102, 255)',
-            'rgb(201, 203, 207)'
-            ],
-            borderWidth: 1
-        }]
-        };
-
-        const config = {
-        type: 'bar',
-        data: data,
-        options: {
-            scales: {
-            y: {
-                beginAtZero: true
-            }
-            }
-        },
-        }
-
-        const myChart = new Chart(
-            document.getElementById('myChart'),
-            config
-        );
-
-    </script>
     
     
 

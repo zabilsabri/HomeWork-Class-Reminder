@@ -1,0 +1,44 @@
+body{
+    background: #dbdbdb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+article{
+    background: white;
+    width: 97%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.heading{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 88%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.empty{
+    color: red;
+}
+
+.card-body{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.buttonFooter{
+    margin-right: 20px;
+    margin-top: 20px;
+    text-align: right;
+}
