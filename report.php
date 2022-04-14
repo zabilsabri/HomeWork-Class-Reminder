@@ -115,7 +115,7 @@ $id_room = $_SESSION['id_room'];
             </div>
             </article>
             <div class="buttonFooter">
-                <button id="btnExport" onclick="fnExportToExcel('xlsx','myfirstsheet')" class="btn btn-success">Export to Excel</button>
+                <button id="btnExport" onclick="fnExportToExcel('xlsx','(Input Your File Name)')" class="btn btn-success">Export to Excel</button>
             </div>
 
             <script>

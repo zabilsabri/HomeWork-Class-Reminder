@@ -3,18 +3,22 @@
 session_start();
 include 'connection.php';
 
-$id_room_ecrypt = base64_decode(urldecode($_GET['id_r']));
-$id_room = ((($id_room_ecrypt * '26091971')/'08082020')/'10052003');
-$_SESSION['id_room'] = $id_room;
+if (isset($_GET['id_r'])){
+    $id_room_ecrypt = base64_decode(urldecode($_GET['id_r']));
+    $id_room = ((($id_room_ecrypt * '26091971')/'08082020')/'10052003');
+    $_SESSION['id_room'] = $id_room;
 
-$std_id = $_SESSION['std_id'];
+    $std_id = $_SESSION['std_id'];
 
-$sql_main = mysqli_query($conn, "select * from room where id_room = '$id_room'");
-$row_main = mysqli_fetch_array($sql_main);
-$_SESSION['name_room'] = $row_main['Name_Room'];
+    $sql_main = mysqli_query($conn, "select * from room where id_room = '$id_room'");
+    $row_main = mysqli_fetch_array($sql_main);
+    $_SESSION['name_room'] = $row_main['Name_Room'];
 
-if($_SESSION['nama'] === $row_main['creator']){
-    $_SESSION['admin'] = 1;
+    if($_SESSION['nama'] === $row_main['creator']){
+        $_SESSION['admin'] = 1;
+    }
+} else {
+    header('login.php');
 }
 
 include "roomSecurity.php";
