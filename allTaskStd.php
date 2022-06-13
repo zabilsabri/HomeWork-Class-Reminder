@@ -59,6 +59,7 @@ if (!isset($_SESSION['login'])){
                         <?php 
                             
                         $id_room = $_SESSION['id_room'];
+                        $id_room = round($id_room);
                         $std_id = $_SESSION['std_id'];
 
                         $sql_hw = mysqli_query($conn, "select * from homework where id_room = $id_room");

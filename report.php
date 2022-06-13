@@ -13,7 +13,7 @@ if(!isset($_SESSION['admin'])){
 }
 
 $id_room = $_SESSION['id_room'];
-
+$id_room = round($id_room);
 
 ?>
 

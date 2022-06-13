@@ -9,6 +9,10 @@ if(isset($_SESSION['id_room'])){
 if(isset($_SESSION['admin'])){
     unset($_SESSION["admin"]);
 }
+
+if(!isset($_SESSION['login'])){
+    header("location: login.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +48,11 @@ if(isset($_SESSION['admin'])){
     <main>
         <div class="row">
             <?php  
+
+            if (!isset($_SESSION["std_id"])){
+                header("login.php");
+            };
+
             $std_id = $_SESSION['std_id'];
             
             $sql = mysqli_query($conn, "select * from room_path where std_id = '$std_id'");

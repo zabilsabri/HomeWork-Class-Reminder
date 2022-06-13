@@ -10,9 +10,11 @@ $id_hw_ecrypt = base64_decode(urldecode($_GET['id']));
 $id_hw_r = ((($id_hw_ecrypt * '26091971')/'08082020')/'10052003');
 $id_hw = round($id_hw_r);
 
+$roomId = round($roomId);
+
 $sql_dl_check = mysqli_query($conn, "select * from homework where id_room = '$roomId' and hw_id = $id_hw");
 
-$id_moreInfo_ecrypt = (($_SESSION['id_room'] * '10052003' * '08082020')/'26091971');
+$id_moreInfo_ecrypt = (($roomId * '10052003' * '08082020')/'26091971');
 $link = "tugas.php?id_r=".urlencode(base64_encode($id_moreInfo_ecrypt));
 
 while($row_dl_check = mysqli_fetch_array($sql_dl_check)){
@@ -23,7 +25,7 @@ while($row_dl_check = mysqli_fetch_array($sql_dl_check)){
     $today_date = date("d/m/Y H:i:s");
 
     if($today_date > $datetimeDL){
-        header("location: ");
+        header('location: '.$link);
     }
 }
 ?>

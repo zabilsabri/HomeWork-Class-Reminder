@@ -50,6 +50,7 @@ if(!isset($_SESSION['admin'])){
             <article>
             <?php
                 $id_room = $_SESSION['id_room'];
+                $id_room = round($id_room);
                 $sql = mysqli_query($conn, "select * from homework where id_room = $id_room");
                 $num_row = mysqli_num_rows($sql);
                     

@@ -5,8 +5,10 @@ include 'connection.php';
 
 if (isset($_GET['id_r'])){
     $id_room_ecrypt = base64_decode(urldecode($_GET['id_r']));
-    $id_room = ((($id_room_ecrypt * '26091971')/'08082020')/'10052003');
+    $id_room = ((((int)$id_room_ecrypt * '26091971')/'08082020')/'10052003');
     $_SESSION['id_room'] = $id_room;
+
+    $id_room = round($id_room);
 
     $std_id = $_SESSION['std_id'];
 

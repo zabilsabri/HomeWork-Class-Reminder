@@ -59,6 +59,7 @@ include 'roomSecurity.php';
                         include 'connection.php';
 
                         $id_room = $_SESSION['id_room'];
+                        $id_room = round($id_room);
                         
                         $sql = mysqli_query($conn, "select * from room_path where r_id = '$id_room'");
                         

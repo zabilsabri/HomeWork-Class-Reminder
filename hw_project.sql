@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 26 Mar 2022 pada 01.39
--- Versi server: 10.4.22-MariaDB
--- Versi PHP: 8.1.1
+-- Waktu pembuatan: 13 Jun 2022 pada 16.50
+-- Versi server: 10.4.19-MariaDB
+-- Versi PHP: 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `comment_section` (
   `id` int(11) NOT NULL,
   `task_id` int(11) NOT NULL,
+  `id_room` int(11) NOT NULL,
   `DATE` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `NAME` varchar(100) NOT NULL,
   `comment` varchar(1000) NOT NULL
@@ -104,15 +105,6 @@ CREATE TABLE `student_info` (
   `NAMA` varchar(100) NOT NULL,
   `NIS` varchar(1024) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `student_info`
---
-
-INSERT INTO `student_info` (`st_id`, `updated on`, `NAMA`, `NIS`) VALUES
-(1, '2022-02-10 09:51:16', 'zabil sabri muhammad', '$2y$10$jsPemp/OmpAI8zAGbp23EOviBsxncqurtbh/.fCXTJ8Ih6krDC/1C'),
-(2, '2022-02-10 10:05:27', 'wahyudi nugraha', '$2y$10$L0IOQSfW39/Uw6g5a.DFPuH2HxUYn67SC7gPtENsSjdLd5sOkDKMu'),
-(3, '2022-02-10 11:09:02', 'saron mian', '$2y$10$SWOtYpmq0YRBExT.G3fYmO9Gazhu9mf5wmM0pyZT/bIRRDHz7VjwO');
 
 -- --------------------------------------------------------
 
@@ -216,7 +208,7 @@ ALTER TABLE `room_path`
 -- AUTO_INCREMENT untuk tabel `student_info`
 --
 ALTER TABLE `student_info`
-  MODIFY `st_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `st_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `uploaded_image`
