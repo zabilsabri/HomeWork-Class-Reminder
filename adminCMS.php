@@ -45,9 +45,7 @@ if (!isset($_SESSION['admin'])){
             <div class="heading">
                 <nav class="navbar navbar-light bg-light">
                     <div class="container-fluid">
-                        <a href="tugas.php">
-                            <h1>TASK DETAILS</h1>
-                        </a>
+                        <h1>TASK DETAILS</h1>
 
                         <?php
     
@@ -66,10 +64,16 @@ if (!isset($_SESSION['admin'])){
                             $dateDL = date("d/m/Y H:i:s", $timeDL);
 
                         ?>
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                            data-bs-target="#modalDeleteTask">
-                            DELETE
-                        </button>
+                        <div class="headingButton">
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#modalEditTask">
+                                EDIT
+                            </button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#modalDeleteTask">
+                                DELETE
+                            </button>
+                        </div>
                     </div>
                 </nav>
             </div>
@@ -99,6 +103,7 @@ if (!isset($_SESSION['admin'])){
                     include 'connection.php';
 
                     $id_room = $_SESSION['id_room'];
+                    $id_room = round($id_room);
 
                     $sql_hw_room = mysqli_query($conn, "SELECT * FROM uploaded_image WHERE id_id = $id");
                     $sql_std_room = mysqli_query($conn, "select std_id, r_id, status from room_path where r_id = '$id_room' and status = 'member'");
@@ -116,7 +121,11 @@ if (!isset($_SESSION['admin'])){
                                 <p>Finished Task</p>
                             </div>
                             <div class="col" style="border-left: black solid">
-                                <h2><?php echo $std_check - $hw_check; ?></h2>
+                                <h2>
+                                    <?php 
+                                        echo $std_check - $hw_check;
+                                    ?>
+                                </h2>
                                 <p>Un-Finished Task</p>
                             </div>
                         </div>
@@ -207,6 +216,34 @@ if (!isset($_SESSION['admin'])){
                     </div>
                 </div>
             </div>
+
+<!------------MODAL EDIT TASK------------------------->
+    <div class="modal fade" id="modalEditTask" tabindex="-1" aria-labelledby="modalEditTask" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEditTask">ADD HOMEWORK</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="editTaskBE.php?hw_id=<?= $id; ?>" method="POST">
+                        1. SUBJECT
+                        <input class="form-control" name="mapel" type="text" value="<?php echo $rowtest['MAPEL']; ?>" aria-label="default input example">
+                        2. DEADLINE
+                        <input class="form-control" type="datetime-local" name="deadline" value="<?php echo $rowtest['DEADLINE']; ?>" aria-label="default input example">
+                        <div class="mb-3">
+                            <label for="textareaket" class="form-label">3. DESCRIPTION</label>
+                            <textarea class="form-control" name="keterangan" id="textareaket" rows="3"><?php echo $rowtest['KETERANGAN']; ?></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" name="create" class="btn btn-primary">EDIT</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 
