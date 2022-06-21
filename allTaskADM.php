@@ -70,6 +70,7 @@ if(!isset($_SESSION['admin'])){
                     <?php
 
                     $id_room = $_SESSION['id_room'];
+                    $id_room = round($id_room);
                     $id = $row['hw_id'];
 
                     $sql_hw_room = mysqli_query($conn, "SELECT * FROM uploaded_image WHERE id_id = $id");
