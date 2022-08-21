@@ -28,16 +28,12 @@ include 'connection.php';
                 <b class="failed">Room is Already Exist!</b>
             <?php } ?>
 
-            <?php if(isset($_GET['empty'])){ ?>
-                <b class="failed">Fill All The Fields!</b>
-            <?php } ?>
-
             <form action="createRoomBE.php" method="POST">
                     <div class="text-box">
-                        <input type="text" class="form-content" name="roomName" placeholder="Name">
+                        <input type="text" class="form-content" name="roomName" placeholder="Name" required>
                     </div>
                     <div class="text-box">
-                        <input type="password" id="password" class="form-content" name="roomPassword" placeholder="Password">
+                        <input type="password" id="password" class="form-content" name="roomPassword" placeholder="Password" required>
                         <div class="eye">
                             <i class="fas fa-eye-slash" onclick="showHide()" id="toogle"></i>
                         </div>

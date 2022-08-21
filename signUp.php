@@ -20,10 +20,10 @@
             
             <form action="signUpBE.php" method="POST">
                 <div class="text-box">
-                    <input type="text" class="form-content" name="username" placeholder="Nama">
+                    <input type="text" class="form-content" name="username" placeholder="Nama" required>
                 </div>
                 <div class="text-box">
-                    <input type="password" id="password" class="form-content" name="nis" placeholder="Password">
+                    <input type="password" id="password" class="form-content" name="nis" placeholder="Password" required>
                     <div class="eye">
                         <i class="fas fa-eye-slash" onclick="showHide()" id="toogle"></i>
                     </div>

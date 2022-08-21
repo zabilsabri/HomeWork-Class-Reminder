@@ -175,9 +175,9 @@ include "roomSecurity.php";
                 <div class="modal-body">
                     <form action="createBE.php" method="POST">
                         1. SUBJECT
-                        <input class="form-control" name="mapel" type="text" aria-label="default input example">
+                        <input class="form-control" name="mapel" type="text" aria-label="default input example" required>
                         2. DEADLINE
-                        <input class="form-control" type="datetime-local" name="deadline" aria-label="default input example">
+                        <input class="form-control" type="datetime-local" name="deadline" aria-label="default input example" required>
                         <div class="mb-3">
                             <label for="textareaket" class="form-label">3. DESCRIPTION</label>
                             <textarea class="form-control" name="keterangan" id="textareaket" rows="3"></textarea>

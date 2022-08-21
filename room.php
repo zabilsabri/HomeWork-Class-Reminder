@@ -11,7 +11,7 @@ if(isset($_SESSION['admin'])){
 }
 
 if(!isset($_SESSION['login'])){
-    header("location: login.php");
+    header("location: login.php?notlogin");
 }
 ?>
 

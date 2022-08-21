@@ -19,7 +19,7 @@ $rowc = mysqli_fetch_array($sql2);
 
 if ($row['NAME'] == $nama || $rowc['creator'] == $nama || $_SESSION["rules_room"] == 0){
     $sqli = mysqli_query($conn, "delete from homework where hw_id = $id");
-    header("location: $link");
+    header("location: allTaskADM.php");
 
 } else {
     

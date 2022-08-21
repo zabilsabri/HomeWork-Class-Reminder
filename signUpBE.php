@@ -16,7 +16,7 @@ if(isset($_POST['register'])){
     $sqlc = mysqli_query($conn, "select NAMA from student_info where NAMA = '$nama'");
     $row = mysqli_fetch_array($sqlc);
 
-    if(!empty($nama) && !empty($password)){
+    
 
         if($row['NAMA'] != $nama){
             $sql = "insert into student_info (NAMA, NIS) values ('$nama', '$password')";
@@ -28,10 +28,6 @@ if(isset($_POST['register'])){
         } else {
             header('location: signUp.php?exist');
         };
-
-    } else {
-        header('location: signUp.php?empty');
-    };
     
 } else {
     header('location: signUp.php?notLogin');
